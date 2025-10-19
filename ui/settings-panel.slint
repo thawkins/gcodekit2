@@ -2,6 +2,9 @@ import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from 
 
 export component SettingsPanel inherits Rectangle {
     background: ThemeProvider.colors.background;
+    
+    // Callback to Rust for theme changes
+    callback set-theme(string);
 
     VerticalLayout {
         padding: 20px;
@@ -67,7 +70,7 @@ export component SettingsPanel inherits Rectangle {
                         
                         TouchArea {
                             clicked => {
-                                ThemeProvider.set-theme("light");
+                                root.set-theme("light");
                             }
                         }
                     }
@@ -85,7 +88,7 @@ export component SettingsPanel inherits Rectangle {
                         
                         TouchArea {
                             clicked => {
-                                ThemeProvider.set-theme("dark");
+                                root.set-theme("dark");
                             }
                         }
                     }
@@ -104,8 +107,7 @@ export component SettingsPanel inherits Rectangle {
                         
                         TouchArea {
                             clicked => {
-                                // Would call system theme detection
-                                // ThemeProvider.apply-system-theme();
+                                root.set-theme("system");
                             }
                         }
                     }

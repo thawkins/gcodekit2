@@ -21,7 +21,27 @@ component MenuBar inherits Rectangle {
             width: 100%;
         }
         
-        ThemeToggleButton { }
+        // Theme toggle button
+        Rectangle {
+            background: ThemeProvider.colors.button;
+            width: 40px;
+            height: 32px;
+            border-radius: 3px;
+            
+            TouchArea {
+                clicked => {
+                    ThemeProvider.toggle-theme();
+                }
+            }
+            
+            Text {
+                text: ThemeProvider.mode == "light" ? "🌙" : "☀";
+                color: ThemeProvider.colors.text-primary;
+                font-size: 16px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
         
         Rectangle {
             background: ThemeProvider.colors.button;
@@ -285,13 +305,17 @@ component RightPanel inherits Rectangle {
 export component AppWindow inherits Window {
     width: 1600px;
     height: 1000px;
-    title: "GCodeKit2 - GRBL Control v0.1.0-alpha";
+    title: "GCodeKit2 - GRBL Control v0.2.0-alpha";
     
     VerticalLayout {
         spacing: 0px;
         padding: 0px;
         
-        MenuBar { }
+        MenuBar {
+            settings-requested => {
+                // TODO: Show settings panel
+            }
+        }
         
         HorizontalLayout {
             spacing: 0px;

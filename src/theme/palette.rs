@@ -42,6 +42,11 @@ impl Color {
         format!("#{:02X}{:02X}{:02X}", self.r, self.g, self.b)
     }
 
+    /// Convert color to Slint Color type
+    pub fn to_slint_color(&self) -> slint::Color {
+        slint::Color::from_rgb_u8(self.r, self.g, self.b)
+    }
+
     /// Calculate relative luminance for WCAG contrast calculation
     /// Based on WCAG 2.0 formula: https://www.w3.org/TR/WCAG20/#relativeluminancedef
     pub fn luminance(&self) -> f64 {
