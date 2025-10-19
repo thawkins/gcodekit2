@@ -1,10 +1,22 @@
-import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from "theme-provider.slint";
+import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from "../theme/mod.slint";
+import { ComboBox } from "std-widgets.slint";
 
 export component SettingsPanel inherits Rectangle {
     background: ThemeProvider.colors.background;
     
     // Callback to Rust for theme changes
     callback set-theme(string);
+    
+    // Connection widget callbacks
+    callback refresh-ports();
+    callback connect(string);
+    callback disconnect();
+    
+    // Properties for port data
+    in property <[string]> available-ports;
+    in property <string> selected-port;
+    in property <bool> is-connected;
+    in property <string> connection-status;
 
     VerticalLayout {
         padding: 20px;
@@ -243,17 +255,80 @@ export component SettingsPanel inherits Rectangle {
                     font-weight: 700;
                 }
 
+                // Connection Status
                 HorizontalLayout {
                     spacing: 10px;
+
+                    ThemedText {
+                        text: "Status:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: root.connection-status;
+                        color: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
+                    }
+                }
+
+                // Serial Port ComboBox
+                HorizontalLayout {
+                    spacing: 10px;
+                    alignment: center;
 
                     ThemedText {
                         text: "Serial Port:";
                         width: 120px;
                     }
 
-                    ThemedText {
-                        text: "/dev/ttyACM0";
-                        color: ThemeProvider.colors.button;
+                    ComboBox {
+                        model: root.available-ports;
+                        selected-value <=> root.selected-port;
+                        width: 200px;
+                    }
+
+                    // Refresh button
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Refresh";
+                            font-size: 11px;
+                        }
+                        
+                        TouchArea {
+                            clicked => {
+                                root.refresh-ports();
+                            }
+                        }
+                    }
+                }
+
+                // Connect/Disconnect buttons
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    Rectangle {
+                        background: root.is-connected ? ThemeProvider.colors.status-red : ThemeProvider.colors.status-green;
+                        width: 150px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: root.is-connected ? "Disconnect" : "Connect";
+                        }
+                        
+                        TouchArea {
+                            clicked => {
+                                if (root.is-connected) {
+                                    root.disconnect();
+                                } else {
+                                    root.connect(root.selected-port);
+                                }
+                            }
+                        }
                     }
                 }
 

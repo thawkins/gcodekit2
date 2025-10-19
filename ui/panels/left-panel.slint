@@ -1,0 +1,181 @@
+//! Left Panel - Machine control and jog controls
+//!
+//! Displays connection status, jog buttons, and machine overrides.
+
+import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+import { InteractiveButton } from "../widgets/interactive-button.slint";
+
+/// Left panel with machine control and jog buttons
+export component LeftPanel inherits Rectangle {
+    width: 250px;
+    background: ThemeProvider.colors.background;
+    
+    // State for button feedback
+    private property <int> button_press_count: 0;
+    
+    VerticalLayout {
+        padding: 10px;
+        spacing: 10px;
+        
+        ThemedText {
+            text: "Machine Control";
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Connection"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Status: Connected"; font-size: 11px; }
+                ThemedSecondaryText { text: "Port: /dev/ttyACM0"; font-size: 11px; }
+            }
+        }
+        
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Jog Controls"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Step Size: 1mm"; font-size: 11px; }
+                
+                // First row: Home, Stop, Unlock
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    InteractiveButton {
+                        label: "Home";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Stop";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Unlock";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                }
+                
+                // Second row: Y+
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle { width: 20px; }
+                    InteractiveButton {
+                        label: "Y+";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    Rectangle { width: 20px; }
+                }
+                
+                // Third row: X-, Z-, X+
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    InteractiveButton {
+                        label: "X-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Z-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "X+";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                }
+                
+                // Fourth row: Y-
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle { width: 20px; }
+                    InteractiveButton {
+                        label: "Y-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    Rectangle { width: 20px; }
+                }
+                
+                // Fifth row: Pause, Continue
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    InteractiveButton {
+                        label: "Pause";
+                        width: 60px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Continue";
+                        width: 60px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                }
+            }
+        }
+        
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Overrides"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Feed: 100%"; font-size: 11px; }
+                ThemedSecondaryText { text: "Power: 100%"; font-size: 11px; }
+                ThemedSecondaryText { 
+                    text: "Clicks: " + button_press_count; 
+                    font-size: 10px;
+                    color: ThemeProvider.colors.status-blue;
+                }
+            }
+        }
+        
+        // Spacer to push widgets to top
+        Rectangle {
+            height: 100%;
+        }
+    }
+}

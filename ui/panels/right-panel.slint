@@ -1,0 +1,143 @@
+//! Right Panel - CAM functions and material database
+//!
+//! Displays shape generation, import options, and materials database.
+
+import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Right panel with CAM functions and materials
+export component RightPanel inherits Rectangle {
+    width: 250px;
+    background: ThemeProvider.colors.background;
+    
+    VerticalLayout {
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 12.5px;  // 5% of 250px = 12.5px
+        spacing: 10px;
+        
+        ThemedText {
+            text: "CAM Functions";
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Shape Generation"; font-size: 12px; font-weight: 700; }
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Rectangle";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Circle";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+            }
+        }
+        
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Import"; font-size: 12px; font-weight: 700; }
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "SVG/DXF";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Image";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+            }
+        }
+        
+        ThemedRectangle {
+            height: 80px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                ThemedText { text: "Materials"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Database loaded"; font-size: 11px; }
+            }
+        }
+        
+        // Spacer to push widgets to top
+        Rectangle {
+            height: 100%;
+        }
+    }
+}

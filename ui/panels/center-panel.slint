@@ -1,0 +1,36 @@
+//! Center Panel - Main content area with tabbed interface
+//!
+//! Displays tabbed content for G-code editing, visualization, console, etc.
+
+import { TabWidget } from "std-widgets.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Center panel with tabbed interface for main content
+export component CenterPanel inherits Rectangle {
+    background: ThemeProvider.colors.background;
+    
+    VerticalLayout {
+        TabWidget {
+            Tab {
+                title: "G-code Editor";
+                Rectangle { background: ThemeProvider.colors.background; }
+            }
+            Tab {
+                title: "3D Visualizer";
+                Rectangle { background: ThemeProvider.colors.background; }
+            }
+            Tab {
+                title: "Device Console";
+                Rectangle { background: ThemeProvider.colors.background; }
+            }
+            Tab {
+                title: "Job Manager";
+                Rectangle { background: ThemeProvider.colors.background; }
+            }
+            Tab {
+                title: "Designer";
+                Rectangle { background: ThemeProvider.colors.background; }
+            }
+        }
+    }
+}

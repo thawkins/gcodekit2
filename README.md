@@ -46,6 +46,29 @@ A comprehensive desktop application for controlling GRBL-compatible laser engrav
 - **jobs**: Priority queuing, job scheduling, progress tracking
 - **materials**: Material database, cutting parameters
 - **widgets**: Connection, jog controls, overrides, G-code loading
+- **theme**: System theme detection, color palettes, preference persistence
+
+### UI Architecture (Slint)
+The UI hierarchy mirrors the backend structure for consistency and maintainability:
+
+- **`ui/theme/`**: Theme provider and styling system
+  - Centralized color schemes and component styling
+  - Light/Dark theme support with automatic system detection
+  
+- **`ui/widgets/`**: Reusable UI components
+  - `InteractiveButton` - Themed button with feedback
+  - `MenuBar` - Application menu with theme toggle
+  - `StatusBar` - Real-time status display
+  
+- **`ui/panels/`**: Layout components (page sections)
+  - `LeftPanel` - Machine control and jog buttons
+  - `CenterPanel` - Tabbed main content area
+  - `RightPanel` - CAM functions and materials
+  - `SettingsPanel` - Device connection and app settings
+  
+- **`ui/app.slint`**: Main entry point
+  - Composes all components into the application window
+  - Defines app-level callbacks and state properties
 
 ### Dependencies
 - **slint 1.13.1**: Modern Rust GUI framework
@@ -91,7 +114,8 @@ gcodekit/
 │   ├── lib.rs                  # Library exports
 │   ├── communication/          # GRBL protocol & serial communication
 │   │   ├── mod.rs             # Main controller interface
-│   │   └── grbl.rs            # Version parsing
+│   │   ├── grbl.rs            # Version parsing
+│   │   └── serial.rs          # Serial port management
 │   ├── designer/               # CAM functions
 │   │   ├── mod.rs             # Design management
 │   │   ├── shapes.rs          # Geometry primitives
@@ -100,20 +124,35 @@ gcodekit/
 │   │   └── mod.rs             # Job queue and manager
 │   ├── materials/              # Material database
 │   │   └── mod.rs             # Material profiles
-│   └── widgets/                # UI components
+│   ├── theme/                  # Application theming
+│   │   └── mod.rs             # Theme management
+│   └── widgets/                # Backend UI components
 │       ├── mod.rs             # Widget exports
-│       ├── connection.rs       # Device connection
+│       ├── connection.rs       # Device connection (integrated with GrblController)
 │       ├── jog.rs             # Jogging controls
 │       ├── overrides.rs        # Feed/power adjustments
 │       └── gcode_loading.rs    # File management
-├── ui/
-│   └── app.slint              # Main UI definition
+├── ui/                         # Slint UI files (mirrors src/ structure)
+│   ├── app.slint              # Main application window (51 lines, modular)
+│   ├── theme/
+│   │   └── mod.slint          # Theme provider and styling
+│   ├── widgets/               # Reusable UI components
+│   │   ├── interactive-button.slint  # Themed button component
+│   │   ├── menu-bar.slint             # Application menu bar
+│   │   └── status-bar.slint           # Status display bar
+│   └── panels/                # Layout components
+│       ├── left-panel.slint          # Machine control and jog buttons
+│       ├── center-panel.slint        # Tabbed main content area
+│       ├── right-panel.slint         # CAM functions and materials
+│       └── settings-panel.slint      # Connection and app settings
 ├── tests/                      # Integration tests
+├── docs/                       # Documentation
 ├── Cargo.toml                 # Dependencies
 ├── build.rs                   # Slint build script
 ├── README.md                  # This file
 ├── SPEC.md                    # Feature specification
-└── AGENTS.md                  # Development guidelines
+├── AGENTS.md                  # Development guidelines
+└── CHANGELOG.md               # Version history
 ```
 
 ## Test Coverage

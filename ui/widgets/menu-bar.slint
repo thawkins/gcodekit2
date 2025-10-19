@@ -1,0 +1,175 @@
+//! Menu Bar Widget - Application main menu with theme toggle and settings
+//!
+//! Provides the top menu bar with file, machine, view, tools, and help menus,
+//! along with theme toggle and settings access.
+
+import { ThemedText } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Application menu bar with menu items and settings
+export component MenuBar inherits Rectangle {
+    background: ThemeProvider.colors.panel;
+    height: 50px;
+    
+    private property <int> toggle_count: 0;
+    
+    callback settings_requested();
+    callback file_menu();
+    callback machine_menu();
+    callback view_menu();
+    callback tools_menu();
+    callback help_menu();
+    
+    HorizontalLayout {
+        padding: 10px;
+        spacing: 20px;
+        
+        // File menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.file_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "File"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Machine menu
+        Rectangle {
+            width: 70px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.machine_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Machine"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // View menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.view_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "View"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Tools menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.tools_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Tools"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Help menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.help_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Help"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        Rectangle {
+            width: 100%;
+        }
+        
+        // Theme toggle button
+        Rectangle {
+            background: ThemeProvider.colors.button;
+            width: 40px;
+            height: 32px;
+            border-radius: 3px;
+            
+            TouchArea {
+                width: 100%;
+                height: 100%;
+                mouse-cursor: pointer;
+                clicked => {
+                    ThemeProvider.toggle-theme();
+                    toggle_count += 1;
+                }
+            }
+            
+            Text {
+                text: ThemeProvider.mode == "light" ? "🌙" : "☀";
+                color: ThemeProvider.colors.text-primary;
+                font-size: 16px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Settings button
+        Rectangle {
+            background: ThemeProvider.colors.button;
+            width: 40px;
+            height: 32px;
+            border-radius: 3px;
+            
+            TouchArea {
+                width: 100%;
+                height: 100%;
+                clicked => {
+                    root.settings_requested();
+                }
+            }
+            
+            ThemedText {
+                text: "⚙";
+                font-size: 16px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+    }
+}

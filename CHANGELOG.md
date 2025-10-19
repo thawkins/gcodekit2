@@ -29,28 +29,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Command queue management
   - Response logging for diagnostics
 
-- **Comprehensive Communication Tests**: 8 unit + 4 serial = 12 total tests ✅
-  - Controller creation and initialization
-  - Machine state parsing and color coding
-  - Position tracking and status updates
-  - Command queue management
-  - Response logging
-  - Recovery configuration
-  - Emergency stop functionality
-  - Serial port configuration and connection tests
-
 ### Changed
-- **Jog Window UI**: Updated with all SPEC-required buttons ✅
-  - Added Home, Stop, Unlock buttons (top row)
-  - Added Y+/Y- (center control)
-  - Added X+/X- (horizontal axis)
-  - Added Z- (vertical axis)
-  - Added Pause/Continue buttons (job control)
-  - All buttons with white text on blue background
-  - Improved visual contrast and readability
-  - Fixed InteractiveButton component text color to white (#FFFFFF)
+- **ConnectionWidget**: Integrated with GrblController for real serial communication ✅
+  - `refresh_ports()` now uses `SerialConnection::list_ports()` for actual system ports
+  - `connect()` and `disconnect()` are now async and use GrblController methods
+  - `refresh_ports()` returns `Result<()>` instead of modifying state directly
+  - Added `sync_with_controller()` to keep widget state synchronized with controller
+  - Improved error handling with detailed error messages
+  - Port detection uses live system enumeration instead of hardcoded list
 
-- **Widget Auto-Sizing**: Widgets now resize vertically to fit content ✅
+- **UI Connection Panel**: Interactive port selection and device connection ✅
+  - Added ComboBox dropdown for serial port selection in SettingsPanel
+  - Implemented "Refresh" button to scan available ports
+  - Added "Connect/Disconnect" button with dynamic status display
+  - Connection status indicator with color-coded state (green/red)
+  - Async callbacks bound to UI for connection management
+  - Port list dynamically populated from system enumeration
+  - Error handling and logging for connection failures
+
+- **Slint UI Module Hierarchy**: Reorganized UI files to mirror src/ structure ✅
+  - Created modular component structure with organized directories
+  - `ui/theme/mod.slint` - Theme provider and styling components
+  - `ui/widgets/` - Reusable UI components (InteractiveButton, MenuBar, StatusBar)
+  - `ui/panels/` - Layout panels (LeftPanel, CenterPanel, RightPanel, SettingsPanel)
+  - `ui/app.slint` - Main application window with clean modular imports
+  - Improved code organization and reusability
+  - Each component in its own file with documentation
+  - Reduced app.slint from 617 lines to 51 lines (92% reduction)
+  - Better maintainability and future scalability
   - Removed fixed heights from all panel widgets
   - Connection widget auto-sizes
   - Jog Controls widget auto-sizes

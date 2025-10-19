@@ -1,0 +1,57 @@
+//! Status Bar Widget - Application status display bar
+//!
+//! Displays machine status, position, version, and current theme indicator.
+
+import { ThemedText } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Application status bar showing system information
+export component StatusBar inherits Rectangle {
+    background: ThemeProvider.colors.panel;
+    height: 30px;
+    
+    in property <string> status: "Idle";
+    in property <string> position: "X: 0.00 Y: 0.00 Z: 0.00";
+    in property <string> version: "GRBL v1.1h";
+    
+    HorizontalLayout {
+        padding: 5px;
+        spacing: 20px;
+        
+        ThemedText {
+            text: "Status: " + root.status;
+            font-size: 11px;
+        }
+        
+        ThemedText {
+            text: "Position: " + root.position;
+            font-size: 11px;
+        }
+        
+        ThemedText {
+            text: "Version: " + root.version;
+            font-size: 11px;
+        }
+        
+        Rectangle {
+            width: 100%;
+        }
+        
+        // Theme indicator
+        HorizontalLayout {
+            spacing: 5px;
+            
+            ThemedText {
+                text: "Theme:";
+                font-size: 10px;
+            }
+            
+            ThemedText {
+                text: ThemeProvider.mode == "light" ? "☀ Light" : "🌙 Dark";
+                color: ThemeProvider.mode == "light" ? ThemeProvider.colors.status-yellow : #7B68EE;
+                font-size: 10px;
+                font-weight: 700;
+            }
+        }
+    }
+}
