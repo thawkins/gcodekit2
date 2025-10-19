@@ -1,128 +1,217 @@
-import { StandardButton } from "std-widgets.slint";
+import { StandardButton, TabWidget, VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
+
+component MenuBar inherits Rectangle {
+    background: #2b2b2b;
+    height: 50px;
+    
+    HorizontalLayout {
+        padding: 10px;
+        spacing: 20px;
+        
+        Text { text: "File"; color: white; font-size: 14px; }
+        Text { text: "Machine"; color: white; font-size: 14px; }
+        Text { text: "View"; color: white; font-size: 14px; }
+        Text { text: "Tools"; color: white; font-size: 14px; }
+        Text { text: "Help"; color: white; font-size: 14px; }
+    }
+}
+
+component StatusBar inherits Rectangle {
+    background: #e0e0e0;
+    height: 30px;
+    
+    HorizontalLayout {
+        padding: 5px;
+        spacing: 20px;
+        
+        Text {
+            text: "Status: Idle";
+            font-size: 11px;
+        }
+        
+        Text {
+            text: "Position: X: 0.00 Y: 0.00 Z: 0.00";
+            font-size: 11px;
+        }
+        
+        Text {
+            text: "Version: GRBL v1.1h";
+            font-size: 11px;
+        }
+    }
+}
+
+component LeftPanel inherits Rectangle {
+    width: 250px;
+    background: #f5f5f5;
+    
+    VerticalLayout {
+        padding: 10px;
+        spacing: 10px;
+        
+        Text {
+            text: "Machine Control";
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        Rectangle {
+            background: white;
+            height: 80px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Connection"; font-size: 12px; font-weight: 700; }
+                Text { text: "Status: Connected"; font-size: 11px; }
+                Text { text: "Port: /dev/ttyACM0"; font-size: 11px; }
+            }
+        }
+        
+        Rectangle {
+            background: white;
+            height: 120px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Jog Controls"; font-size: 12px; font-weight: 700; }
+                Text { text: "Step Size: 1mm"; font-size: 11px; }
+                
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    Button { text: "X-"; }
+                    Button { text: "Y+"; }
+                    Button { text: "X+"; }
+                }
+            }
+        }
+        
+        Rectangle {
+            background: white;
+            height: 100px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Overrides"; font-size: 12px; font-weight: 700; }
+                Text { text: "Feed: 100%"; font-size: 11px; }
+                Text { text: "Power: 100%"; font-size: 11px; }
+            }
+        }
+    }
+}
+
+component CenterPanel inherits Rectangle {
+    background: white;
+    
+    VerticalLayout {
+        TabWidget {
+            Tab {
+                title: "G-code Editor";
+                Rectangle { background: white; }
+            }
+            Tab {
+                title: "3D Visualizer";
+                Rectangle { background: #f0f0f0; }
+            }
+            Tab {
+                title: "Device Console";
+                Rectangle { background: white; }
+            }
+            Tab {
+                title: "Job Manager";
+                Rectangle { background: white; }
+            }
+            Tab {
+                title: "Designer";
+                Rectangle { background: white; }
+            }
+        }
+    }
+}
+
+component RightPanel inherits Rectangle {
+    width: 250px;
+    background: #f5f5f5;
+    
+    VerticalLayout {
+        padding: 10px;
+        spacing: 10px;
+        
+        Text {
+            text: "CAM Functions";
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        Rectangle {
+            background: white;
+            height: 100px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Shape Generation"; font-size: 12px; font-weight: 700; }
+                Button { text: "Rectangle"; }
+                Button { text: "Circle"; }
+            }
+        }
+        
+        Rectangle {
+            background: white;
+            height: 100px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Import"; font-size: 12px; font-weight: 700; }
+                Button { text: "SVG/DXF"; }
+                Button { text: "Image"; }
+            }
+        }
+        
+        Rectangle {
+            background: white;
+            height: 80px;
+            
+            VerticalLayout {
+                padding: 10px;
+                spacing: 5px;
+                
+                Text { text: "Materials"; font-size: 12px; font-weight: 700; }
+                Text { text: "Database loaded"; font-size: 11px; }
+            }
+        }
+    }
+}
 
 export component AppWindow inherits Window {
-    width: 1400px;
-    height: 900px;
-    title: "GCodeKit - GRBL Control";
-
+    width: 1600px;
+    height: 1000px;
+    title: "GCodeKit - GRBL Control v0.1.0-alpha";
+    
     VerticalLayout {
-        // Menu Bar
-        Rectangle {
-            height: 50px;
-            background: #2b2b2b;
-            
-            HorizontalLayout {
-                padding: 10px;
-                Text {
-                    text: "File";
-                    color: white;
-                    font-size: 14px;
-                }
-                Text {
-                    text: "Machine";
-                    color: white;
-                    font-size: 14px;
-                }
-                Text {
-                    text: "View";
-                    color: white;
-                    font-size: 14px;
-                }
-                Text {
-                    text: "Tools";
-                    color: white;
-                    font-size: 14px;
-                }
-                Text {
-                    text: "Help";
-                    color: white;
-                    font-size: 14px;
-                }
-            }
-        }
-
-        // Main Content Area
+        spacing: 0px;
+        padding: 0px;
+        
+        MenuBar { }
+        
         HorizontalLayout {
-            // Left Panel
-            Rectangle {
-                width: 250px;
-                background: #f0f0f0;
-                
-                VerticalLayout {
-                    padding: 10px;
-                    Text {
-                        text: "Machine Control";
-                        font-weight: 700;
-                    }
-                    Text {
-                        text: "Status: Disconnected";
-                        font-size: 12px;
-                    }
-                }
-            }
-
-            // Center Area (Tabs)
-            VerticalLayout {
-                Rectangle {
-                    height: 40px;
-                    background: #e8e8e8;
-                    
-                    HorizontalLayout {
-                        padding: 5px;
-                        Text { text: "G-code Editor"; }
-                        Text { text: "3D Visualizer"; }
-                        Text { text: "Device Console"; }
-                        Text { text: "Job Manager"; }
-                        Text { text: "Designer"; }
-                    }
-                }
-
-                Rectangle {
-                    background: white;
-                    VerticalLayout {
-                        alignment: center;
-                        Text {
-                            text: "Tab content will appear here";
-                        }
-                    }
-                }
-            }
-
-            // Right Panel
-            Rectangle {
-                width: 250px;
-                background: #f0f0f0;
-                
-                VerticalLayout {
-                    padding: 10px;
-                    Text {
-                        text: "CAM Functions";
-                        font-weight: 700;
-                    }
-                    Text {
-                        text: "Design Tools";
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
-
-        // Status Bar
-        Rectangle {
-            height: 30px;
-            background: #e0e0e0;
+            spacing: 0px;
+            padding: 0px;
             
-            HorizontalLayout {
-                padding: 5px;
-                Text {
-                    text: "Status: Idle";
-                    font-size: 11px;
-                }
-                Text {
-                    text: "Position: X: 0.0 Y: 0.0 Z: 0.0";
-                    font-size: 11px;
-                }
-            }
+            LeftPanel { }
+            CenterPanel { }
+            RightPanel { }
         }
+        
+        StatusBar { }
     }
 }

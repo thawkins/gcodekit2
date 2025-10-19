@@ -1,7 +1,7 @@
-//! GCodeKit - Desktop GUI for GRBL laser engravers and CNC machines
+//! GCodeKit - Desktop application for GRBL laser engravers and CNC machines
 //!
-//! This application provides comprehensive machine control, CAM functions,
-//! and error recovery for GRBL-compatible devices.
+//! Provides comprehensive machine control, CAM functions, and error recovery
+//! for GRBL v1.1+ compatible devices across Linux, Windows, and macOS.
 
 mod communication;
 mod designer;
@@ -11,6 +11,7 @@ mod widgets;
 
 use anyhow::Result;
 
+// Include Slint modules
 slint::include_modules!();
 
 #[tokio::main]
@@ -20,7 +21,7 @@ async fn main() -> Result<()> {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    tracing::info!("Starting GCodeKit application");
+    tracing::info!("Starting GCodeKit v0.1.0-alpha");
 
     let ui = AppWindow::new()?;
     ui.run()?;

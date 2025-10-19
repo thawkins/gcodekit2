@@ -1,72 +1,145 @@
-//! Jog widget for real-time axis control
+//! Jog Widget - Real-time axis control (X/Y/Z)
 
-/// Step size options for jogging
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum StepSize {
-    ZeroPointOne,
-    One,
-    Ten,
-    Fifty,
+use serde::{Deserialize, Serialize};
+use tracing::info;
+
+/// Step sizes for jogging (in mm)
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub enum JogStepSize {
+    Small,   // 0.1 mm
+    Normal,  // 1.0 mm
+    Large,   // 10 mm
+    Huge,    // 50 mm
 }
 
-impl StepSize {
-    /// Get the step size in mm
+impl JogStepSize {
+    /// Get numeric value
     pub fn value(&self) -> f64 {
         match self {
-            Self::ZeroPointOne => 0.1,
-            Self::One => 1.0,
-            Self::Ten => 10.0,
-            Self::Fifty => 50.0,
+            JogStepSize::Small => 0.1,
+            JogStepSize::Normal => 1.0,
+            JogStepSize::Large => 10.0,
+            JogStepSize::Huge => 50.0,
+        }
+    }
+
+    /// Get as string
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            JogStepSize::Small => "0.1mm",
+            JogStepSize::Normal => "1.0mm",
+            JogStepSize::Large => "10mm",
+            JogStepSize::Huge => "50mm",
         }
     }
 }
 
-impl Default for StepSize {
-    fn default() -> Self {
-        Self::One
-    }
-}
-
-/// Jog widget for axis control
+/// Jog widget state
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct JogWidget {
-    pub current_step: StepSize,
-    pub x_position: f64,
-    pub y_position: f64,
-    pub z_position: f64,
+    pub step_size: JogStepSize,
+    pub last_x_move: f64,
+    pub last_y_move: f64,
+    pub last_z_move: f64,
+    pub current_command: Option<String>,
 }
 
 impl JogWidget {
     /// Create a new jog widget
     pub fn new() -> Self {
-        Self {
-            current_step: StepSize::default(),
-            x_position: 0.0,
-            y_position: 0.0,
-            z_position: 0.0,
+        JogWidget {
+            step_size: JogStepSize::Normal,
+            last_x_move: 0.0,
+            last_y_move: 0.0,
+            last_z_move: 0.0,
+            current_command: None,
         }
     }
 
-    /// Jog X axis
-    pub fn jog_x(&mut self, direction: i32) {
-        let delta = self.current_step.value() * direction as f64;
-        self.x_position += delta;
+    /// Jog X axis positive
+    pub fn jog_x_positive(&mut self) -> String {
+        let step = self.step_size.value();
+        self.last_x_move = step;
+        let cmd = format!("$J=G91 G21 X{:.2} F600", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog X+: {}", cmd);
+        cmd
     }
 
-    /// Jog Y axis
-    pub fn jog_y(&mut self, direction: i32) {
-        let delta = self.current_step.value() * direction as f64;
-        self.y_position += delta;
+    /// Jog X axis negative
+    pub fn jog_x_negative(&mut self) -> String {
+        let step = -self.step_size.value();
+        self.last_x_move = step;
+        let cmd = format!("$J=G91 G21 X{:.2} F600", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog X-: {}", cmd);
+        cmd
     }
 
-    /// Jog Z axis
-    pub fn jog_z(&mut self, direction: i32) {
-        let delta = self.current_step.value() * direction as f64;
-        self.z_position += delta;
+    /// Jog Y axis positive
+    pub fn jog_y_positive(&mut self) -> String {
+        let step = self.step_size.value();
+        self.last_y_move = step;
+        let cmd = format!("$J=G91 G21 Y{:.2} F600", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog Y+: {}", cmd);
+        cmd
+    }
+
+    /// Jog Y axis negative
+    pub fn jog_y_negative(&mut self) -> String {
+        let step = -self.step_size.value();
+        self.last_y_move = step;
+        let cmd = format!("$J=G91 G21 Y{:.2} F600", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog Y-: {}", cmd);
+        cmd
+    }
+
+    /// Jog Z axis positive
+    pub fn jog_z_positive(&mut self) -> String {
+        let step = self.step_size.value();
+        self.last_z_move = step;
+        let cmd = format!("$J=G91 G21 Z{:.2} F300", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog Z+: {}", cmd);
+        cmd
+    }
+
+    /// Jog Z axis negative
+    pub fn jog_z_negative(&mut self) -> String {
+        let step = -self.step_size.value();
+        self.last_z_move = step;
+        let cmd = format!("$J=G91 G21 Z{:.2} F300", step);
+        self.current_command = Some(cmd.clone());
+        info!("Jog Z-: {}", cmd);
+        cmd
     }
 
     /// Set step size
-    pub fn set_step_size(&mut self, step: StepSize) {
-        self.current_step = step;
+    pub fn set_step_size(&mut self, size: JogStepSize) {
+        self.step_size = size;
+        info!("Jog step size set to: {}", size.as_str());
+    }
+
+    /// Get available step sizes
+    pub fn step_sizes() -> Vec<JogStepSize> {
+        vec![
+            JogStepSize::Small,
+            JogStepSize::Normal,
+            JogStepSize::Large,
+            JogStepSize::Huge,
+        ]
+    }
+
+    /// Unlock machine (alarm reset)
+    pub fn unlock(&self) -> String {
+        "$X".to_string()
+    }
+
+    /// Resume from hold
+    pub fn resume(&self) -> String {
+        "~".to_string()
     }
 }
 
@@ -81,31 +154,72 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_step_size_values() {
-        assert_eq!(StepSize::ZeroPointOne.value(), 0.1);
-        assert_eq!(StepSize::One.value(), 1.0);
-        assert_eq!(StepSize::Ten.value(), 10.0);
-        assert_eq!(StepSize::Fifty.value(), 50.0);
+    fn test_jog_widget_creation() {
+        let widget = JogWidget::new();
+        assert_eq!(widget.step_size, JogStepSize::Normal);
     }
 
     #[test]
-    fn test_jog_widget_creation() {
-        let widget = JogWidget::new();
-        assert_eq!(widget.x_position, 0.0);
-        assert_eq!(widget.current_step, StepSize::One);
+    fn test_step_size_values() {
+        assert_eq!(JogStepSize::Small.value(), 0.1);
+        assert_eq!(JogStepSize::Normal.value(), 1.0);
+        assert_eq!(JogStepSize::Large.value(), 10.0);
+        assert_eq!(JogStepSize::Huge.value(), 50.0);
     }
 
     #[test]
     fn test_jog_x_positive() {
         let mut widget = JogWidget::new();
-        widget.jog_x(1);
-        assert_eq!(widget.x_position, 1.0);
+        let cmd = widget.jog_x_positive();
+        assert!(cmd.contains("X"));
+        assert!(cmd.contains("1.00"));
     }
 
     #[test]
     fn test_jog_x_negative() {
         let mut widget = JogWidget::new();
-        widget.jog_x(-1);
-        assert_eq!(widget.x_position, -1.0);
+        let cmd = widget.jog_x_negative();
+        assert!(cmd.contains("X-1.00"));
+    }
+
+    #[test]
+    fn test_jog_y_positive() {
+        let mut widget = JogWidget::new();
+        let cmd = widget.jog_y_positive();
+        assert!(cmd.contains("Y1.00"));
+    }
+
+    #[test]
+    fn test_jog_z_positive() {
+        let mut widget = JogWidget::new();
+        let cmd = widget.jog_z_positive();
+        assert!(cmd.contains("Z1.00"));
+    }
+
+    #[test]
+    fn test_set_step_size() {
+        let mut widget = JogWidget::new();
+        widget.set_step_size(JogStepSize::Large);
+        assert_eq!(widget.step_size, JogStepSize::Large);
+        let cmd = widget.jog_x_positive();
+        assert!(cmd.contains("X10.00"));
+    }
+
+    #[test]
+    fn test_unlock_command() {
+        let widget = JogWidget::new();
+        assert_eq!(widget.unlock(), "$X");
+    }
+
+    #[test]
+    fn test_resume_command() {
+        let widget = JogWidget::new();
+        assert_eq!(widget.resume(), "~");
+    }
+
+    #[test]
+    fn test_step_sizes_list() {
+        let sizes = JogWidget::step_sizes();
+        assert_eq!(sizes.len(), 4);
     }
 }
