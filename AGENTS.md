@@ -20,6 +20,30 @@
   - Use `timeout 600 cargo test` on Unix/Linux
   - Use `cargo test --test-threads=1` for sequential execution if needed
 
+### Test Organization
+All tests **MUST** be located in the `tests/` folder organized by module hierarchy, NOT inline in source files:
+
+```
+tests/
+├── lib.rs                          # Integration test root with module declarations
+├── communication/
+│   └── mod.rs                      # GRBL protocol and serial communication tests
+├── designer/
+│   └── mod.rs                      # CAM, shapes, and toolpath tests
+├── jobs/
+│   └── mod.rs                      # Job scheduling and queue tests
+├── materials/
+│   └── mod.rs                      # Material database tests
+└── widgets/
+    └── mod.rs                      # UI widget tests (connection, jog, overrides, loading)
+```
+
+**Convention**: Each module directory has a `mod.rs` file containing all tests for that module. Tests should:
+- Use `#[test]` for sync tests and `#[tokio::test]` for async tests
+- Import from the public `gcodekit` crate (e.g., `use gcodekit::communication::GrblController;`)
+- Be organized with related tests grouped together
+- Follow naming convention: `test_<component>_<scenario>` (e.g., `test_jog_x_positive`)
+
 ## Lint & Format Commands
 - `cargo clippy` - Run linter with clippy
 - `cargo fmt` - Format code with rustfmt

@@ -40,16 +40,3 @@ impl VersionInfo {
         None
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_version_parsing() {
-        let version = VersionInfo::parse("GRBL v1.1h").unwrap();
-        assert_eq!(version.major, 1);
-        assert_eq!(version.minor, 1);
-        assert_eq!(version.patch, 'h');
-    }
-}

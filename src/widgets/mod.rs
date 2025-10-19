@@ -10,5 +10,5 @@ pub mod overrides;
 
 pub use connection::ConnectionWidget;
 pub use gcode_loading::GcodeLoading;
-pub use jog::JogWidget;
+pub use jog::{JogWidget, JogStepSize};
 pub use overrides::OverridesWidget;
