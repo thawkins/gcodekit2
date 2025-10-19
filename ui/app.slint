@@ -1,5 +1,5 @@
 import { StandardButton, TabWidget, VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
-import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from "theme-provider.slint";
+import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText, ThemeToggleButton } from "theme-provider.slint";
 
 component MenuBar inherits Rectangle {
     background: ThemeProvider.colors.panel;
@@ -18,6 +18,8 @@ component MenuBar inherits Rectangle {
         Rectangle {
             width: 100%;
         }
+        
+        ThemeToggleButton { }
         
         Rectangle {
             background: ThemeProvider.colors.button;

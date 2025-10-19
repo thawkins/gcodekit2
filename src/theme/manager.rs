@@ -10,6 +10,7 @@ use std::sync::{Arc, RwLock};
 use tracing::info;
 
 /// Manages all theme operations
+#[derive(Clone)]
 pub struct ThemeManager {
     current_theme: Arc<RwLock<ThemeType>>,
     user_preference: Arc<RwLock<String>>,

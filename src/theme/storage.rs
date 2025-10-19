@@ -32,6 +32,8 @@ impl Default for ThemeConfig {
 }
 
 /// Manages theme preference storage and retrieval
+/// Persistent theme preference storage
+#[derive(Clone)]
 pub struct ThemeStorage {
     config_path: PathBuf,
 }

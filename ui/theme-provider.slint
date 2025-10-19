@@ -32,6 +32,12 @@ export global ThemeProvider {
     // Current theme mode: "light" or "dark"
     in-out property <string> mode: "light";
 
+    // Callback for theme changes (called from Rust)
+    callback theme-changed(string);
+
+    // Callback when theme toggle button is clicked
+    callback toggle-requested();
+
     // Toggle theme
     public function toggle-theme() {
         if (mode == "light") {
@@ -112,4 +118,26 @@ export component ThemedText inherits Text {
 // Reusable themed secondary text
 export component ThemedSecondaryText inherits Text {
     color: ThemeProvider.colors.text-secondary;
+}
+
+// Theme toggle button component
+export component ThemeToggleButton inherits Rectangle {
+    background: ThemeProvider.colors.button;
+    border-radius: 3px;
+    width: 40px;
+    height: 32px;
+    
+    TouchArea {
+        clicked => {
+            ThemeProvider.toggle-requested();
+        }
+    }
+    
+    Text {
+        text: ThemeProvider.mode == "light" ? "🌙" : "☀";
+        color: ThemeProvider.colors.text-primary;
+        font-size: 16px;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
 }

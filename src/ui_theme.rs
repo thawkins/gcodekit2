@@ -135,6 +135,7 @@ impl UIThemePalette {
 }
 
 /// Manages theme integration between Rust and Slint
+#[derive(Clone)]
 pub struct UIThemeProvider {
     manager: Arc<ThemeManager>,
     current_palette: Arc<tokio::sync::RwLock<UIThemePalette>>,
