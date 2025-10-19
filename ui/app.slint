@@ -1,0 +1,128 @@
+import { StandardButton } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    width: 1400px;
+    height: 900px;
+    title: "GCodeKit - GRBL Control";
+
+    VerticalLayout {
+        // Menu Bar
+        Rectangle {
+            height: 50px;
+            background: #2b2b2b;
+            
+            HorizontalLayout {
+                padding: 10px;
+                Text {
+                    text: "File";
+                    color: white;
+                    font-size: 14px;
+                }
+                Text {
+                    text: "Machine";
+                    color: white;
+                    font-size: 14px;
+                }
+                Text {
+                    text: "View";
+                    color: white;
+                    font-size: 14px;
+                }
+                Text {
+                    text: "Tools";
+                    color: white;
+                    font-size: 14px;
+                }
+                Text {
+                    text: "Help";
+                    color: white;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        // Main Content Area
+        HorizontalLayout {
+            // Left Panel
+            Rectangle {
+                width: 250px;
+                background: #f0f0f0;
+                
+                VerticalLayout {
+                    padding: 10px;
+                    Text {
+                        text: "Machine Control";
+                        font-weight: 700;
+                    }
+                    Text {
+                        text: "Status: Disconnected";
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            // Center Area (Tabs)
+            VerticalLayout {
+                Rectangle {
+                    height: 40px;
+                    background: #e8e8e8;
+                    
+                    HorizontalLayout {
+                        padding: 5px;
+                        Text { text: "G-code Editor"; }
+                        Text { text: "3D Visualizer"; }
+                        Text { text: "Device Console"; }
+                        Text { text: "Job Manager"; }
+                        Text { text: "Designer"; }
+                    }
+                }
+
+                Rectangle {
+                    background: white;
+                    VerticalLayout {
+                        alignment: center;
+                        Text {
+                            text: "Tab content will appear here";
+                        }
+                    }
+                }
+            }
+
+            // Right Panel
+            Rectangle {
+                width: 250px;
+                background: #f0f0f0;
+                
+                VerticalLayout {
+                    padding: 10px;
+                    Text {
+                        text: "CAM Functions";
+                        font-weight: 700;
+                    }
+                    Text {
+                        text: "Design Tools";
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        // Status Bar
+        Rectangle {
+            height: 30px;
+            background: #e0e0e0;
+            
+            HorizontalLayout {
+                padding: 5px;
+                Text {
+                    text: "Status: Idle";
+                    font-size: 11px;
+                }
+                Text {
+                    text: "Position: X: 0.0 Y: 0.0 Z: 0.0";
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}
