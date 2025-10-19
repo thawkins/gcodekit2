@@ -8,7 +8,7 @@ GCodeKit2 is a production-quality desktop application for controlling GRBL-compa
 
 ## Phase Definitions
 
-### Phase 1-8: Core Foundation ✅ COMPLETED (v0.1.0-alpha)
+### Phase 1-8: Core Foundation 
 
 **Completed Features**:
 - GRBL communication protocol with version detection
