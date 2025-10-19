@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2-alpha] - 2025-10-19 (MVP Building, Test Reorganization, Program Rename)
+
+### Added
+- **Program Rename**: Official program name changed from `gcodekit` to `gcodekit2`
+- **Theme Requirements**: Added system theming requirement to SPEC.md (Light/Dark mode support with system detection)
+- **Documentation Consolidation**: All markdown files organized in docs/ folder (except SPEC.md, AGENTS.md, README.md, CHANGELOG.md)
+- **Changelog Management**: CHANGELOG.md requirement added to AGENTS.md - must update before each push to remote
+
+### Changed
+- **Test Organization**: All tests moved to tests/ folder with module hierarchy mirroring src/
+- **AGENTS.md**: Updated to reflect test location requirements and changelog management procedure
+- **SPEC.md**: Added Theme Support requirement (15.1 System Theme Support)
+- **Build**: Release and debug versions both built and tested
+
+### Build Status
+- Debug Build: ✅ Successful (224MB)
+- Release Build: ✅ Successful (13MB)
+- All Tests: ✅ Passing (128+ tests)
+- Test Organization: ✅ Complete (tests/ hierarchy mirrors src/)
+
 ## [0.2.1-alpha] - 2025-10-19 (Project Reorganization, Finalization, Master Plan)
 
 ### Added
