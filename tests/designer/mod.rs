@@ -1,6 +1,6 @@
 //! Designer module tests
 
-use gcodekit::designer::{Design, Designer, Shape};
+use gcodekit2::designer::{Design, Designer, Shape};
 
 #[test]
 fn test_design_creation() {
@@ -128,7 +128,7 @@ fn test_circle_to_gcode() {
 
 #[test]
 fn test_toolpath_creation() {
-    use gcodekit::designer::Toolpath;
+    use gcodekit2::designer::Toolpath;
     let tp = Toolpath::new(
         "Cut".to_string(),
         "G0 X10 Y10\nG1 Z-5 F100\n".to_string(),
@@ -143,7 +143,7 @@ fn test_toolpath_creation() {
 
 #[test]
 fn test_toolpath_estimate_time() {
-    use gcodekit::designer::Toolpath;
+    use gcodekit2::designer::Toolpath;
     let tp = Toolpath::new(
         "Test".to_string(),
         "G1 X10\nG1 X20\nG1 X30\n".to_string(),
@@ -157,7 +157,7 @@ fn test_toolpath_estimate_time() {
 
 #[test]
 fn test_toolpath_optimize() {
-    use gcodekit::designer::Toolpath;
+    use gcodekit2::designer::Toolpath;
     let mut tp = Toolpath::new(
         "Test".to_string(),
         "; Comment\nG0 X10\n\n  G1 Y20  \nG0 Z5".to_string(),
@@ -172,7 +172,7 @@ fn test_toolpath_optimize() {
 
 #[test]
 fn test_convert_arcs_to_lines() {
-    use gcodekit::designer::Toolpath;
+    use gcodekit2::designer::Toolpath;
     let mut tp = Toolpath::new(
         "Test".to_string(),
         "G0 X10\nG2 X20 Y20 I5 J5\nG1 Z5".to_string(),

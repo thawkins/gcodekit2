@@ -1,7 +1,7 @@
 //! Widgets module tests
 
-use gcodekit::widgets::{ConnectionWidget, JogWidget, JogStepSize, OverridesWidget};
-use gcodekit::widgets::gcode_loading::{GcodeFile, GcodeLoading};
+use gcodekit2::widgets::{ConnectionWidget, JogWidget, JogStepSize, OverridesWidget};
+use gcodekit2::widgets::gcode_loading::{GcodeFile, GcodeLoading};
 
 // Connection widget tests
 

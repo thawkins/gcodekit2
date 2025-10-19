@@ -1,6 +1,6 @@
 //! Materials module tests
 
-use gcodekit::materials::{Material, MaterialDatabase, MaterialType};
+use gcodekit2::materials::{Material, MaterialDatabase, MaterialType};
 
 #[test]
 fn test_material_creation() {

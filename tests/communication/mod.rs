@@ -1,6 +1,6 @@
 //! Communication module tests
 
-use gcodekit::communication::{GrblController, MachineState, Position};
+use gcodekit2::communication::{GrblController, MachineState, Position};
 
 #[tokio::test]
 async fn test_grbl_controller_creation() {
@@ -70,7 +70,7 @@ async fn test_response_logging() {
 
 #[tokio::test]
 async fn test_recovery_config() {
-    use gcodekit::communication::RecoveryConfig;
+    use gcodekit2::communication::RecoveryConfig;
     let controller = GrblController::new();
     let config = RecoveryConfig {
         max_retries: 5,

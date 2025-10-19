@@ -1801,7 +1801,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "gcodekit"
+name = "gcodekit2"
 version = "0.1.0-alpha"
 dependencies = [
  "anyhow",

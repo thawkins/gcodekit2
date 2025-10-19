@@ -1,6 +1,6 @@
 //! Jobs module tests
 
-use gcodekit::jobs::{Job, JobManager, Priority, JobState};
+use gcodekit2::jobs::{Job, JobManager, Priority, JobState};
 
 #[test]
 fn test_priority_creation() {
