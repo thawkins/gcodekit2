@@ -269,11 +269,12 @@ The UI must dynamically adapt to the system theme preference, providing a seamle
 
 ## Development Status
 
-**Current Phase**: Phase 13 Complete - Device Console Integration
+**Current Phase**: Phase 14 Planned - System Theme Support (Light/Dark Mode)
 **Implementation Status**: Alpha Development Version - Core features functional with ongoing development
 **Version**: 0.1.0-alpha
-**Test Coverage**: 362 passing tests covering all major components, machine control, UI functionality, communication, and status monitoring
+**Test Coverage**: 365+ passing tests covering all major components, machine control, UI functionality, communication, and status monitoring
 **Architecture**: Modular, extensible design with stable UI framework, advanced CAM capabilities, real-time status monitoring, and improved code quality
+**UI Theme Support**: Planned - Dynamic adaptation to system light/dark theme preference with accessibility compliance
 
 ⚠️ **Alpha Notice**: This software is under active development. While functional and tested, it may contain bugs and the API may change in future releases. Use with appropriate caution.
 

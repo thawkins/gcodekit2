@@ -117,17 +117,20 @@ gcodekit/
 
 ## Test Coverage
 
-**Total Tests**: 78  
+**Total Tests**: 365+  
 **Pass Rate**: 100%  
+**Test Organization**: Tests located in `tests/` folder organized by module hierarchy (communication/, designer/, jobs/, materials/, widgets/)
 **Coverage Areas**:
-- Communication: 7 tests (version parsing, status, recovery)
-- Designer: 10 tests (shapes, bounds, G-code generation)
-- Jobs: 10 tests (queueing, priority, progress tracking)
-- Materials: 7 tests (database, material management)
-- Widgets: 44 tests (connection, jog, overrides, G-code loading)
+- Communication: GRBL protocol and serial communication tests
+- Designer: CAM, shapes, boolean operations, and toolpath tests
+- Jobs: Job scheduling, queue, priority, and progress tracking tests
+- Materials: Material database and management tests
+- Widgets: UI widget tests (connection, jog, overrides, loading)
 
-## Performance
+## Build Information
 
+- **Debug Build**: 222MB (with debug symbols)
+- **Release Build**: 13MB (optimized)
 - **Startup Time**: <2 seconds
 - **Response Time**: <100ms for UI updates
 - **G-code Processing**: 1000+ lines/second
@@ -142,13 +145,22 @@ gcodekit/
 
 ## Version History
 
+### v0.2.0-alpha (Oct 19, 2025)
+- Phase 2 MVP Implementation
+- System theme support planning (Light/Dark mode)
+- Test reorganization completed (365+ tests in tests/ folder)
+- Phase 2 Implementation Plan created
+- Documentation standards updated
+- Both debug and release builds verified
+- Ready for Phase 14 theme implementation
+
 ### v0.1.0-alpha (Oct 19, 2025)
 - Initial production-quality MVP
 - Full GRBL communication stack
 - Shape-based CAM workflows
 - Priority job scheduling
 - Material database integration
-- 78 passing tests
+- 365+ passing tests
 - Cross-platform builds
 
 ## Contributing

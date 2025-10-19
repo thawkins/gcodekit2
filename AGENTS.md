@@ -56,7 +56,7 @@ tests/
 ## Documentation standards 
 -  For all functions create DOCBLOCK documentation comments above each function that describes the purpose of the function, and documents any arguments and return vaulues
 -  For all modules place a DOCBLOCK at the top of the File that describes the purpose of the module, and any dependancies.
--  **Documentation Files**: All documentation markdown files (*.md) **MUST** be located in the `docs/` folder, except for `SPEC.md`, `AGENTS.md`, `README.md` and `CHANGELOG.md` which remain in the project root. This includes: implementation guides, architecture documentation, feature specifications, task breakdowns, user guides, API references, and any other markdown documentation.
+-  **Documentation Files**: All documentation markdown files (*.md) **MUST** be located in the `docs/` folder, except for `SPEC.md`, `AGENTS.md`, `README.md` and `CHANGELOG.md` which remain in the project root. This includes: implementation guides, architecture documentation, feature specifications, task breakdowns, user guides, API references, and any other markdown documentation. Any future documentation should be created in the docs/ folder following this convention.
 -  Do not create explainer documents or other documentation unless specificaly asked to.
 
 
