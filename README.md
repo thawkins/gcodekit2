@@ -36,6 +36,7 @@ A comprehensive desktop application for controlling GRBL-compatible laser engrav
 - **Tabbed Interface**: G-code Editor, 3D Visualizer, Device Console, Job Manager, Designer tabs
 - **Cross-platform**: Runs on Linux, Windows, and macOS
 - **Responsive Design**: Real-time updates and low-latency communication
+- **Web Pendant**: Remote control via mobile-responsive web interface with WebSocket real-time streaming
 
 ## Architecture
 
@@ -146,7 +147,7 @@ gcodekit/
 
 ## Version History
 
-### v0.2.0-alpha (Oct 19, 2025 - Phase 2 MVP & Complete Theme Implementation)
+### v0.2.0-alpha (Oct 19, 2025 - Phase 2 MVP, Complete Theme Implementation & Web Pendant)
 - **Phase 2 MVP Implementation**: Complete foundation for all major features
 - **System Theme Support**: Full infrastructure for Light/Dark theme support with system detection ✅
 - **Theme Infrastructure**: 
@@ -156,14 +157,22 @@ gcodekit/
   - Persistent theme preferences ✅
   - Dynamic theme switching capability ✅
   - Theme module with 31 comprehensive tests ✅
-- **Test Coverage**: 108 tests organized in tests/ hierarchy (100% passing)
-  - 31 new theme-specific tests covering system detection, palette validation, contrast compliance
-  - Integration tests for all theme operations
+- **Task 10: Web Pendant Interface** ✅
+  - RESTful API for remote machine control ✅
+  - WebSocket real-time streaming communication ✅
+  - Mobile-responsive HTML5 interface ✅
+  - Cross-browser compatibility (Chrome, Firefox, Safari, Edge) ✅
+  - Light/Dark theme support in pendant UI ✅
+  - 20 integration tests covering all pendant components ✅
+- **Test Coverage**: 128 tests organized in tests/ hierarchy (100% passing)
+  - 31 theme-specific tests covering system detection, palette validation, contrast compliance
+  - 20 pendant-specific tests covering server, API, WebSocket, and UI components
+  - Integration tests for all operations
   - WCAG AA contrast ratio verification
-- **Build Status**: Debug and release builds fully optimized
-- **Code Quality**: All tests passing, theme infrastructure complete
-- **Documentation**: All markdown docs in docs/ folder (except SPEC.md, README.md, AGENTS.md in root)
-- **Ready for**: Phase 14.2 (Theme UI), 14.3 (Settings Integration), 14.4 (Full Adaptation)
+- **Build Status**: Debug (224MB) and release (13MB) builds fully optimized
+- **Code Quality**: All tests passing, theme and pendant infrastructure complete
+- **Documentation**: All markdown docs in docs/ folder including TASK_10_WEB_PENDANT.md (except SPEC.md, README.md, AGENTS.md in root)
+- **Ready for**: Phase 14.2 (Theme UI), 14.3 (Settings Integration), Task 11 (Material Database)
 
 ### v0.1.0-alpha (Oct 19, 2025)
 - Initial production-quality MVP

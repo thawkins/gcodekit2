@@ -10,6 +10,7 @@ pub mod materials;
 pub mod widgets;
 pub mod theme;
 pub mod ui_theme;
+pub mod pendant;
 
 pub use communication::GrblController;
 pub use designer::Designer;
@@ -17,3 +18,4 @@ pub use jobs::JobManager;
 pub use materials::MaterialDatabase;
 pub use theme::ThemeManager;
 pub use ui_theme::{UIThemeProvider, UIThemePalette, UIColor};
+pub use pendant::{PendantServer, PendantConfig};

@@ -1,0 +1,386 @@
+/* GCodeKit2 Web Pendant - Responsive Mobile UI Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.version {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Panels */
+.status-panel,
+.control-panel {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .status-panel,
+body.dark-mode .control-panel {
+    background: #2d2d2d;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.status-panel h2,
+.control-panel h2 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: #0066cc;
+}
+
+body.dark-mode .status-panel h2,
+body.dark-mode .control-panel h2 {
+    color: #4da6ff;
+}
+
+/* Status Grid */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 4px;
+    border-left: 3px solid #0066cc;
+}
+
+body.dark-mode .status-item {
+    background: #1e1e1e;
+    border-left-color: #4da6ff;
+}
+
+.status-item label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+body.dark-mode .status-item label {
+    color: #999;
+}
+
+.status-item span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+body.dark-mode .status-item span {
+    color: #ffffff;
+}
+
+/* State Indicator */
+.state {
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+}
+
+.state.idle {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.state.running {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.state.alarm {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.state.hold {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+body.dark-mode .state {
+    color: #fff;
+}
+
+body.dark-mode .state.idle {
+    background: rgba(46, 125, 50, 0.3);
+}
+
+body.dark-mode .state.running {
+    background: rgba(21, 101, 192, 0.3);
+}
+
+body.dark-mode .state.alarm {
+    background: rgba(198, 40, 40, 0.3);
+}
+
+body.dark-mode .state.hold {
+    background: rgba(230, 81, 0, 0.3);
+}
+
+/* Jog Panel */
+.jog-panel h3 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.axis-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 0.5rem;
+}
+
+.jog-btn {
+    padding: 0.75rem;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 1rem;
+}
+
+.jog-btn:hover {
+    background: #004499;
+    transform: translateY(-1px);
+}
+
+.jog-btn:active {
+    transform: translateY(0);
+}
+
+body.dark-mode .jog-btn {
+    background: #4da6ff;
+    color: #1e1e1e;
+}
+
+body.dark-mode .jog-btn:hover {
+    background: #66b3ff;
+}
+
+/* Emergency Panel */
+.emergency-panel {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ddd;
+}
+
+body.dark-mode .emergency-panel {
+    border-top-color: #444;
+}
+
+.emergency-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #ff3333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.emergency-btn:hover {
+    background: #cc0000;
+    transform: scale(1.01);
+}
+
+.emergency-btn:active {
+    transform: scale(0.99);
+}
+
+/* Footer */
+.footer {
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+body.dark-mode .footer {
+    background: #2d2d2d;
+    border-top-color: #444;
+}
+
+.connection-status {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.connection.connected {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.connection.disconnected {
+    background: #ffebee;
+    color: #c62828;
+}
+
+body.dark-mode .connection.connected {
+    background: rgba(46, 125, 50, 0.3);
+    color: #4caf50;
+}
+
+body.dark-mode .connection.disconnected {
+    background: rgba(198, 40, 40, 0.3);
+    color: #f44336;
+}
+
+.message-count {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+body.dark-mode .message-count {
+    color: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.25rem;
+    }
+
+    .content {
+        padding: 0.75rem;
+    }
+
+    .status-panel,
+    .control-panel {
+        padding: 1rem;
+    }
+
+    .status-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .axis-controls {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .connection-status,
+    .message-count {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1rem;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .axis-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .status-panel,
+    .control-panel {
+        padding: 0.75rem;
+    }
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0066cc;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

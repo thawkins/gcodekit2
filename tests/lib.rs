@@ -7,6 +7,7 @@
 //! - tests/materials/ - Material database operations
 //! - tests/widgets/ - UI widget tests
 //! - tests/theme/ - Theme system, color palettes, and persistence
+//! - tests/pendant/ - Web pendant interface, WebSocket, and HTTP server
 
 mod communication;
 mod designer;
@@ -14,3 +15,4 @@ mod jobs;
 mod materials;
 mod theme;
 mod widgets;
+mod pendant;
