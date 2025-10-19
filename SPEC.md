@@ -75,10 +75,11 @@ Additional Requirements:
 8. Code Style: Follow Rust formatting (4 spaces, max 100 width), snake_case naming, structured error handling with anyhow
 9. Logging: Use tracing for structured logging, avoid println! in production code
 10. Modular Architecture: Separate communication logic from UI components for maintainability
-11. Testing: Implement comprehensive unit tests for all components using `cargo test`. Tests should cover core functionality, edge cases, and error conditions. Unit tests must pass as part of the build process and CI/CD pipeline.
+11. Testing: Implement comprehensive unit tests for all components using `cargo test`. Tests should cover core functionality, edge cases, and error conditions. Unit tests must pass as part of the build process and CI/CD pipeline. All tests must be organized in the `tests/` folder with hierarchy mirroring the `src/` directory.
 12. Error Recovery: Implement 99.9% uptime guarantee through automatic error recovery, job resumption, and comprehensive logging
 13. 3-Axis Support: Optimized for GRBL machines with dedicated X/Y/Z axis control
 14. Job Management: Advanced job queuing with priority scheduling, progress tracking, and automatic resumption after errors
+15. System Theme Support: Support Light and Dark themes with automatic detection of OS theme preference, dynamic theme switching without application restart, and WCAG AA accessibility compliance for all UI components
 
  Current Features:
   12. **Advanced Visualizer**: Right-click jog to location ✓, color-coded paths for G0/G1/G2/G3 moves ✓, 3-axis support (XYZ) ✓, real-time machine position overlay ✓, outline gcode functionality (planned)

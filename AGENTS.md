@@ -51,7 +51,13 @@ tests/
 
 ## Github access
 - use "gh" to access all github repositories. 
-- when asked to "push to remote", update the SPEC.md and README.md files with all recent activity and spec changes,  construct a stuitable commit message based on recent activity, commit all changes and push the changes to the remote repository. 
+- when asked to "push to remote", update the SPEC.md, README.md, and CHANGELOG.md files with all recent activity and spec changes, construct a suitable commit message based on recent activity, commit all changes and push the changes to the remote repository.
+
+## Changelog Management
+- **CHANGELOG.md**: Maintain a changelog in the root directory documenting all changes before each push to remote.
+- **Format**: Follow Keep a Changelog format (https://keepachangelog.com/)
+- **Update Timing**: Update CHANGELOG.md before each push to remote with the latest changes, features, fixes, and improvements.
+- **Version**: Use semantic versioning (major.minor.patch-prerelease) 
 
 ## Documentation standards 
 -  For all functions create DOCBLOCK documentation comments above each function that describes the purpose of the function, and documents any arguments and return vaulues
