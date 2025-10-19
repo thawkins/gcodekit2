@@ -2,35 +2,90 @@
 //!
 //! Displays tabbed content for G-code editing, visualization, console, etc.
 
-import { TabWidget } from "std-widgets.slint";
 import { ThemeProvider } from "../theme/mod.slint";
+import { CustomTabWidget } from "../widgets/custom-tab-widget.slint";
+import { DeviceConsole } from "../widgets/device-console.slint";
 
 /// Center panel with tabbed interface for main content
 export component CenterPanel inherits Rectangle {
     background: ThemeProvider.colors.background;
     
+    // Tab state
+    private property <int> current-tab: 0;
+    
+    // Console state
+    in property <string> console-content: "[System] Console Ready";
+    in property <bool> show-info: true;
+    in property <bool> show-debug: true;
+    in property <bool> show-warn: true;
+    in property <bool> show-error: true;
+    in property <bool> show-trace: false;
+    
+    // Callbacks
+    callback send-command(string);
+    callback clear-console();
+    callback copy-console();
+    callback save-console();
+    callback toggle-info(bool);
+    callback toggle-debug(bool);
+    callback toggle-warn(bool);
+    callback toggle-error(bool);
+    callback toggle-trace(bool);
+    
     VerticalLayout {
-        TabWidget {
-            Tab {
-                title: "G-code Editor";
-                Rectangle { background: ThemeProvider.colors.background; }
+        CustomTabWidget {
+            current-tab <=> root.current-tab;
+            tab-titles: ["G-code Editor", "3D Visualizer", "Device Console", "Job Manager", "Designer"];
+            
+            // G-code Editor Tab
+            Rectangle {
+                background: ThemeProvider.colors.background;
+                visible: root.current-tab == 0;
             }
-            Tab {
-                title: "3D Visualizer";
-                Rectangle { background: ThemeProvider.colors.background; }
+            
+            // 3D Visualizer Tab
+            Rectangle {
+                background: ThemeProvider.colors.background;
+                visible: root.current-tab == 1;
             }
-            Tab {
-                title: "Device Console";
-                Rectangle { background: ThemeProvider.colors.background; }
+            
+            // Device Console Tab
+            Rectangle {
+                background: ThemeProvider.colors.background;
+                visible: root.current-tab == 2;
+                
+                DeviceConsole {
+                    console-content: root.console-content;
+                    show-info: root.show-info;
+                    show-debug: root.show-debug;
+                    show-warn: root.show-warn;
+                    show-error: root.show-error;
+                    show-trace: root.show-trace;
+                    send-command(cmd) => { root.send-command(cmd); }
+                    clear-console => { root.clear-console(); }
+                    copy-console => { root.copy-console(); }
+                    save-console => { root.save-console(); }
+                    toggle-info(val) => { root.toggle-info(val); }
+                    toggle-debug(val) => { root.toggle-debug(val); }
+                    toggle-warn(val) => { root.toggle-warn(val); }
+                    toggle-error(val) => { root.toggle-error(val); }
+                    toggle-trace(val) => { root.toggle-trace(val); }
+                }
             }
-            Tab {
-                title: "Job Manager";
-                Rectangle { background: ThemeProvider.colors.background; }
+            
+            // Job Manager Tab
+            Rectangle {
+                background: ThemeProvider.colors.background;
+                visible: root.current-tab == 3;
             }
-            Tab {
-                title: "Designer";
-                Rectangle { background: ThemeProvider.colors.background; }
+            
+            // Designer Tab
+            Rectangle {
+                background: ThemeProvider.colors.background;
+                visible: root.current-tab == 4;
             }
         }
     }
 }
+
+

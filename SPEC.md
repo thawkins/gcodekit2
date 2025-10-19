@@ -96,6 +96,9 @@ Additional Requirements:
   22. **Tool Management**: Tool length offsets (G43/G49), tool change support, and tool libraries ✓
   23. **Keybinding Customization**: Configurable keyboard shortcuts for all major actions ✓
   24. **UI Stability**: Resolved all duplicate element IDs in slint interface for reliable dropdown menus and button interactions ✓
+  25. **Device Console**: Real-time log viewer with 1000-line buffer, multi-level filtering, log level prefixes, and export controls ✓
+  26. **Custom Tab Widget**: Visual tab highlighting with green active state, white text, and responsive tab switching ✓
+  27. **Improved Tab UI**: All tabs display white text for better contrast and readability ✓
 
   26. **Configurable UI System**: Dockable window functionality with toggleable left/right panels via View menu ✓
   27. **Advanced CAM Operations**: Part nesting algorithm using bottom-left fill strategy with rotation support ✓

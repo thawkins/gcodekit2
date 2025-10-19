@@ -11,6 +11,7 @@ pub mod widgets;
 pub mod theme;
 pub mod ui_theme;
 pub mod pendant;
+pub mod console_logger;
 
 pub use communication::GrblController;
 pub use designer::{
@@ -22,3 +23,4 @@ pub use materials::MaterialDatabase;
 pub use theme::ThemeManager;
 pub use ui_theme::{UIThemeProvider, UIThemePalette, UIColor};
 pub use pendant::{PendantServer, PendantConfig};
+pub use console_logger::{ConsoleBuffer, init_console_logging, get_console_logs, clear_console_logs, add_console_message};

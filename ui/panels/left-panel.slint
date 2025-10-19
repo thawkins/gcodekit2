@@ -5,11 +5,24 @@
 import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
 import { ThemeProvider } from "../theme/mod.slint";
 import { InteractiveButton } from "../widgets/interactive-button.slint";
+import { ConnectionPanel } from "../widgets/connection-panel.slint";
 
 /// Left panel with machine control and jog buttons
 export component LeftPanel inherits Rectangle {
     width: 250px;
     background: ThemeProvider.colors.background;
+    
+    // Connection state properties
+    in property <[string]> available-ports;
+    in property <string> selected-port;
+    in property <bool> is-connected;
+    in property <string> connection-status: "Disconnected";
+    in property <string> baud-rate: "115200";
+    
+    // Connection callbacks
+    callback refresh-ports();
+    callback connect(string);
+    callback disconnect();
     
     // State for button feedback
     private property <int> button_press_count: 0;
@@ -24,15 +37,15 @@ export component LeftPanel inherits Rectangle {
             font-size: 14px;
         }
         
-        ThemedRectangle {
-            VerticalLayout {
-                padding: 10px;
-                spacing: 5px;
-                
-                ThemedText { text: "Connection"; font-size: 12px; font-weight: 700; }
-                ThemedSecondaryText { text: "Status: Connected"; font-size: 11px; }
-                ThemedSecondaryText { text: "Port: /dev/ttyACM0"; font-size: 11px; }
-            }
+        ConnectionPanel {
+            available-ports: root.available-ports;
+            selected-port: root.selected-port;
+            is-connected: root.is-connected;
+            status-message: root.connection-status;
+            baud-rate: root.baud-rate;
+            refresh-ports => { root.refresh-ports(); }
+            connect(port) => { root.connect(port); }
+            disconnect => { root.disconnect(); }
         }
         
         ThemedRectangle {

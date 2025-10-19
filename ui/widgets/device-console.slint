@@ -1,0 +1,350 @@
+//! Device Console Widget - Real-time GRBL serial communication display
+//!
+//! Shows incoming and outgoing serial commands, responses, and status messages
+//! from the GRBL device for debugging and monitoring.
+
+import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Device console for displaying serial communication
+export component DeviceConsole inherits Rectangle {
+    background: ThemeProvider.colors.background;
+    
+    // Input properties
+    in property <string> status-text: "Disconnected";
+    in property <string> console-content: "[System] Console Ready\nWaiting for device connection...";
+    
+    // Filter toggles
+    in property <bool> show-info: true;
+    in property <bool> show-debug: true;
+    in property <bool> show-warn: true;
+    in property <bool> show-error: true;
+    in property <bool> show-trace: false;
+    
+    // Callbacks
+    callback send-command(string);
+    callback clear-console();
+    callback copy-console();
+    callback save-console();
+    callback toggle-info(bool);
+    callback toggle-debug(bool);
+    callback toggle-warn(bool);
+    callback toggle-error(bool);
+    callback toggle-trace(bool);
+    
+    VerticalLayout {
+        padding: 10px;
+        spacing: 5px;
+        
+        // Header with title
+        HorizontalLayout {
+            spacing: 10px;
+            alignment: start;
+            
+            ThemedText {
+                text: "Device Console";
+                font-size: 14px;
+                font-weight: 700;
+            }
+            
+            Rectangle { width: 100%; }
+        }
+        
+        // Button bar
+        HorizontalLayout {
+            spacing: 5px;
+            height: 24px;
+            
+            // Clear button
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 60px;
+                height: 24px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "Clear";
+                    font-size: 9px;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => {
+                        root.clear-console();
+                    }
+                }
+            }
+            
+            // Copy All button
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 70px;
+                height: 24px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "Copy All";
+                    font-size: 9px;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => {
+                        root.copy-console();
+                    }
+                }
+            }
+            
+            // Save All button
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 70px;
+                height: 24px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "Save All";
+                    font-size: 9px;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => {
+                        root.save-console();
+                    }
+                }
+            }
+            
+            Rectangle { width: 100%; }
+            
+            // Filter checkboxes
+            HorizontalLayout {
+                spacing: 10px;
+                
+                // Info checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-info ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-info(!root.show-info);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Info";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Debug checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-debug ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-debug(!root.show-debug);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Debug";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Warn checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-warn ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-warn(!root.show-warn);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Warn";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Error checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-error ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-error(!root.show-error);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Error";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Trace checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-trace ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-trace(!root.show-trace);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Trace";
+                        font-size: 8px;
+                    }
+                }
+            }
+        }
+        
+        // Console output area (90% of remaining space)
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 5px;
+                spacing: 0px;
+                
+                // Console text with monospace font for better readability
+                Rectangle {
+                    background: ThemeProvider.colors.panel;
+                    border-radius: 3px;
+                    
+                    VerticalLayout {
+                        padding: 5px;
+                        spacing: 0px;
+                        
+                        ThemedText {
+                            text: root.console-content;
+                            font-size: 8px;
+                            font-family: "monospace";
+                            wrap: word-wrap;
+                        }
+                    }
+                }
+                
+                Rectangle { height: 100%; }
+            }
+        }
+        
+        // Command input section (10% of remaining space)
+        ThemedRectangle {
+            VerticalLayout {
+                padding: 5px;
+                spacing: 2px;
+                
+                ThemedText {
+                    text: "Send Command";
+                    font-size: 10px;
+                    font-weight: 700;
+                }
+                
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    // Input field placeholder
+                    Rectangle {
+                        background: ThemeProvider.colors.panel;
+                        border-radius: 3px;
+                        height: 24px;
+                        
+                        ThemedSecondaryText {
+                            text: "Enter G-code or $ command...";
+                            font-size: 8px;
+                            padding: 3px;
+                        }
+                    }
+                    
+                    // Send button
+                    Rectangle {
+                        background: ThemeProvider.colors.status-green;
+                        width: 60px;
+                        height: 24px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Send";
+                            font-size: 9px;
+                            font-weight: 700;
+                            color: #FFFFFF;
+                        }
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.send-command("$H");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

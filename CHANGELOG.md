@@ -5,6 +5,64 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.7-alpha] - 2025-10-19 (UI Polish & Device Console)
+
+### Added
+- **Device Console Widget**: Real-time application log viewer ✅
+  - Console displays logs from startup (no device connection required)
+  - 1000-line buffer with automatic oldest-line removal
+  - Clear, Copy All, Save All button bar controls
+  - 5-level filter checkboxes (Info, Debug, Warn, Error, Trace)
+  - Real-time filtering with instant display updates
+  - Monospace font for better code readability
+  - Log level prefix on each line (INFO:, DEBUG:, etc.)
+  - Periodic 500ms refresh for new log display
+  - Integration with tracing logger system
+
+- **Custom Tab Widget**: Visual tab highlighting ✅
+  - Replaces std-widgets TabWidget with custom implementation
+  - 5 tabs: G-code Editor, 3D Visualizer, Device Console, Job Manager, Designer
+  - Active tab highlighted in green with white text
+  - Inactive tabs in gray with white text
+  - Bold text for selected tab, regular for unselected
+  - Click-to-select tab switching
+  - Real-time content visibility updates
+  - Better visual feedback on tab selection
+
+- **Log Formatting Functions**: Console logger enhancements ✅
+  - `extract_level()` - Detects log level from message
+  - `format_log_line()` - Reformats logs with level at start
+  - `get_console_as_string()` - Export logs for clipboard/file save
+
+### Changed
+- **Tab Text Visibility**: All tabs now display white text ✅
+  - Improved contrast on blue background
+  - Better readability for selected and unselected tabs
+  - Consistent styling across all 5 tabs
+
+- **Console Logger Module**: Enhanced for UI integration ✅
+  - Added MAX_CONSOLE_LINES constant (1000 lines)
+  - Automatic buffer management with oldest-line removal
+  - `filter_console_logs()` - Multi-level filtering support
+  - Log level extraction and formatting
+
+- **Main Event Handlers**: Centralized console updates ✅
+  - `update_console_display()` helper function
+  - All filter callbacks use unified update logic
+  - Periodic async update loop (500ms interval)
+  - Formatting applied on every update
+
+### Fixed
+- Tab text readability on unselected tabs ✅
+- Console display layout and spacing ✅
+- Filter checkbox visibility and interaction ✅
+
+### Build Status
+- Debug Build: ✅ Successful (261MB)
+- All Tests: ✅ Passing (210 total: 139 lib + 116 main + 210 integration)
+- Code Quality: ✅ No compilation errors
+- UI Polish: ✅ All tabs and console fully functional
+
 ## [0.2.6-alpha] - 2025-10-19 (Device Communications & UI Improvements)
 
 ### Added

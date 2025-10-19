@@ -1,0 +1,160 @@
+//! Custom Tab Widget - Tabbed interface with highlighted active tab
+//!
+//! Provides a tabbed interface where the active tab is visually highlighted.
+
+import { ThemedText } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Custom tabbed widget with highlighted active tab
+export component CustomTabWidget inherits Rectangle {
+    background: ThemeProvider.colors.background;
+    
+    // Currently selected tab index (0-based)
+    in-out property <int> current-tab: 0;
+    
+    // Tab titles
+    in property <[string]> tab-titles: [];
+    
+    VerticalLayout {
+        spacing: 0px;
+        
+        // Tab bar
+        HorizontalLayout {
+            spacing: 2px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 0px;
+            alignment: start;
+            
+            // Tab 1
+            Rectangle {
+                background: root.current-tab == 0 
+                    ? ThemeProvider.colors.status-green 
+                    : ThemeProvider.colors.button;
+                border-radius: 4px;
+                width: 120px;
+                height: 35px;
+                
+                ThemedText {
+                    text: root.tab-titles.length > 0 ? root.tab-titles[0] : "";
+                    font-size: 11px;
+                    font-weight: root.current-tab == 0 ? 700 : 400;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => { root.current-tab = 0; }
+                }
+            }
+            
+            // Tab 2
+            Rectangle {
+                background: root.current-tab == 1 
+                    ? ThemeProvider.colors.status-green 
+                    : ThemeProvider.colors.button;
+                border-radius: 4px;
+                width: 130px;
+                height: 35px;
+                
+                ThemedText {
+                    text: root.tab-titles.length > 1 ? root.tab-titles[1] : "";
+                    font-size: 11px;
+                    font-weight: root.current-tab == 1 ? 700 : 400;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => { root.current-tab = 1; }
+                }
+            }
+            
+            // Tab 3
+            Rectangle {
+                background: root.current-tab == 2 
+                    ? ThemeProvider.colors.status-green 
+                    : ThemeProvider.colors.button;
+                border-radius: 4px;
+                width: 120px;
+                height: 35px;
+                
+                ThemedText {
+                    text: root.tab-titles.length > 2 ? root.tab-titles[2] : "";
+                    font-size: 11px;
+                    font-weight: root.current-tab == 2 ? 700 : 400;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => { root.current-tab = 2; }
+                }
+            }
+            
+            // Tab 4
+            Rectangle {
+                background: root.current-tab == 3 
+                    ? ThemeProvider.colors.status-green 
+                    : ThemeProvider.colors.button;
+                border-radius: 4px;
+                width: 110px;
+                height: 35px;
+                
+                ThemedText {
+                    text: root.tab-titles.length > 3 ? root.tab-titles[3] : "";
+                    font-size: 11px;
+                    font-weight: root.current-tab == 3 ? 700 : 400;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => { root.current-tab = 3; }
+                }
+            }
+            
+            // Tab 5
+            Rectangle {
+                background: root.current-tab == 4 
+                    ? ThemeProvider.colors.status-green 
+                    : ThemeProvider.colors.button;
+                border-radius: 4px;
+                width: 90px;
+                height: 35px;
+                
+                ThemedText {
+                    text: root.tab-titles.length > 4 ? root.tab-titles[4] : "";
+                    font-size: 11px;
+                    font-weight: root.current-tab == 4 ? 700 : 400;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => { root.current-tab = 4; }
+                }
+            }
+            
+            Rectangle { width: 100%; }
+        }
+        
+        // Content area
+        Rectangle {
+            background: ThemeProvider.colors.background;
+            @children
+        }
+    }
+}

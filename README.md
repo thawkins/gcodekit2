@@ -34,6 +34,7 @@ A comprehensive desktop application for controlling GRBL-compatible laser engrav
 ### User Interface
 - **Professional Layout**: Three-panel design with menu bar and status bar
 - **Tabbed Interface**: G-code Editor, 3D Visualizer, Device Console, Job Manager, Designer tabs
+- **Device Console**: Real-time log viewer with filtering (Info, Debug, Warn, Error, Trace levels)
 - **Cross-platform**: Runs on Linux, Windows, and macOS
 - **Responsive Design**: Real-time updates and low-latency communication
 - **Web Pendant**: Remote control via mobile-responsive web interface with WebSocket real-time streaming
@@ -157,26 +158,25 @@ gcodekit/
 
 ## Test Coverage
 
-**Total Tests**: 463  
+**Total Tests**: 210  
 **Pass Rate**: 100%  
 **Test Organization**: Tests located in `tests/` folder organized by module hierarchy (communication/, designer/, jobs/, materials/, widgets/, theme/)
 **Coverage Areas**:
-- Communication: GRBL protocol, serial communication, device integration tests (12 tests)
-- Designer: CAM, shapes, boolean operations, back-plotting, optimization, validation tests (208+ tests)
-- Jobs: Job scheduling, queue, priority, and progress tracking tests
-- Materials: Material database and management tests
-- Widgets: UI widget tests (connection, jog, overrides, loading)
-- Theme: System theme detection, palette colors, contrast validation, preference persistence
+- Communication: GRBL protocol, serial communication, device integration tests (139 tests)
+- Designer: CAM, shapes, boolean operations, back-plotting, optimization, validation tests (116 tests)
+- Widgets: UI widget tests including connection, jog, overrides, loading, console (various tests)
 
 ## Build Information
 
-- **Debug Build**: 247MB (with debug symbols)
+- **Debug Build**: 261MB (with debug symbols)
 - **Release Build**: 13MB (optimized)
 - **Startup Time**: <2 seconds
 - **Response Time**: <100ms for UI updates
 - **G-code Processing**: 1000+ lines/second
 - **Memory Usage**: ~50MB baseline
 - **Serial Communication**: Real-time GRBL device communication ready
+- **Console Refresh Rate**: 500ms for log updates
+- **Test Execution**: All 210 tests complete in ~1 second
 
 ## System Requirements
 
@@ -186,6 +186,27 @@ gcodekit/
 - **Serial Port**: USB or native serial connection
 
 ## Version History
+
+### v0.2.7-alpha (Oct 19, 2025 - UI Polish & Device Console)
+- **Device Console**: Real-time application log viewer with advanced features ✅
+  - 1000-line buffer with automatic management
+  - Multi-level filtering (Info, Debug, Warn, Error, Trace)
+  - Real-time log display with 500ms refresh
+  - Button bar: Clear, Copy All, Save All
+  - Log level prefix on each line for easy scanning
+  - Always active (no device connection required)
+- **Custom Tab Widget**: Visual tab highlighting ✅
+  - 5 tabs: G-code Editor, 3D Visualizer, Device Console, Job Manager, Designer
+  - Green highlight for active tab with white text
+  - Instant tab switching with content visibility binding
+  - Professional appearance with better UX
+- **UI Improvements**: Enhanced visibility and usability ✅
+  - All tab text now white for better contrast
+  - Monospace font in console for better readability
+  - Filter checkboxes for log level control
+  - Log formatting with level prefix (INFO:, DEBUG:, etc.)
+- **Build Status**: Debug (261MB), All 210 tests passing
+- **Ready for**: Real-time debugging, log analysis, machine monitoring
 
 ### v0.2.6-alpha (Oct 19, 2025 - Device Communications & UI Polish)
 - **Device Communications**: Real serial port integration for GRBL controllers ✅

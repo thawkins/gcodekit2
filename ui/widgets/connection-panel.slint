@@ -1,0 +1,146 @@
+//! Connection Panel Widget - Device connection management
+//!
+//! Displays available serial ports, connection status, and control buttons
+//! for connecting to GRBL devices. Mirrors Universal G-Code Sender (UGS)
+//! connection management UI.
+
+import { ComboBox } from "std-widgets.slint";
+import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
+import { ThemeProvider } from "../theme/mod.slint";
+
+/// Connection panel for device selection and management
+export component ConnectionPanel inherits ThemedRectangle {
+    
+    // Input properties
+    in property <[string]> available-ports: [];
+    in property <string> selected-port: "";
+    in property <bool> is-connected: false;
+    in property <string> status-message: "Disconnected";
+    in property <string> baud-rate: "115200";
+    
+    // Internal state for ComboBox
+    private property <int> current-index: -1;
+    
+    // Callbacks
+    callback refresh-ports();
+    callback connect(string);
+    callback disconnect();
+    
+    VerticalLayout {
+        padding: 10px;
+        spacing: 8px;
+        
+        // Title
+        ThemedText {
+            text: "Connection";
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        // Status line
+        HorizontalLayout {
+            spacing: 5px;
+            
+            ThemedSecondaryText {
+                text: "Status:";
+                width: 50px;
+            }
+            
+            ThemedText {
+                text: root.status-message;
+                color: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
+                font-weight: 700;
+            }
+        }
+        
+        // Port selection row
+        HorizontalLayout {
+            spacing: 5px;
+            alignment: center;
+            
+            ThemedSecondaryText {
+                text: "Port:";
+                width: 40px;
+            }
+            
+            ComboBox {
+                model: root.available-ports;
+                current-index <=> root.current-index;
+                width: 120px;
+            }
+            
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 45px;
+                height: 28px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "⟳";
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => {
+                        root.refresh-ports();
+                    }
+                }
+            }
+        }
+        
+        // Baud rate display
+        HorizontalLayout {
+            spacing: 5px;
+            
+            ThemedSecondaryText {
+                text: "Baud:";
+                width: 50px;
+            }
+            
+            ThemedSecondaryText {
+                text: root.baud-rate;
+                color: ThemeProvider.colors.text-secondary;
+            }
+        }
+        
+        // Connect/Disconnect buttons row
+        HorizontalLayout {
+            spacing: 5px;
+            
+            // Connect button
+            Rectangle {
+                background: root.is-connected ? ThemeProvider.colors.status-red : ThemeProvider.colors.status-green;
+                width: 50%;
+                height: 32px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: root.is-connected ? "Disconnect" : "Connect";
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: #FFFFFF;
+                }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 100%;
+                    mouse-cursor: pointer;
+                    clicked => {
+                        if (root.is-connected) {
+                            root.disconnect();
+                        } else {
+                            // Get selected port from ComboBox by index
+                            if (root.current-index >= 0 && root.current-index < root.available-ports.length) {
+                                root.connect(root.available-ports[root.current-index]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

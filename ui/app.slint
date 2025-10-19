@@ -20,11 +20,31 @@ export component AppWindow inherits Window {
     callback connect(string);
     callback disconnect();
     
+    // Console callbacks
+    callback send-command(string);
+    callback clear-console();
+    callback copy-console();
+    callback save-console();
+    callback toggle-info(bool);
+    callback toggle-debug(bool);
+    callback toggle-warn(bool);
+    callback toggle-error(bool);
+    callback toggle-trace(bool);
+    
     // Connection state properties
     in property <[string]> available-ports;
     in property <string> selected-port;
     in property <bool> is-connected;
     in property <string> connection-status: "Disconnected";
+    in property <string> baud-rate: "115200";
+    
+    // Console state properties
+    in property <string> console-content: "[System] Console Ready";
+    in property <bool> show-info: true;
+    in property <bool> show-debug: true;
+    in property <bool> show-warn: true;
+    in property <bool> show-error: true;
+    in property <bool> show-trace: false;
     
     VerticalLayout {
         spacing: 0px;
@@ -40,8 +60,33 @@ export component AppWindow inherits Window {
             spacing: 0px;
             padding: 0px;
             
-            LeftPanel { }
-            CenterPanel { }
+            LeftPanel {
+                available-ports: root.available-ports;
+                selected-port: root.selected-port;
+                is-connected: root.is-connected;
+                connection-status: root.connection-status;
+                baud-rate: root.baud-rate;
+                refresh-ports => { root.refresh-ports(); }
+                connect(port) => { root.connect(port); }
+                disconnect => { root.disconnect(); }
+            }
+            CenterPanel {
+                console-content: root.console-content;
+                show-info: root.show-info;
+                show-debug: root.show-debug;
+                show-warn: root.show-warn;
+                show-error: root.show-error;
+                show-trace: root.show-trace;
+                send-command(cmd) => { root.send-command(cmd); }
+                clear-console => { root.clear-console(); }
+                copy-console => { root.copy-console(); }
+                save-console => { root.save-console(); }
+                toggle-info(val) => { root.toggle-info(val); }
+                toggle-debug(val) => { root.toggle-debug(val); }
+                toggle-warn(val) => { root.toggle-warn(val); }
+                toggle-error(val) => { root.toggle-error(val); }
+                toggle-trace(val) => { root.toggle-trace(val); }
+            }
             RightPanel { }
         }
         

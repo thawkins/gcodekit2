@@ -30,12 +30,45 @@ impl ConnectionWidget {
         }
     }
 
+    /// Filter ports to only include valid GRBL device ports
+    /// Valid ports: COM followed by number, /dev/ttyUSB followed by number, /dev/ttyACM followed by number
+    fn filter_valid_ports(ports: Vec<String>) -> Vec<String> {
+        ports.into_iter()
+            .filter(|port| {
+                // Windows: COM1, COM2, COM3, etc.
+                if port.starts_with("COM") {
+                    return port[3..].chars().all(|c| c.is_numeric());
+                }
+                
+                // Linux USB: /dev/ttyUSB0, /dev/ttyUSB1, etc.
+                if port.starts_with("/dev/ttyUSB") {
+                    return port[11..].chars().all(|c| c.is_numeric());
+                }
+                
+                // Linux ACM: /dev/ttyACM0, /dev/ttyACM1, etc.
+                if port.starts_with("/dev/ttyACM") {
+                    return port[11..].chars().all(|c| c.is_numeric());
+                }
+                
+                // macOS: /dev/tty.usbserial- or /dev/cu.usbserial-
+                if port.starts_with("/dev/tty.usbserial-") || port.starts_with("/dev/cu.usbserial-") {
+                    return true;
+                }
+                
+                false
+            })
+            .collect()
+    }
+
     /// Refresh available ports from the system
     pub fn refresh_ports(&mut self) -> Result<()> {
         info!("Refreshing available COM ports");
         match SerialConnection::list_ports() {
             Ok(ports) => {
-                self.available_ports = ports;
+                // Filter to only valid GRBL device ports
+                let filtered_ports = Self::filter_valid_ports(ports);
+                info!("Found {} valid GRBL ports: {:?}", filtered_ports.len(), filtered_ports);
+                self.available_ports = filtered_ports;
                 Ok(())
             }
             Err(e) => {
