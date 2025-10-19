@@ -145,19 +145,20 @@ gcodekit/
 
 ## Version History
 
-### v0.2.0-alpha (Oct 19, 2025 - Phase 2 MVP Release)
+### v0.2.0-alpha (Oct 19, 2025 - Phase 2 MVP & Theme Infrastructure)
 - **Phase 2 MVP Implementation**: Complete foundation for all major features
-- **System Theme Support**: Full infrastructure for Light/Dark theme support with system detection
+- **System Theme Support**: Full infrastructure for Light/Dark theme support with system detection ✅
 - **Theme Infrastructure**: 
-  - System theme detection (Windows, macOS, Linux)
-  - Color palettes with WCAG AA compliance
-  - Slint UI theme provider with reactive colors
-  - Persistent theme preferences
+  - System theme detection (Windows, macOS, Linux) ✅
+  - Color palettes with WCAG AA compliance ✅
+  - Slint UI theme provider with reactive colors ✅
+  - Persistent theme preferences ✅
+  - Dynamic theme switching capability 🔄
 - **Test Coverage**: 365+ tests organized in tests/ hierarchy (100% passing)
 - **Build Status**: Debug and release builds optimized
 - **Code Quality**: All tests passing, theme infrastructure complete
-- **Documentation**: PHASE_2_IMPLEMENTATION_PLAN.md created with complete roadmap
-- **Ready for**: Phase 14.2 (Theme UI) and 14.3 (Settings Integration)
+- **Documentation**: All markdown docs in docs/ folder (except SPEC.md, README.md, AGENTS.md in root)
+- **Ready for**: Phase 14.2 (Theme UI), 14.3 (Settings Integration), 14.4 (Full Adaptation)
 
 ### v0.1.0-alpha (Oct 19, 2025)
 - Initial production-quality MVP
