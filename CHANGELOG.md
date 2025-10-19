@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0-alpha] - 2025-10-19
 
+### Added (Session: MVP Build & Documentation)
+- Program renamed to `gcodekit2` in Cargo.toml with successful debug and release builds
+- Both debug (224MB) and release (13MB) binaries built and verified
+- AGENTS.md updated with CHANGELOG management requirements and documentation organization standards
+- Test reorganization completed with all tests in `tests/` folder hierarchy (as per AGENTS.md)
+- SPEC.md confirmed complete with system theme support requirements (requirement #15)
+
+### Changed
+- AGENTS.md enhanced with explicit CHANGELOG management section (Keep a Changelog format)
+- AGENTS.md enhanced with explicit requirements for documentation file locations (docs/ folder except root exceptions)
+- Build system verified working with zero build errors
+
+## [0.2.0-alpha] - 2025-10-19 (Previous Session)
+
 ### Added
 - Initial MVP with core GRBL communication
 - Phase 2 MVP implementation complete with Phase 14 system theme support
