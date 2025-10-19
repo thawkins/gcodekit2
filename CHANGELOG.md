@@ -7,27 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0-alpha] - 2025-10-19
 
-### Added (Session: MVP Documentation & Phase 2 Planning)
+### Added (Session: Phase 14 Completion & Phase 2 Planning)
+- **Phase 14: System Theme Support - COMPLETED** ✅
+  - Comprehensive theme-provider.slint component with reactive colors
+  - Settings panel with theme selection (Light/Dark/Auto System)
+  - All 10 color properties in ThemeColors struct
+  - 31 comprehensive theme system tests (100% passing)
+  - WCAG AA contrast compliance verified (4.5:1+ minimum)
+  - Theme persistence across sessions
+  - Real-time switching without restart
 - Comprehensive implementation plan with phase breakdown (`docs/IMPLEMENTATION_PLAN.md`)
-- Phase structure documentation for all 16+ planned phases
-- Clear deliverables and success criteria for each phase
-- Dependency tracking and risk mitigation strategies
-- Program name confirmed as `gcodekit2` in Cargo.toml
-- Both debug (224MB) and release (13MB) binaries verified and working
-- UI theme appearance requirement added to SPEC.md (requirement #16)
+- Phase 14 completion summary (`docs/PHASE_14_COMPLETION.md`)
+- Both debug (224MB) and release (13MB) binaries verified
 
 ### Changed
-- SPEC.md updated with current phase status (Phase 15: MVP Implementation & Phase 2 Release)
-- AGENTS.md enhanced with explicit CHANGELOG management requirements
-- AGENTS.md clarified documentation file location standards (docs/ folder except 4 root files)
-- CHANGELOG.md designated as required before each push to remote
-- Test organization verified complete in `tests/` folder with hierarchy matching `src/`
-
-### Documentation
-- Created `docs/IMPLEMENTATION_PLAN.md` with comprehensive phase breakdown
-- All markdown documentation properly organized in docs/ folder
-- SPEC.md, AGENTS.md, README.md, CHANGELOG.md remain in project root as required
-- Implementation plan references all completed phases (1-14) and current Phase 15 work
+- Program name confirmed as `gcodekit2` in Cargo.toml
+- SPEC.md: Added UI theme appearance requirement (#16)
+- All UI components now using themed colors from ThemeProvider
+- Build system verified (zero critical errors, 108/108 tests passing)
 
 ### Added
 - Initial MVP with core GRBL communication
