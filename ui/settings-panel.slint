@@ -1,0 +1,226 @@
+import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from "theme-provider.slint";
+
+export component SettingsPanel inherits Rectangle {
+    background: ThemeProvider.colors.background;
+
+    VerticalLayout {
+        padding: 20px;
+        spacing: 15px;
+
+        // Settings title
+        ThemedText {
+            text: "Settings";
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        // Theme settings section
+        ThemedRectangle {
+            height: 200px;
+            border-radius: 4px;
+
+            VerticalLayout {
+                padding: 15px;
+                spacing: 10px;
+
+                ThemedText {
+                    text: "Theme Settings";
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+
+                // Current theme indicator
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "Current Theme:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: ThemeProvider.mode;
+                        color: ThemeProvider.colors.accent;
+                        font-weight: 700;
+                    }
+                }
+
+                // Theme toggle button
+                Rectangle {
+                    background: ThemeProvider.colors.button;
+                    width: 150px;
+                    height: 32px;
+                    border-radius: 3px;
+                    
+                    ThemedText {
+                        text: "Toggle Theme";
+                    }
+                }
+
+                // Theme preset buttons
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 120px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Light Theme";
+                        }
+                    }
+
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 120px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Dark Theme";
+                        }
+                    }
+                }
+            }
+        }
+
+        // Appearance section
+        ThemedRectangle {
+            height: 150px;
+            border-radius: 4px;
+
+            VerticalLayout {
+                padding: 15px;
+                spacing: 10px;
+
+                ThemedText {
+                    text: "Appearance";
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "UI Scale:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: "100%";
+                        color: ThemeProvider.colors.accent;
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "Animations:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: "Enabled";
+                        color: ThemeProvider.colors.status-green;
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "System Theme:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: "Disabled";
+                        color: ThemeProvider.colors.status-red;
+                    }
+                }
+            }
+        }
+
+        // Device settings section
+        ThemedRectangle {
+            height: 130px;
+            border-radius: 4px;
+
+            VerticalLayout {
+                padding: 15px;
+                spacing: 10px;
+
+                ThemedText {
+                    text: "Device Connection";
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "Serial Port:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: "/dev/ttyACM0";
+                        color: ThemeProvider.colors.button;
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    ThemedText {
+                        text: "Baud Rate:";
+                        width: 120px;
+                    }
+
+                    ThemedText {
+                        text: "115200";
+                        color: ThemeProvider.colors.button;
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            // Spacer
+            height: 1%;
+        }
+
+        // Action buttons
+        HorizontalLayout {
+            alignment: end;
+            spacing: 10px;
+
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 150px;
+                height: 32px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "Reset to Defaults";
+                }
+            }
+
+            Rectangle {
+                background: ThemeProvider.colors.button;
+                width: 100px;
+                height: 32px;
+                border-radius: 3px;
+                
+                ThemedText {
+                    text: "Close";
+                }
+            }
+        }
+    }
+}

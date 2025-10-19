@@ -1,40 +1,57 @@
 import { StandardButton, TabWidget, VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
+import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText } from "theme-provider.slint";
 
 component MenuBar inherits Rectangle {
-    background: #2b2b2b;
+    background: ThemeProvider.colors.panel;
     height: 50px;
     
     HorizontalLayout {
         padding: 10px;
         spacing: 20px;
         
-        Text { text: "File"; color: white; font-size: 14px; }
-        Text { text: "Machine"; color: white; font-size: 14px; }
-        Text { text: "View"; color: white; font-size: 14px; }
-        Text { text: "Tools"; color: white; font-size: 14px; }
-        Text { text: "Help"; color: white; font-size: 14px; }
+        ThemedText { text: "File"; font-size: 14px; }
+        ThemedText { text: "Machine"; font-size: 14px; }
+        ThemedText { text: "View"; font-size: 14px; }
+        ThemedText { text: "Tools"; font-size: 14px; }
+        ThemedText { text: "Help"; font-size: 14px; }
+        
+        Rectangle {
+            width: 100%;
+        }
+        
+        Rectangle {
+            background: ThemeProvider.colors.button;
+            width: 40px;
+            height: 32px;
+            border-radius: 3px;
+            
+            ThemedText {
+                text: "⚙";
+                font-size: 16px;
+            }
+        }
     }
 }
 
 component StatusBar inherits Rectangle {
-    background: #e0e0e0;
+    background: ThemeProvider.colors.panel;
     height: 30px;
     
     HorizontalLayout {
         padding: 5px;
         spacing: 20px;
         
-        Text {
+        ThemedText {
             text: "Status: Idle";
             font-size: 11px;
         }
         
-        Text {
+        ThemedText {
             text: "Position: X: 0.00 Y: 0.00 Z: 0.00";
             font-size: 11px;
         }
         
-        Text {
+        ThemedText {
             text: "Version: GRBL v1.1h";
             font-size: 11px;
         }
@@ -43,93 +60,108 @@ component StatusBar inherits Rectangle {
 
 component LeftPanel inherits Rectangle {
     width: 250px;
-    background: #f5f5f5;
+    background: ThemeProvider.colors.background;
     
     VerticalLayout {
         padding: 10px;
         spacing: 10px;
         
-        Text {
+        ThemedText {
             text: "Machine Control";
             font-weight: 700;
             font-size: 14px;
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 80px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Connection"; font-size: 12px; font-weight: 700; }
-                Text { text: "Status: Connected"; font-size: 11px; }
-                Text { text: "Port: /dev/ttyACM0"; font-size: 11px; }
+                ThemedText { text: "Connection"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Status: Connected"; font-size: 11px; }
+                ThemedSecondaryText { text: "Port: /dev/ttyACM0"; font-size: 11px; }
             }
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 120px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Jog Controls"; font-size: 12px; font-weight: 700; }
-                Text { text: "Step Size: 1mm"; font-size: 11px; }
+                ThemedText { text: "Jog Controls"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Step Size: 1mm"; font-size: 11px; }
                 
                 HorizontalLayout {
                     spacing: 5px;
                     
-                    Button { text: "X-"; }
-                    Button { text: "Y+"; }
-                    Button { text: "X+"; }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 50px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "X-"; }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 50px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "Y+"; }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 50px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "X+"; }
+                    }
                 }
             }
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 100px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Overrides"; font-size: 12px; font-weight: 700; }
-                Text { text: "Feed: 100%"; font-size: 11px; }
-                Text { text: "Power: 100%"; font-size: 11px; }
+                ThemedText { text: "Overrides"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Feed: 100%"; font-size: 11px; }
+                ThemedSecondaryText { text: "Power: 100%"; font-size: 11px; }
             }
         }
     }
 }
 
 component CenterPanel inherits Rectangle {
-    background: white;
+    background: ThemeProvider.colors.background;
     
     VerticalLayout {
         TabWidget {
             Tab {
                 title: "G-code Editor";
-                Rectangle { background: white; }
+                Rectangle { background: ThemeProvider.colors.background; }
             }
             Tab {
                 title: "3D Visualizer";
-                Rectangle { background: #f0f0f0; }
+                Rectangle { background: ThemeProvider.colors.background; }
             }
             Tab {
                 title: "Device Console";
-                Rectangle { background: white; }
+                Rectangle { background: ThemeProvider.colors.background; }
             }
             Tab {
                 title: "Job Manager";
-                Rectangle { background: white; }
+                Rectangle { background: ThemeProvider.colors.background; }
             }
             Tab {
                 title: "Designer";
-                Rectangle { background: white; }
+                Rectangle { background: ThemeProvider.colors.background; }
             }
         }
     }
@@ -137,56 +169,83 @@ component CenterPanel inherits Rectangle {
 
 component RightPanel inherits Rectangle {
     width: 250px;
-    background: #f5f5f5;
+    background: ThemeProvider.colors.background;
     
     VerticalLayout {
         padding: 10px;
         spacing: 10px;
         
-        Text {
+        ThemedText {
             text: "CAM Functions";
             font-weight: 700;
             font-size: 14px;
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 100px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Shape Generation"; font-size: 12px; font-weight: 700; }
-                Button { text: "Rectangle"; }
-                Button { text: "Circle"; }
+                ThemedText { text: "Shape Generation"; font-size: 12px; font-weight: 700; }
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "Rectangle"; }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "Circle"; }
+                    }
+                }
             }
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 100px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Import"; font-size: 12px; font-weight: 700; }
-                Button { text: "SVG/DXF"; }
-                Button { text: "Image"; }
+                ThemedText { text: "Import"; font-size: 12px; font-weight: 700; }
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "SVG/DXF"; }
+                    }
+                    Rectangle {
+                        background: ThemeProvider.colors.button;
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 3px;
+                        ThemedText { text: "Image"; }
+                    }
+                }
             }
         }
         
-        Rectangle {
-            background: white;
+        ThemedRectangle {
             height: 80px;
             
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
                 
-                Text { text: "Materials"; font-size: 12px; font-weight: 700; }
-                Text { text: "Database loaded"; font-size: 11px; }
+                ThemedText { text: "Materials"; font-size: 12px; font-weight: 700; }
+                ThemedSecondaryText { text: "Database loaded"; font-size: 11px; }
             }
         }
     }

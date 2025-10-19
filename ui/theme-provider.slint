@@ -1,0 +1,115 @@
+// Theme color provider component
+// Provides theme-aware colors to all UI components
+
+export struct ThemeColors {
+    background: color,
+    text-primary: color,
+    text-secondary: color,
+    panel: color,
+    button: color,
+    accent: color,
+    status-green: color,
+    status-blue: color,
+    status-red: color,
+    status-yellow: color,
+}
+
+export global ThemeProvider {
+    // Theme colors - default to light theme
+    in-out property <ThemeColors> colors: {
+        background: #FFFFFF,
+        text-primary: #000000,
+        text-secondary: #505050,
+        panel: #F5F5F5,
+        button: #0066CC,
+        accent: #FF6B35,
+        status-green: #008000,
+        status-blue: #0000C8,
+        status-red: #C80000,
+        status-yellow: #C8A000,
+    };
+
+    // Current theme mode: "light" or "dark"
+    in-out property <string> mode: "light";
+
+    // Toggle theme
+    public function toggle-theme() {
+        if (mode == "light") {
+            mode = "dark";
+            colors = {
+                background: #1E1E1E,
+                text-primary: #FFFFFF,
+                text-secondary: #CCCCCC,
+                panel: #2D2D2D,
+                button: #4DA6FF,
+                accent: #FF8C42,
+                status-green: #00FF00,
+                status-blue: #4DA6FF,
+                status-red: #FF3333,
+                status-yellow: #FFDD00,
+            };
+        } else {
+            mode = "light";
+            colors = {
+                background: #FFFFFF,
+                text-primary: #000000,
+                text-secondary: #505050,
+                panel: #F5F5F5,
+                button: #0066CC,
+                accent: #FF6B35,
+                status-green: #008000,
+                status-blue: #0000C8,
+                status-red: #C80000,
+                status-yellow: #C8A000,
+            };
+        }
+    }
+
+    // Set specific theme
+    public function set-theme(theme: string) {
+        if (theme == "light") {
+            mode = "light";
+            colors = {
+                background: #FFFFFF,
+                text-primary: #000000,
+                text-secondary: #505050,
+                panel: #F5F5F5,
+                button: #0066CC,
+                accent: #FF6B35,
+                status-green: #008000,
+                status-blue: #0000C8,
+                status-red: #C80000,
+                status-yellow: #C8A000,
+            };
+        } else if (theme == "dark") {
+            mode = "dark";
+            colors = {
+                background: #1E1E1E,
+                text-primary: #FFFFFF,
+                text-secondary: #CCCCCC,
+                panel: #2D2D2D,
+                button: #4DA6FF,
+                accent: #FF8C42,
+                status-green: #00FF00,
+                status-blue: #4DA6FF,
+                status-red: #FF3333,
+                status-yellow: #FFDD00,
+            };
+        }
+    }
+}
+
+// Reusable themed rectangle
+export component ThemedRectangle inherits Rectangle {
+    background: ThemeProvider.colors.panel;
+}
+
+// Reusable themed text
+export component ThemedText inherits Text {
+    color: ThemeProvider.colors.text-primary;
+}
+
+// Reusable themed secondary text
+export component ThemedSecondaryText inherits Text {
+    color: ThemeProvider.colors.text-secondary;
+}
