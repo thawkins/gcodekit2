@@ -5,6 +5,8 @@ component MenuBar inherits Rectangle {
     background: ThemeProvider.colors.panel;
     height: 50px;
     
+    callback settings-requested();
+    
     HorizontalLayout {
         padding: 10px;
         spacing: 20px;
@@ -31,6 +33,12 @@ component MenuBar inherits Rectangle {
                 text: "⚙";
                 font-size: 16px;
             }
+            
+            TouchArea {
+                clicked => {
+                    root.settings-requested();
+                }
+            }
         }
     }
 }
@@ -56,6 +64,27 @@ component StatusBar inherits Rectangle {
         ThemedText {
             text: "Version: GRBL v1.1h";
             font-size: 11px;
+        }
+        
+        Rectangle {
+            width: 100%;
+        }
+        
+        // Theme indicator
+        HorizontalLayout {
+            spacing: 5px;
+            
+            ThemedText {
+                text: "Theme:";
+                font-size: 10px;
+            }
+            
+            ThemedText {
+                text: ThemeProvider.mode == "light" ? "☀ Light" : "🌙 Dark";
+                color: ThemeProvider.mode == "light" ? ThemeProvider.colors.status-yellow : #7B68EE;
+                font-size: 10px;
+                font-weight: 700;
+            }
         }
     }
 }

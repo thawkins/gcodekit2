@@ -16,7 +16,7 @@ export component SettingsPanel inherits Rectangle {
 
         // Theme settings section
         ThemedRectangle {
-            height: 200px;
+            height: auto;
             border-radius: 4px;
 
             VerticalLayout {
@@ -45,42 +45,123 @@ export component SettingsPanel inherits Rectangle {
                     }
                 }
 
-                // Theme toggle button
-                Rectangle {
-                    background: ThemeProvider.colors.button;
-                    width: 150px;
-                    height: 32px;
-                    border-radius: 3px;
-                    
-                    ThemedText {
-                        text: "Toggle Theme";
-                    }
-                }
-
-                // Theme preset buttons
+                // Theme selection dropdown area
                 HorizontalLayout {
                     spacing: 10px;
 
-                    Rectangle {
-                        background: ThemeProvider.colors.button;
+                    ThemedText {
+                        text: "Theme Mode:";
                         width: 120px;
+                    }
+
+                    // Light Theme button
+                    Rectangle {
+                        background: ThemeProvider.mode == "light" ? ThemeProvider.colors.button : ThemeProvider.colors.panel;
+                        width: 100px;
                         height: 32px;
                         border-radius: 3px;
                         
                         ThemedText {
-                            text: "Light Theme";
+                            text: "☀ Light";
                         }
+                        
+                        TouchArea {
+                            clicked => {
+                                ThemeProvider.set-theme("light");
+                            }
+                        }
+                    }
+
+                    // Dark Theme button
+                    Rectangle {
+                        background: ThemeProvider.mode == "dark" ? ThemeProvider.colors.button : ThemeProvider.colors.panel;
+                        width: 100px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "🌙 Dark";
+                        }
+                        
+                        TouchArea {
+                            clicked => {
+                                ThemeProvider.set-theme("dark");
+                            }
+                        }
+                    }
+
+                    // Auto-detect (System) button
+                    Rectangle {
+                        background: ThemeProvider.colors.panel;
+                        width: 100px;
+                        height: 32px;
+                        border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Auto (System)";
+                            font-size: 10px;
+                        }
+                        
+                        TouchArea {
+                            clicked => {
+                                // Would call system theme detection
+                                // ThemeProvider.apply-system-theme();
+                            }
+                        }
+                    }
+                }
+
+                // Theme preview section
+                ThemedText {
+                    text: "Theme Preview:";
+                    font-size: 12px;
+                    font-weight: 700;
+                }
+
+                // Color palette preview
+                HorizontalLayout {
+                    spacing: 5px;
+
+                    Rectangle {
+                        background: ThemeProvider.colors.status-green;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
+                    }
+
+                    Rectangle {
+                        background: ThemeProvider.colors.status-blue;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
+                    }
+
+                    Rectangle {
+                        background: ThemeProvider.colors.status-red;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
+                    }
+
+                    Rectangle {
+                        background: ThemeProvider.colors.status-yellow;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
                     }
 
                     Rectangle {
                         background: ThemeProvider.colors.button;
-                        width: 120px;
-                        height: 32px;
-                        border-radius: 3px;
-                        
-                        ThemedText {
-                            text: "Dark Theme";
-                        }
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
+                    }
+
+                    Rectangle {
+                        background: ThemeProvider.colors.accent;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 2px;
                     }
                 }
             }
@@ -88,7 +169,7 @@ export component SettingsPanel inherits Rectangle {
 
         // Appearance section
         ThemedRectangle {
-            height: 150px;
+            height: auto;
             border-radius: 4px;
 
             VerticalLayout {
@@ -133,13 +214,13 @@ export component SettingsPanel inherits Rectangle {
                     spacing: 10px;
 
                     ThemedText {
-                        text: "System Theme:";
+                        text: "Auto Follow System:";
                         width: 120px;
                     }
 
                     ThemedText {
-                        text: "Disabled";
-                        color: ThemeProvider.colors.status-red;
+                        text: "Enabled";
+                        color: ThemeProvider.colors.status-green;
                     }
                 }
             }
@@ -147,7 +228,7 @@ export component SettingsPanel inherits Rectangle {
 
         // Device settings section
         ThemedRectangle {
-            height: 130px;
+            height: auto;
             border-radius: 4px;
 
             VerticalLayout {
