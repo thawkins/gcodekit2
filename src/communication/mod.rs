@@ -15,7 +15,9 @@ use tokio::time::sleep;
 use tracing::{error, info, warn};
 
 mod grbl;
+mod serial;
 pub use grbl::*;
+pub use serial::{SerialConfig, SerialConnection};
 
 /// GRBL machine state enumeration
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Hash, Default)]
@@ -117,11 +119,12 @@ impl Default for RecoveryConfig {
 
 /// GRBL Controller for managing device communication
 pub struct GrblController {
+    serial: Arc<SerialConnection>,
     port: Arc<Mutex<Option<String>>>,
     version: Arc<Mutex<String>>,
     status: Arc<Mutex<GrblStatus>>,
     recovery_config: Arc<Mutex<RecoveryConfig>>,
-    command_queue: Arc<Mutex<VecDeque<String>>>,
+    pub command_queue: Arc<Mutex<VecDeque<String>>>,
     response_log: Arc<Mutex<VecDeque<String>>>,
 }
 
@@ -129,6 +132,23 @@ impl GrblController {
     /// Create a new GRBL controller
     pub fn new() -> Self {
         GrblController {
+            serial: Arc::new(SerialConnection::default_config()),
+            port: Arc::new(Mutex::new(None)),
+            version: Arc::new(Mutex::new(String::new())),
+            status: Arc::new(Mutex::new(GrblStatus {
+                connected: false,
+                ..Default::default()
+            })),
+            recovery_config: Arc::new(Mutex::new(RecoveryConfig::default())),
+            command_queue: Arc::new(Mutex::new(VecDeque::new())),
+            response_log: Arc::new(Mutex::new(VecDeque::new())),
+        }
+    }
+
+    /// Create with custom serial configuration
+    pub fn with_config(config: SerialConfig) -> Self {
+        GrblController {
+            serial: Arc::new(SerialConnection::new(config)),
             port: Arc::new(Mutex::new(None)),
             version: Arc::new(Mutex::new(String::new())),
             status: Arc::new(Mutex::new(GrblStatus {
@@ -144,48 +164,105 @@ impl GrblController {
     /// Connect to a GRBL device on the specified port
     pub async fn connect(&self, port_name: &str) -> Result<()> {
         info!("Connecting to GRBL device on port: {}", port_name);
-        let mut port = self.port.lock().await;
-        *port = Some(port_name.to_string());
-        
-        let mut status = self.status.lock().await;
-        status.connected = true;
-        status.state = MachineState::Idle;
-        
-        info!("Connected to GRBL device");
-        Ok(())
+
+        // Attempt to connect with retries
+        let config = self.recovery_config.lock().await;
+        let mut attempts = 0;
+        let max_attempts = config.max_retries as usize;
+
+        loop {
+            match self.serial.connect(port_name).await {
+                Ok(_) => {
+                    let mut port = self.port.lock().await;
+                    *port = Some(port_name.to_string());
+
+                    let mut status = self.status.lock().await;
+                    status.connected = true;
+                    status.state = MachineState::Idle;
+
+                    info!("Connected to GRBL device on {}", port_name);
+                    return Ok(());
+                }
+                Err(e) => {
+                    attempts += 1;
+                    if attempts >= max_attempts {
+                        error!("Failed to connect after {} attempts: {}", attempts, e);
+                        return Err(e);
+                    }
+                    warn!(
+                        "Connection attempt {} failed: {}. Retrying...",
+                        attempts, e
+                    );
+                    sleep(Duration::from_millis(config.retry_delay_ms)).await;
+                }
+            }
+        }
     }
 
     /// Disconnect from the device
     pub async fn disconnect(&self) -> Result<()> {
         info!("Disconnecting from GRBL device");
+        self.serial.disconnect().await?;
+
         let mut port = self.port.lock().await;
         *port = None;
-        
+
         let mut status = self.status.lock().await;
         status.connected = false;
-        
+
         Ok(())
     }
 
     /// Detect GRBL firmware version
     pub async fn detect_version(&self) -> Result<String> {
         info!("Detecting GRBL version");
-        let v = "GRBL v1.1h".to_string();
-        let mut version = self.version.lock().await;
-        *version = v.clone();
-        
-        let mut status = self.status.lock().await;
-        status.version = v.clone();
-        
-        Ok(v)
+
+        // Send version request
+        self.serial.send_command("$I").await?;
+
+        // Read response
+        match self.serial.read_response_timeout(256, Duration::from_secs(2)).await {
+            Ok(response) => {
+                let version = response.trim().to_string();
+                let mut ver = self.version.lock().await;
+                *ver = version.clone();
+
+                let mut status = self.status.lock().await;
+                status.version = version.clone();
+
+                info!("Detected version: {}", version);
+                Ok(version)
+            }
+            Err(e) => {
+                warn!("Failed to detect version: {}", e);
+                Err(e)
+            }
+        }
     }
 
     /// Send a command to GRBL
     pub async fn send_command(&self, command: &str) -> Result<()> {
-        info!("Queuing command: {}", command);
+        // Queue the command
         let mut queue = self.command_queue.lock().await;
         queue.push_back(command.to_string());
-        Ok(())
+
+        // Send to device
+        self.serial.send_command(command).await?;
+
+        // Try to read response
+        match self.serial.read_response_timeout(256, Duration::from_secs(1)).await {
+            Ok(response) => {
+                self.log_response(response).await;
+                info!("Command {} sent successfully", command);
+                Ok(())
+            }
+            Err(e) => {
+                warn!("Command {} sent but no immediate response: {}", command, e);
+                // Command was sent, but we might not get immediate response
+                // This is not necessarily an error
+                Ok(())
+            }
+        }
     }
 
     /// Get the next queued command

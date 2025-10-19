@@ -5,6 +5,10 @@
 
 pub mod shapes;
 pub mod toolpath;
+pub mod imaging;
+pub mod backplot;
+pub mod validator;
+pub mod optimizer;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -12,6 +16,9 @@ use uuid::Uuid;
 
 pub use shapes::Shape;
 pub use toolpath::Toolpath;
+pub use backplot::{BackPlotter, BackPlotStep, BackPlotState, MoveType};
+pub use validator::{GcodeValidator, GrblVersion, ValidationIssue, Severity};
+pub use optimizer::{GcodeOptimizer, OptimizerOptions, OptimizationStats};
 
 /// Design document containing shapes and operations
 #[derive(Debug, Clone, Serialize, Deserialize)]

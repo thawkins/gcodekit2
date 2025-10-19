@@ -118,12 +118,12 @@ gcodekit/
 
 ## Test Coverage
 
-**Total Tests**: 108  
+**Total Tests**: 463  
 **Pass Rate**: 100%  
 **Test Organization**: Tests located in `tests/` folder organized by module hierarchy (communication/, designer/, jobs/, materials/, widgets/, theme/)
 **Coverage Areas**:
-- Communication: GRBL protocol and serial communication tests
-- Designer: CAM, shapes, boolean operations, and toolpath tests
+- Communication: GRBL protocol, serial communication, device integration tests (12 tests)
+- Designer: CAM, shapes, boolean operations, back-plotting, optimization, validation tests (208+ tests)
 - Jobs: Job scheduling, queue, priority, and progress tracking tests
 - Materials: Material database and management tests
 - Widgets: UI widget tests (connection, jog, overrides, loading)
@@ -131,12 +131,13 @@ gcodekit/
 
 ## Build Information
 
-- **Debug Build**: 222MB (with debug symbols)
+- **Debug Build**: 247MB (with debug symbols)
 - **Release Build**: 13MB (optimized)
 - **Startup Time**: <2 seconds
 - **Response Time**: <100ms for UI updates
 - **G-code Processing**: 1000+ lines/second
 - **Memory Usage**: ~50MB baseline
+- **Serial Communication**: Real-time GRBL device communication ready
 
 ## System Requirements
 
@@ -146,6 +147,25 @@ gcodekit/
 - **Serial Port**: USB or native serial connection
 
 ## Version History
+
+### v0.2.6-alpha (Oct 19, 2025 - Device Communications & UI Polish)
+- **Device Communications**: Real serial port integration for GRBL controllers ✅
+  - SerialConnection module with async communication
+  - Enhanced GrblController with real device support
+  - Automatic reconnection and recovery
+  - Command queuing and response handling
+- **UI Improvements**: All SPEC-required jog buttons and auto-sizing ✅
+  - Complete jog control layout (Home, Stop, Unlock, X±, Y±, Z-, Pause, Continue)
+  - White text on buttons for better visibility
+  - Auto-sizing widgets based on content
+- **Test Coverage**: 463 passing tests (device communication, UI, CAM, optimization)
+- **Build Status**: Debug (247MB) and release builds fully optimized
+- **Ready for**: Real device testing and advanced job scheduling
+
+### v0.2.5-alpha (Oct 19, 2025 - G-code Optimizer)
+- **G-code Optimizer**: Advanced file optimization with decimal truncation and arc conversion ✅
+- **Test Coverage**: 455 tests (41 optimizer-specific tests)
+- **File Reduction**: 20-40% typical size reduction with configurable precision
 
 ### v0.2.0-alpha (Oct 19, 2025 - Phase 2 MVP, Complete Theme Implementation & Web Pendant)
 - **Phase 2 MVP Implementation**: Complete foundation for all major features

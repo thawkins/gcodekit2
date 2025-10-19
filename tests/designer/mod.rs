@@ -2,6 +2,11 @@
 
 use gcodekit2::designer::{Design, Designer, Shape};
 
+mod imaging;
+mod backplot;
+mod validator;
+mod optimizer;
+
 #[test]
 fn test_design_creation() {
     let design = Design::new("Test Design".to_string());

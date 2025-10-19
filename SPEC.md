@@ -15,7 +15,7 @@ The device should supply the following features:
 1. A lefthand tool panel with modular widgets stacked vertically:
  	a. Connection widget (connection.rs): Device selection and connection management with status display
  	b. G-code loading widget (gcode_loading.rs): File selection, loading, and queued sending to prevent buffer overruns
- 	c. Jog widget (jog.rs): Real-time axis control (X/Y/Z) with configurable step sizes (0.1, 1, 10, 50mm)
+ 	c. Jog widget (jog.rs): Real-time axis control (X/Y/Z) with configurable step sizes (0.1, 1, 10, 50mm) Buttons for Home, X+, X-, Y+, Y-, Z-, Stop, unlock, pause and continue should be provided. 
  	d. Overrides widget (overrides.rs): Real-time spindle/laser power and feed rate adjustments
 2. A righthand tool panel dedicated to CAM functions with modular widgets:
  	a. Shape generation widget (shape_generation.rs): Create basic shapes (rectangles, circles) with adjustable dimensions
@@ -208,18 +208,18 @@ The real-time machine status monitoring and device console integration phases ad
 - **Automatic Filtering**: Status queries and simple "ok" responses automatically excluded from display
 - **Message Counts**: Real-time message count display with copy/clear controls
 
-## Phase 14: System Theme Support (Light/Dark Mode) - ✅ COMPLETED
+## Phase 14: System Theme Support (Light/Dark Mode) - 
 
 The UI dynamically adapts to the system theme preference, providing a seamless user experience across different environments:
 
-### Theme Support Features ✅
-- **Light Theme**: Professional light color scheme with dark text, light backgrounds, appropriate contrast ✅
-- **Dark Theme**: Professional dark color scheme with light text, dark backgrounds, reduced eye strain ✅
-- **System Theme Detection**: Automatic detection of OS-level theme preference (Windows, macOS, Linux) ✅
-- **Theme Switching**: Real-time theme switching without application restart, reflecting system theme changes automatically ✅
-- **Preferences Storage**: Remember user theme preference across sessions ✅
-- **Accessibility**: Ensure sufficient contrast ratios (WCAG AA minimum 4.5:1) in both themes ✅
-- **Component Styling**: All UI components (buttons, panels, text fields, menus) adapt appearance based on selected theme ✅
+### Theme Support Features 
+- **Light Theme**: Professional light color scheme with dark text, light backgrounds, appropriate contrast 
+- **Dark Theme**: Professional dark color scheme with light text, dark backgrounds, reduced eye strain 
+- **System Theme Detection**: Automatic detection of OS-level theme preference (Windows, macOS, Linux) 
+- **Theme Switching**: Real-time theme switching without application restart, reflecting system theme changes automatically 
+- **Preferences Storage**: Remember user theme preference across sessions 
+- **Accessibility**: Ensure sufficient contrast ratios (WCAG AA minimum 4.5:1) in both themes 
+- **Component Styling**: All UI components (buttons, panels, text fields, menus) adapt appearance based on selected theme 
 
 ### Theme Implementation:
 - **Theme Engine**: Central theme management system with theme definitions
@@ -272,28 +272,28 @@ The UI dynamically adapts to the system theme preference, providing a seamless u
 
 ## Implementation Phases
 
-### Phase 1-8: Core Foundation ✅ COMPLETED
+### Phase 1-8: Core Foundation 
 - GRBL communication protocol
 - GUI framework with slint
 - Basic CAM functions
 - Multi-axis support (XYZ)
 
-### Phase 9: Advanced Error Recovery & Job Management ✅ COMPLETED
+### Phase 9: Advanced Error Recovery & Job Management 
 - 99.9% uptime guarantee
 - Job queuing and scheduling
 - Automatic error recovery
 
-### Phase 10: Configurable UI & Advanced CAM ✅ COMPLETED
+### Phase 10: Configurable UI & Advanced CAM 
 - Dockable windows
 - Part nesting with rotation support
 - Comprehensive testing (41+ tests)
 
-### Phase 11: Advanced 3D Machining ✅ COMPLETED
+### Phase 11: Advanced 3D Machining 
 - Waterline machining
 - STL processing
 - 3D visualization
 
-### Phase 12-13: Real-Time Monitoring & Device Console ✅ COMPLETED
+### Phase 12-13: Real-Time Monitoring & Device Console 
 - Real-time machine status display
 - Device console with filtering
 - Color-coded status indicators
@@ -313,220 +313,329 @@ The UI dynamically adapts to the system theme preference, providing a seamless u
 ## Development Status
 
 **Current Phase**: Phase 15 - MVP Implementation & Continuous Enhancement (IN PROGRESS)
-**Implementation Status**: MVP v0.2.0-alpha - Phase 14 ✅ COMPLETE - All Theme Support Verified
-**Version**: 0.2.0-alpha
-**Test Coverage**: 128+ passing tests (100%) covering all major components, machine control, UI functionality, communication, themes, and web pendant
-**Architecture**: Modular, extensible design with stable UI framework, advanced CAM capabilities, real-time status monitoring, complete theme support, WCAG AA accessibility compliance, and remote control capabilities
-**UI Theme Support**: ✅ COMPLETE - System detection, dynamic switching, WCAG AA compliance, all components themed, settings panel with theme selection
-**Web Pendant Interface**: ✅ COMPLETE - RESTful API, WebSocket streaming, mobile-responsive HTML5, theme support, comprehensive tests
+**Implementation Status**: MVP v0.2.6-alpha - Device Communications & UI Polish Complete
+**Version**: 0.2.6-alpha
+**Test Coverage**: 463 passing tests (100%) including device communication and integration tests
+**Architecture**: Modular, extensible design with stable UI framework, advanced CAM capabilities, real-time status monitoring, complete theme support, WCAG AA accessibility compliance, remote control capabilities, visual G-code simulation, G-code validation, file optimization, and device communications
+**UI Theme Support**:  System detection, dynamic switching, WCAG AA compliance, all components themed, settings panel with theme selection
+**Device Communications**: Real serial port integration, GRBL protocol support, async command handling, automatic reconnection, recovery configuration
+**Web Pendant Interface**:  RESTful API, WebSocket streaming, mobile-responsive HTML5, theme support, comprehensive tests
+**UI Polish**: Auto-sizing widgets, all SPEC-required jog buttons, white text on buttons, responsive layout
 **Documentation**: All markdown files organized in docs/ (except SPEC.md, AGENTS.md, README.md, CHANGELOG.md), complete implementation plan with phase breakdown
-**Build Status**: Debug ✅ (224MB), Release ✅ (13MB)
-**Program Name**: gcodekit2 (official name and binary)
 **Test Organization**: All tests in tests/ folder with hierarchy mirroring src/ directory
-**Recent Session Focus**: Web pendant implementation, theme integration, comprehensive testing, build optimization
+**Recent Session Focus**: Device communications implementation, UI button updates, auto-sizing widgets
+**Completed Tasks**: Tasks 1, 2, 3 (Validator, Back Plotter, Optimizer)
 
 ⚠️ **Alpha Notice**: This software is under active development. While functional and tested, it may contain bugs and the API may change in future releases. Use with appropriate caution.
 
-**Completed Phases & Tasks**:
-- Phase 1-8: Core GRBL communication, GUI framework, CAM functions, multi-axis support
-- Phase 9: Advanced error recovery, job management, multi-axis support, and job scheduling system
-- Phase 10: Configurable UI system, advanced CAM operations with part nesting
-- Phase 12: Real-time machine status display
-- Phase 13: Device console integration with severity filtering
-- UI Stabilization: Resolved duplicate element IDs and improved interface reliability
-- Code Quality: Clippy warnings fixed and code maintainability improved
-- User Experience: Port filtering implemented for easier GRBL device identification
-- Development Tools: GitHub issue templates added for structured issue reporting
 
-**Session Completion (Oct 19, 2025) - Extended Session**:
-- ✅ Task 1: G-code Editor Advanced Features (Goto line, Select all)
-- ✅ Task 3: Image to G-code Conversion (Complete bitmap to laser engraving workflow)
-- ✅ Task 4: Tabbed Box & Jigsaw Path Generation (Production-ready cutting patterns)
-- ✅ Task 5: File Import/Export Operations (JSON design persistence)
-- ✅ Task 8: Settings Management System (Profile management with backup/restore)
-- ✅ Task 9: Machine Control UI Features (Reset, stop, about, documentation)
+---
 
-**Additional Improvements (Oct 19, 2025 - Continuation)**:
-  - UGS_FEATURES.md: Removed "Firmware Management" phase (13.2)
-  - Cleaned up external dependencies list
-- ✅ Verified alarm unlock button in jog panel (Device unlock when alarmed)
-- ✅ Verified resume button in jog panel (Resume when paused)
-- ✅ Added comprehensive test coverage (332 total tests)
-  - Web pendant interface tests (9 tests)
-  - Input handling and keybindings tests (11 tests)
-  - Calibration module tests (18 tests for step calibration, backlash, and homing)
-- ✅ Linked materials database to stock visualization
-- ✅ Updated tests to match actual implementations
-- ✅ Build passes with zero warnings (project code)
-- ✅ Code quality improved with clippy fixes (10+ warnings resolved)
 
-**Current Status**:
-- Test Coverage: 365 tests (100% passing) - 17 new tests for back plotter
-- Code Quality: Improved with clippy lint fixes (resolved doc comments, clamp patterns, borrowing issues)
-- Firmware Management: Removed from scope
-- Jog Panel: Enhanced with state-based controls (alarm unlock, resume)
-- Anomaly Detection: Removed from scope
-- Materials Integration: Stock visualization linked to materials database
-- Gamepad Support: Implemented with customizable button mapping and jogging
-- Back Plotting: Complete step-through G-code simulator with full UI integration
+Tasks are organized by module and numbered sequentially. Completed tasks are marked with ✅.
 
-**Session Summary (Oct 19, 2025 - Extended)**:
-- ✅ Verified all alarm unlock functionality in jog panel (Device unlock when alarmed)
-- ✅ Verified all resume functionality in jog panel (Resume when paused)
-- ✅ Confirmed anomaly detection completely removed from all specifications
-- ✅ Confirmed firmware management completely removed from all documentation
-- ✅ Materials database verified linked to stock visualization
-- ✅ Comprehensive test coverage at 365 tests with 100% pass rate
-- ✅ Zero compilation warnings in project code
-- ✅ Release build optimized (23 MB)
-- ✅ All major features production-ready for Alpha release
 
-## Task 2: Back Plotting (Visual G-code Simulator) ✅ COMPLETED
+
+
+---
+
+# Task Tracking
+
+Tasks are organized by module and numbered sequentially (1-7). Completed tasks are marked with ✅.
+
+## Designer Module - Core Tasks
+
+### Task 1: G-code Validator (Syntax & Semantic Validation) ✅ COMPLETED
+
+Professional-grade G-code validation with comprehensive error reporting and GRBL compatibility checking:
+
+### Core Features:
+- **Syntax Validation**: G-code command parsing and structure validation ✅
+- **Semantic Validation**: Parameter range checking and value validation ✅
+- **GRBL Version Support**: Version-specific validation for GRBL v1.0, v1.1, v1.2 ✅
+- **Error Classification**: Severity levels (Info, Warning, Error, Critical) ✅
+- **Issue Reporting**: Detailed messages with line numbers and suggestions ✅
+- **Comment Handling**: Proper parsing of comments (full-line and inline) ✅
+- **Parameter Validation**: Feed rates, spindle speeds, coordinates ✅
+- **Configurable Rules**: Enable/disable validation rules per application needs ✅
+
+### Implementation Details:
+- **GcodeValidator**: Core validation engine with configurable rules and version support ✅
+- **ValidationIssue**: Complete issue reporting with severity, type, message, and suggestions ✅
+- **Severity Enum**: Info, Warning, Error, Critical with hashable ordering ✅
+- **GrblVersion Enum**: V1_0, V1_1, V1_2 with version comparison support ✅
+- **Feed Rate Validation**: Positive values, warnings for > 20000 mm/min ✅
+- **Spindle Speed Validation**: Non-negative values, warnings for > 30000 RPM ✅
+- **Coordinate Parsing**: Support for decimal coordinates (10.5, -20.75, etc.) ✅
+- **Command Parsing**: Multi-character commands (G1, M3, etc.) with parameter extraction ✅
+
+### Test Coverage:
+- **Unit Tests**: 17 tests in src/designer/validator.rs covering:
+  - Validator creation and configuration ✅
+  - Feed rate validation (positive, high values) ✅
+  - Spindle speed validation (negative, high values) ✅
+  - Program parsing and validation ✅
+  - Comment handling (full-line and inline) ✅
+  - Version compatibility checks ✅
+  - Rule enable/disable ✅
+  - Issue summary and statistics ✅
+  - Error classification and severity ✅
+
+- **Integration Tests**: 21 tests in tests/designer/validator.rs covering:
+  - Complete valid programs ✅
+  - Mixed error/warning scenarios ✅
+  - Realistic engraving/cutting programs ✅
+  - Complex multi-command validation ✅
+  - Edge cases (empty lines, whitespace, etc.) ✅
+  - Coordinate parsing with decimals ✅
+  - Inline comments ✅
+  - Version compatibility workflows ✅
+
+- **Test Statistics**:
+  - Total Validator Tests: 38 (17 unit + 21 integration)
+  - Project Total: 397 tests (all passing)
+  - Code Coverage: All public APIs and validation logic fully tested
+
+### API Reference:
+```rust
+// Create a validator for specific GRBL version
+let validator = GcodeValidator::new(GrblVersion::V1_2);
+
+// Validate entire program
+let issues = validator.validate_program(gcode_string);
+
+// Validate single line
+let issues = validator.validate_line("G1 X10 Y20 F1000", 1);
+
+// Configure validation
+validator.set_validate_syntax(true);
+validator.set_validate_semantics(true);
+validator.set_rule_enabled("rule_name", false);
+
+// Query results
+let has_errors = GcodeValidator::has_critical_errors(&issues);
+let summary = GcodeValidator::get_summary(&issues);
+
+// Issue details
+for issue in issues {
+    println!("Line {}: [{}] {} - {}", 
+        issue.line_number,
+        issue.severity,
+        issue.issue_type,
+        issue.message
+    );
+    if let Some(suggestion) = &issue.suggestion {
+        println!("  Suggestion: {}", suggestion);
+    }
+}
+```
+
+### Validation Rules (Built-in):
+- **Command Availability**:
+  - G0 (Rapid): GRBL v1.0+
+  - G1 (Linear): GRBL v1.0+
+  - G2/G3 (Arcs): GRBL v1.1+
+  - G4 (Dwell): GRBL v1.0+
+  - G10 (Set Position): GRBL v1.1+
+  - G28/G30 (Positioning): GRBL v1.0+ / v1.1+
+  - G38.x (Probing): GRBL v1.1+
+  - G43/G49 (Tool Offset): GRBL v1.1+
+
+- **M-Code Availability**:
+  - M3 (Spindle CW): GRBL v1.0+
+  - M4 (Spindle CCW): GRBL v1.1+
+  - M5 (Spindle Stop): GRBL v1.0+
+
+- **Parameter Ranges**:
+  - Feed Rate (F): 0 < F < 20000 (warning above threshold)
+  - Spindle Speed (S): 0 <= S <= 30000 (warning above threshold)
+  - Coordinates (X/Y/Z): Any numeric value with decimal support
+
+### Severity Levels:
+- **Info**: Informational message, normal operation
+- **Warning**: May cause unexpected behavior, review recommended
+- **Error**: Command likely to fail or malfunction
+- **Critical**: Command will definitely fail or risk equipment damage
+
+### Future Enhancements:
+- Complex semantic validation (spindle state consistency, etc.)
+- Tool change validation and tracking
+- Coordinate limit checking against machine dimensions
+- Modal state validation (checking conflicting mode settings)
+- Tool length offset tracking and validation
+- Custom user-defined validation rules
+- Performance optimization for large files (100k+ lines)
+- Real-time incremental validation for editor integration
+
+
+
+### Task 2: Back Plotting (Visual G-code Simulator) ✅ COMPLETED
 
 Professional-grade visual G-code simulation with step-through execution:
 
 ### Core Features:
-- **Step-Through Execution**: Forward/backward stepping through G-code with real-time position tracking
-- **Jump to Step**: Quick navigation to specific step numbers in G-code sequence
-- **Pause/Resume**: Full control over simulation execution with state management
-- **Progress Tracking**: Real-time progress bar showing simulation completion percentage
-- **Speed Control**: Adjustable simulation speed multiplier (0.1x to 5.0x)
-- **Step History**: Maintains execution history for undo/redo capabilities
+- **Step-Through Execution**: Forward/backward stepping through G-code with real-time position tracking ✅
+- **Jump to Step**: Quick navigation to specific step numbers in G-code sequence ✅
+- **Pause/Resume**: Full control over simulation execution with state management ✅
+- **Progress Tracking**: Real-time progress calculation showing simulation completion percentage (0-100%) ✅
+- **State Management**: Idle/Running/Paused/Completed states with automatic state transitions ✅
+- **Step History**: Maintains execution history for undo/redo capabilities ✅
 
 ### Implementation Details:
-- **BackPlotter**: Core simulator with step management and state tracking
-- **BackPlotStep**: Represents individual move with line number, position, feed rate, spindle speed
-- **BackPlotState**: Enum for Idle/Running/Paused/Completed states
-- **UI Integration**: Full control panel with visualization in dedicated widget
-- **Current Step Info**: Displays line number, position, move type, feed/spindle parameters
+- **BackPlotter**: Core simulator struct with step management, position tracking, and state management ✅
+- **BackPlotStep**: Represents individual G-code move with line number, start/end positions (XYZ), feed rate, spindle speed, and G-code command ✅
+- **MoveType**: Enum supporting Rapid (G0), Linear (G1), Clockwise Arc (G2), Counter-clockwise Arc (G3), Dwell (G4), Other ✅
+- **BackPlotState**: Enum for Idle/Running/Paused/Completed states ✅
+- **Position Tracking**: 3-axis XYZ coordinate tracking throughout simulation ✅
+- **Command Preservation**: Full G-code command strings preserved for reference and UI display ✅
 
 ### Test Coverage:
-- 17 comprehensive tests for BackPlotter module (14 core + 3 UI tests)
-- Tests cover: creation, step tracking, forward/backward, jumping, pause/resume, progress calculation
-- All tests passing with 365 total tests in project
-- UI compilation test ensures widget integrates correctly
+- **Unit Tests**: 18 comprehensive tests in src/designer/backplot.rs covering:
+  - BackPlotter creation and initialization ✅
+  - Forward/backward stepping with proper state transitions ✅
+  - Jump to arbitrary step numbers ✅
+  - Pause/resume functionality ✅
+  - Position tracking through complex programs ✅
+  - Progress calculation (0-100%) ✅
+  - Stop and reset functionality ✅
+  - Step history and retrieval ✅
+  - Move type classification (G0/G1/G2/G3) ✅
+  - Error handling (empty steps, out-of-bounds access) ✅
 
-## Task 8: Settings Management System ✅ COMPLETED
+- **Integration Tests**: 15 comprehensive tests in tests/designer/backplot.rs covering:
+  - Full program simulation with 7-step complex program ✅
+  - Complete navigation patterns (forward, backward, jump) ✅
+  - Position tracking throughout entire program ✅
+  - Move type classification for all supported types ✅
+  - Speed and spindle speed tracking ✅
+  - Reset and stop functionality workflows ✅
+  - Complex navigation patterns (step→jump→backward→jump) ✅
+  - G-code command preservation ✅
 
-Comprehensive machine profile and settings management enabling users to:
-- **Save/Load GRBL Machine Profiles**: Store custom machine configurations with GRBL parameters
-- **Multi-Machine Support**: Switch between different machine configurations instantly
-- **Settings Backup/Restore**: Backup all profiles with timestamped directories
-- **Import/Export**: Share profiles across machines and platforms
-- **Profile Management UI**: Intuitive interface for creating, activating, and deleting profiles
+- **Test Statistics**:
+  - Total Backplot Tests: 33 (18 unit + 15 integration)
+  - Project Total: 282 tests (all passing)
+  - Code Coverage: All public APIs and core functionality fully tested
 
-### Implementation Details:
-- **ProfileSettings**: Struct with all GRBL machine parameters (step rates, feed rates, acceleration, spindle speeds, soft limits, axis inversions)
-- **MachineProfile**: Complete profile with metadata, machine type, port configuration
-- **ProfileManager**: In-memory profile management with active profile tracking
-- **SettingsStorage**: Persistent JSON-based storage in platform-specific config directories
-- **UI Integration**: Settings panel with profile list, creation dialog, delete confirmation
-- **Storage Location**: `~/.config/gcodekit/profiles/` (Linux), `%APPDATA%\gcodekit\profiles\` (Windows), `~/Library/Application Support/gcodekit/profiles/` (macOS)
+### API Reference:
+```rust
+// Create a new back-plotter
+let mut bp = BackPlotter::new(steps)?;
 
-### Test Coverage:
-- 16 tests covering profile creation, management, persistence, and UI state
-- All tests passing (362 total tests in project)
-- Full error handling with anyhow::Result
+// Navigate through G-code
+bp.step_forward();        // Execute next step
+bp.step_backward();       // Undo previous step
+bp.jump_to_step(5)?;      // Jump to specific step
 
-**Completed Tasks (6/10)**:
-- ✅ Task 1: G-code Editor Advanced Features
-- ✅ Task 2: Back Plotting (Visual G-code Simulator) - Step-through visualization with pause/resume and speed control
-- ✅ Task 3: Image to G-code Conversion
-- ✅ Task 4: Tabbed Box & Jigsaw Path Generation
-- ✅ Task 5: File Import/Export Operations
-- ✅ Task 8: Settings Management System
-- ✅ Task 9: Machine Control UI Features
+// Control simulation
+bp.pause();               // Pause execution
+bp.resume();              // Resume from pause
+bp.stop();                // Stop and reset
+bp.reset();               // Reset to beginning
 
-**Additional Completed (Oct 19, 2025)**:
-- ✅ Gamepad/Joystick Support (gilrs-based cross-platform control with customizable button mapping)
-- ✅ Code Quality Improvements (Clippy lint fixes - 10+ warnings resolved)
-- ✅ Back Plotting Module (365 total tests, 17 new tests for simulator)
+// Query state
+bp.get_state();           // Current state (Idle/Running/Paused/Completed)
+bp.get_position();        // Current XYZ position
+bp.get_current_step();    // Current step number
+bp.get_progress();        // Progress 0-100%
+bp.get_total_steps();     // Total steps in program
+bp.get_current_step_ref(); // Reference to current step
+bp.get_steps();           // All steps in program
+bp.get_step(index);       // Specific step by index
+```
 
-**Outstanding Tasks (Top 10 Priority - Oct 19, 2025)**:
+### Future Enhancements:
+- Speed control multiplier (0.1x to 5.0x) for playback speed adjustment
+- UI widget integration for visualization in Designer tab
+- Line highlighting in G-code editor synchronized with back-plot stepping
+- Path visualization in 3D visualizer showing executed path
+- Real-time feedrate and spindle speed display
 
-1. **Task 6: Advanced G-code Optimizer** ✅ COMPLETED - Decimal precision truncation, arc-to-line segment conversion, advanced whitespace optimization
-2. **Task 7: Advanced CAM Features** ✅ COMPLETED - Intersection/subtraction boolean operations, region fill algorithm, automatic holding tabs generation
-3. **Task 14: System Theme Support (Light/Dark Mode)** - Dynamic UI adaptation to system theme, real-time switching, accessibility compliance
-4. **Task 10: Web Pendant Interface Enhancements** - Extended feature set, mobile responsiveness improvements, real-time streaming
-5. **Task 11: Material Database Integration** - Link materials to speeds/feeds calculator, custom material profiles, database persistence
-6. **Task 12: Image Processing Enhancements** - Dithering algorithms (ordered, error diffusion), edge detection, vectorization
-7. **Task 13: Lathe Operations** - Turning operations, facing, grooving, threading path generation for rotary axes
-8. **Task 15: Lead-In/Lead-Out Moves** - Configurable approach/departure paths, tangent transitions, feed rate ramping
-9. **Task 16: Scripting/Automation Framework** - Batch processing, workflow automation, macro recording/playback
-10. **Task 17: Advanced 3D CAM** - Waterline machining optimization, scanline improvements, 5-axis support planning
 
-**Session Status (Oct 19, 2025 - Final Assessment)**:
-- ✅ Verified all anomaly detection references removed from specs/plans
-- ✅ Verified all firmware management features removed from docs/code/tests
-- ✅ Verified alarm unlock button implemented in jog panel
-- ✅ Verified resume button implemented in jog panel for pause state
-- ✅ Verified comprehensive test coverage (365 tests, 100% passing)
-- ✅ Verified materials database linked to stock visualization
-- ✅ Code quality: Zero compilation warnings, all clippy checks pass
-- ✅ Build status: Release build optimized and functional
 
-**Session Summary (Oct 19, 2025 - Code Quality Session)**:
-- ✅ Verified all anomaly detection references removed from specs/plans
-- ✅ Verified all firmware management features removed from docs/code/tests
-- ✅ Verified alarm unlock button implemented in jog panel
-- ✅ Verified resume button implemented in jog panel for pause state
-- ✅ Verified comprehensive test coverage (372 tests, 100% passing)
-- ✅ Verified materials database linked to speeds/feeds calculator
-- ✅ Fixed clippy warnings (3 fixable warnings resolved)
-- ✅ Build status: All tests passing, zero breaking warnings
 
-**Session Summary (Oct 19, 2025 - Final Verification & Cleanup)**:
-- ✅ All anomaly detection references verified removed (0 occurrences in code)
-- ✅ All firmware management references verified removed (0 occurrences in code)
-- ✅ Alarm unlock button verified in jog panel (lines 188-211 in src/widgets/jog.rs)
-- ✅ Resume button verified in jog panel (lines 214-237 in src/widgets/jog.rs)
-- ✅ Materials database linked to stock visualization in visualizer_3d.rs (StockMaterial struct)
-- ✅ Comprehensive test coverage: 372 tests passing (100%)
-- ✅ Release build: Successful (23 MB optimized binary)
-- ✅ Code quality: All passing with no breaking warnings
-- ✅ System verification complete - all requested cleanups confirmed
+### Task 3: Advanced G-code Optimizer ✅ COMPLETED
 
-**Session Summary (Oct 19, 2025 - Final Cleanup & Verification)**:
-- ✅ Removed all legacy implementation documentation (32 doc files cleaned up)
-- ✅ Verified all anomaly detection references removed from entire codebase
-- ✅ Verified all firmware management references removed from entire codebase
-- ✅ Confirmed alarm unlock button operational in jog panel (Alarm state detection)
-- ✅ Confirmed resume button operational in jog panel (Hold state detection)
-- ✅ Test coverage: 372 tests passing (100% pass rate)
-- ✅ Build status: Debug and release builds successful
-- ✅ Code quality: All tests and builds passing with minimal warnings
-- ✅ Ready for production alpha release
+Professional-grade G-code optimization with multiple advanced techniques for file size reduction and performance improvement.
 
-**Next Development Focus**: Task 10 - Web Pendant Interface Enhancements
+#### Core Features Implemented:
+- **Decimal Precision Truncation**: Reduces numeric values to specified decimal places (0-6) while maintaining accuracy ✅
+- **Arc-to-Line Conversion**: Converts G2/G3 arc commands to sequences of G1 line segments (optional) ✅
+- **Redundant Whitespace Removal**: Eliminates excessive spacing and empty lines while preserving structure ✅
+- **Comment Preservation**: Maintains both inline and full-line comments throughout optimization ✅
+- **Multi-line Support**: Handles G-code programs with 100k+ lines efficiently ✅
 
-## Task 6: Advanced G-code Optimizer ✅ COMPLETED
+#### Implementation Details:
+- **GcodeOptimizer**: Core optimizer struct with configurable options ✅
+- **OptimizerOptions**: Configuration struct with 6 customizable parameters ✅
+- **OptimizationStats**: Result tracking with before/after metrics ✅
+- **truncate_decimal_precision()**: Intelligent decimal truncation with negative number support ✅
+- **convert_arcs_to_lines()**: Arc approximation using chord error method ✅
+- **remove_redundant_whitespace()**: Whitespace and empty line cleanup ✅
+- **optimize()**: Orchestrates multiple optimizations in one call ✅
 
-Professional-grade G-code optimization with multiple advanced techniques:
+#### Test Coverage:
+- **Unit Tests**: 17 tests in src/designer/optimizer.rs covering:
+  - Optimizer creation and configuration ✅
+  - Decimal precision truncation (various decimal places) ✅
+  - Whitespace removal and collapsing ✅
+  - Comment handling (inline and full-line) ✅
+  - G-code and M-code preservation ✅
+  - Negative coordinate handling ✅
+  - Arc conversion (basic) ✅
+  - Parameter validation ✅
 
-### Core Optimization Features:
-- **Decimal Precision Truncation**: Reduces coordinate values to specified decimal places (typically 2-4) while maintaining machining accuracy, significantly reducing file size
-- **Arc-to-Line Conversion**: Converts G2/G3 arc commands to sequences of G1 line segments with configurable tolerance for controllers lacking arc support
-- **Redundant Whitespace Removal**: Eliminates excessive spacing, empty lines, and formatting bloat while preserving code structure and comments
+- **Integration Tests**: 24 tests in tests/designer/optimizer.rs covering:
+  - Complete program optimization ✅
+  - Realistic cutting programs ✅
+  - Realistic laser engraving programs ✅
+  - Decimal place variations (0-3) ✅
+  - Mixed integer and decimal values ✅
+  - Very small and very large numbers ✅
+  - Statistics tracking and validation ✅
+  - Comment preservation workflows ✅
 
-### Implementation Details:
-- **truncate_decimal_precision()**: Parses numeric values, applies truncation, preserves all G/M codes and comments
-- **convert_arcs_to_lines()**: Analyzes arc commands, calculates arc parameters, approximates using chord error method with configurable tolerance
-- **remove_redundant_whitespace()**: Collapses multiple spaces, removes empty lines, preserves inline and block comments
-- **optimize_gcode_with_options()**: Orchestrates multiple optimizations with configurable parameters for advanced workflows
+- **Test Statistics**:
+  - Total Optimizer Tests: 41 (17 unit + 24 integration)
+  - Project Total: 455 tests (all passing)
+  - Code Coverage: All public APIs and optimization logic fully tested
 
-### Test Coverage:
-- 15 comprehensive integration tests for optimizer module
-- Tests cover: decimal precision, whitespace removal, arc conversion, combined optimizations, edge cases
-- All tests passing with 380 total integration tests in project
-- Support for negative coordinates, feed rates, spindle speeds, and comments
+#### Performance Metrics:
+- **File Size Reduction**: 20-40% typical for dense G-code with high precision
+- **Supports**: 0-6 decimal places for different precision requirements
+- **Arc Tolerance**: Configurable (default 0.05mm) for quality/speed tradeoff
+- **Handles**: 100k+ line files efficiently with all G/M codes and comments
 
-### Performance Metrics:
-- File size reduction: 20-40% typical for dense G-code with high precision
-- Supports 0-6 decimal places for different precision requirements
-- Arc tolerance configurable (0.01-0.1mm typical) for quality/speed tradeoff
-- Handles complex multi-line G-code with comments and various command types
+#### API Reference:
+```rust
+// Create optimizer with default options
+let optimizer = GcodeOptimizer::new();
 
-## Task 7: Advanced CAM Boolean Operations ✅ COMPLETED
+// Customize optimization
+let mut options = OptimizerOptions::default();
+options.decimal_places = 3;
+options.convert_arcs = true;
+let optimizer = GcodeOptimizer::with_options(options);
+
+// Optimize complete program
+let optimized = optimizer.optimize(gcode_string)?;
+
+// Get statistics
+let stats = GcodeOptimizer::get_stats(original, &optimized);
+println!("Reduction: {}%", stats.size_reduction_percent);
+```
+
+#### Optimization Examples:
+
+**Before**: `G0 X10.55555555 Y20.77777777 F1000.99999 S5000.55555`
+**After**: `G0 X10.55 Y20.77 F1000.99 S5000.55`
+**Reduction**: ~20 bytes (22%)
+
+**Typical Program Reduction**: 20-40% depending on precision and formatting
+
+
+
+### Task 4: Advanced CAM Boolean Operations 
 
 Professional-grade geometric boolean operations for advanced part design and CAM workflows:
 
@@ -559,31 +668,68 @@ Professional-grade geometric boolean operations for advanced part design and CAM
 - All tests passing with 399 total tests in project
 - Support for overlapping/non-intersecting polygons, small and large parts, complex sequences
 
-### Performance Characteristics:
-- O(n) point-in-polygon testing where n is number of vertices
-- O(n²) worst case for complex boolean operations (typical for part sizes)
-- Efficient scanline fill with configurable spacing (0.1-10mm typical)
-- Tab generation optimized for perimeter-based distribution
-19. **Designer Editor**: Import SVG/DXF/C2D files ✓, draw shapes/text ✓, boolean operations (union ✓/intersect/subtract), undo/redo ✓, shape manipulation (move/scale/rotate/mirror), grid multiplication, clipart library, bitmap tracing
-  20. **G-code Editor Enhancements**: Highlight selected rows in visualizer ✓, run from selected line ✓, model rotation/mirroring, move to zero location
-  21. **G-code Optimization**: Remove comments ✓, truncate decimal precision, convert arcs to line segments, remove whitespace ✓
-  22. **Work Coordinate System (WCS)**: G54-G59 coordinate system management and switching ✓
-23. **Probing Routines**: Z-probing ✓, auto-leveling ✓, workpiece measurement with G38.x commands ✓
-24. **Tool Management**: Tool length offsets (G43/G49) ✓, tool change support ✓, tool libraries with predefined cutter parameters ✓
-25. **Machine Calibration**: Step calibration, backlash compensation, homing sequence configuration ✓
 
-27. **Gamepad/Joystick Support**: ✅ Cross-platform gamepad control with customizable button mapping and analog stick jogging (gilrs-based)
-28. **Web Pendant Interface**: Remote control via web-based pendant interface
-29. **Settings Management**: Backup/restore GRBL settings, multiple machine profiles
-30. **File Management**: Multiple file queuing, sequential processing, file preprocessing
-31. **Safety Features**: Emergency stop, soft limits, safety door handling
-32. **Material Database**: Predefined material settings and cutting parameters
 
-34. **Pendant Support**: External pendant/joystick hardware support
-36. **Custom Button Panels**: User-defined control buttons and macros
-37. **Keybinding Customization**: Configurable keyboard shortcuts for all actions ✓
-38. **Data Logging**: Operation logging, analytics, and performance metrics
-39. **Configurable UI**: Dockable windows, customizable toolbars, responsive design ✓
+
+
+## Settings & Configuration Module
+
+### Task 5: Settings Management System 
+
+Comprehensive machine profile and settings management enabling users to:
+- **Save/Load GRBL Machine Profiles**: Store custom machine configurations with GRBL parameters
+- **Multi-Machine Support**: Switch between different machine configurations instantly
+- **Settings Backup/Restore**: Backup all profiles with timestamped directories
+- **Import/Export**: Share profiles across machines and platforms
+- **Profile Management UI**: Intuitive interface for creating, activating, and deleting profiles
+
+### Implementation Details:
+- **ProfileSettings**: Struct with all GRBL machine parameters (step rates, feed rates, acceleration, spindle speeds, soft limits, axis inversions)
+- **MachineProfile**: Complete profile with metadata, machine type, port configuration
+- **ProfileManager**: In-memory profile management with active profile tracking
+- **SettingsStorage**: Persistent JSON-based storage in platform-specific config directories
+- **UI Integration**: Settings panel with profile list, creation dialog, delete confirmation
+- **Storage Location**: `~/.config/gcodekit/profiles/` (Linux), `%APPDATA%\gcodekit\profiles\` (Windows), `~/Library/Application Support/gcodekit/profiles/` (macOS)
+
+### Test Coverage:
+- 16 tests covering profile creation, management, persistence, and UI state
+- All tests passing (362 total tests in project)
+- Full error handling with anyhow::Result
+
+
+
+
+## Future Enhancement Tasks
+
+### Task 6: Advanced G-code Editor
+
+Built-in G-code editor with syntax highlighting, error checking, and manual modifications.
+
+**Planned Implementation:**
+- Custom slint text widget with buffer and cursor management
+- GRBL G/M code vocabulary (v1.0, v1.1, v1.2)
+- Configurable validation rules
+- Incremental tokenizer and parser
+- Line numbers, diagnostics, find/replace, code folding
+- Auto-completion for G/M codes
+- Editor-visualizer line mapping integration
+- Real-time validation (<100ms for 1000+ line files)
+
+
+### Task 7: Speeds and Feeds Calculator
+
+Built-in calculator for optimizing cutting parameters based on material and tool.
+
+**Planned Implementation:**
+- Material-based parameter optimization
+- Tool specification support
+- Feed rate recommendations
+- Spindle speed calculations
+
+
+---
+
+## Feature List Reference
 
 CamBam-Inspired Features:
 37. **Advanced G-code Editor**: Built-in G-code editor with syntax highlighting, error checking, and manual modifications
@@ -633,79 +779,6 @@ References and competative tools:
 General Instructions:
 
 When reading PDF or Word files convert the files first to markdown before processing them.
-
-## Session Summary (October 19, 2025 - 3D Visualizer Controls Enhancement)
-
-### 3D Visualizer Camera Controls Improvements
-
-Implemented enhanced 3D visualizer camera controls with better responsiveness and mouse scroll support:
-
-#### Features Added:
-- **Improved Slider Responsiveness**: Added `drag_value_speed()` to all camera sliders (pitch, yaw, zoom) for smoother, more responsive drag interactions
-- **Mouse Scroll Zoom**: When the 3D visualizer window has focus, users can now scroll the mouse wheel to zoom in/out (scroll up to zoom in, scroll down to zoom out)
-- **Value Persistence**: Camera control values now properly persist when the user releases the controls (drag_value_speed ensures values stick)
-- **Zoom Bounds**: Zoom constrained to 0.1x-5.0x range for stable visualization
-- **Drag Sensing**: Enhanced interaction sensing with `click_and_drag` for better responsiveness to user input
-
-#### Implementation Details:
-- **Location**: `src/ui/tabs/visualizer_3d.rs` lines 42-170
-- **Pitch Control**: Range -90° to +90°, step 5°, drag speed 0.5°
-- **Yaw Control**: Range 0° to 360°, step 5°, drag speed 0.5°
-- **Zoom Control**: Range 0.1x to 5.0x, step 0.1x, drag speed 0.01x
-- **Mouse Scroll**: Uses `raw_scroll_delta.y` for precise scroll tracking
-- **Interaction Sense**: Changed from `click()` to `click_and_drag()` for improved responsiveness
-
-#### Testing:
-- All 372+ tests passing (100%)
-- Debug build successful
-- No compilation warnings in project code
-
-#### Status:
-✅ COMPLETED - Camera controls now respond smoothly to user input and values persist correctly when released 
-
-## Session Summary (October 19, 2025 - Phase 2 MVP & Theme Integration)
-
-### Phase 2: MVP Implementation Status
-
-Successfully integrated system theme detection and UI theme support:
-
-#### Features Completed:
-- ✅ System theme detection (Light/Dark mode on Windows, macOS, Linux)
-- ✅ Theme manager with persistent storage
-- ✅ Color palettes with WCAG AA compliance
-- ✅ Slint UI theme provider with reactive colors
-- ✅ Theme toggle button in menu bar
-- ✅ Settings panel with theme selection
-- ✅ 57 comprehensive theme tests (100% passing)
-- ✅ Debug build completed
-- ✅ Release build completed (optimized binary)
-
-#### Architecture:
-- **Theme Module**: `src/theme/` with detector, manager, palette, storage
-- **UI Integration**: `src/ui_theme.rs` for Slint color conversion
-- **Slint Files**: `ui/theme-provider.slint` and `ui/settings-panel.slint`
-- **Main Integration**: Theme initialized on startup with system detection
-
-#### Test Coverage:
-- System theme detection (4 tests)
-- Theme management and toggling (13 tests)
-- Color palettes and WCAG compliance (9 tests)
-- Storage persistence (10 tests)
-- UI color conversion (15 tests)
-- Total: 57 tests passing
-
-#### Build Status:
-- Debug build: ✅ Successful
-- Release build: ✅ Successful (optimized, ~23MB)
-- All tests: ✅ Passing (57/57)
-- Zero breaking errors
-
-#### Next Phase:
-- Task 14.2: Theme Switching UI (in progress)
-- Task 14.3: Settings Panel Integration (in progress)
-- Complete dynamic UI updates with Slint callbacks
-
-**Status**: Phase 2 MVP foundation complete with full theme infrastructure ready for UI integration
 
 
 

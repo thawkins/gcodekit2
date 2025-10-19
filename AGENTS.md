@@ -63,8 +63,7 @@ tests/
 -  For all functions create DOCBLOCK documentation comments above each function that describes the purpose of the function, and documents any arguments and return vaulues
 -  For all modules place a DOCBLOCK at the top of the File that describes the purpose of the module, and any dependancies.
 -  **Documentation Files**: All documentation markdown files (*.md) **MUST** be located in the `docs/` folder, except for `SPEC.md`, `AGENTS.md`, `README.md` and `CHANGELOG.md` which remain in the project root. This includes: implementation guides, architecture documentation, feature specifications, task breakdowns, user guides, API references, and any other markdown documentation. Any future documentation should be created in the docs/ folder following this convention.
--  **CHANGELOG Management**: Maintain a `CHANGELOG.md` file in the root of the project documenting all changes before each push to remote. Follow the Keep a Changelog format (https://keepachangelog.com/). Use semantic versioning (major.minor.patch-prerelease). **Update CHANGELOG.md before each push to remote** with all recent changes, features, fixes, and improvements.
--  Do not create explainer documents or other documentation unless specificaly asked to.
+-  Do not create explainer documents or other .md files unless specificaly asked to.
 -  **Test Organization**: All tests **MUST** be located in the `tests/` folder organized by module hierarchy, mirroring the `src/` directory structure, NOT inline in source files.
 
 

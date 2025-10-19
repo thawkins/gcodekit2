@@ -45,7 +45,22 @@ async fn main() -> Result<()> {
     // Log successful initialization
     tracing::info!("UI window created successfully");
 
+    // Setup event handlers for UI interaction
+    setup_ui_handlers(&ui);
+
     ui.run()?;
 
     Ok(())
 }
+
+/// Setup all UI event handlers and callbacks
+fn setup_ui_handlers(_ui: &AppWindow) {
+    tracing::debug!("Setting up UI event handlers");
+
+    // Note: Slint handles most event routing automatically through TouchArea and Button elements
+    // Callbacks are invoked directly from the UI definition in app.slint
+    // This function is here for future expansion of event handling if needed
+
+    tracing::debug!("UI event handlers setup complete");
+}
+

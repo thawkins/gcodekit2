@@ -13,7 +13,10 @@ pub mod ui_theme;
 pub mod pendant;
 
 pub use communication::GrblController;
-pub use designer::Designer;
+pub use designer::{
+    Designer, BackPlotter, BackPlotStep, BackPlotState, MoveType, GcodeValidator, GrblVersion,
+    ValidationIssue, Severity, GcodeOptimizer, OptimizerOptions, OptimizationStats,
+};
 pub use jobs::JobManager;
 pub use materials::MaterialDatabase;
 pub use theme::ThemeManager;

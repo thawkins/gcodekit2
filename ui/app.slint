@@ -1,21 +1,142 @@
 import { StandardButton, TabWidget, VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
 import { ThemeProvider, ThemedRectangle, ThemedText, ThemedSecondaryText, ThemeToggleButton } from "theme-provider.slint";
 
+/// Interactive button component with visual feedback
+component InteractiveButton inherits Rectangle {
+    in property <string> label;
+    callback clicked;
+    
+    background: ThemeProvider.colors.button;
+    border-radius: 3px;
+    
+    TouchArea {
+        width: 100%;
+        height: 100%;
+        mouse-cursor: pointer;
+        clicked => {
+            root.clicked();
+        }
+    }
+    
+    ThemedText {
+        text: root.label;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+        color: #FFFFFF;
+    }
+}
+
 component MenuBar inherits Rectangle {
     background: ThemeProvider.colors.panel;
     height: 50px;
     
-    callback settings-requested();
+    private property <int> toggle_count: 0;
+    
+    callback settings_requested();
+    callback file_menu();
+    callback machine_menu();
+    callback view_menu();
+    callback tools_menu();
+    callback help_menu();
     
     HorizontalLayout {
         padding: 10px;
         spacing: 20px;
         
-        ThemedText { text: "File"; font-size: 14px; }
-        ThemedText { text: "Machine"; font-size: 14px; }
-        ThemedText { text: "View"; font-size: 14px; }
-        ThemedText { text: "Tools"; font-size: 14px; }
-        ThemedText { text: "Help"; font-size: 14px; }
+        // File menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.file_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "File"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Machine menu
+        Rectangle {
+            width: 70px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.machine_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Machine"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // View menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.view_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "View"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Tools menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.tools_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Tools"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
+        
+        // Help menu
+        Rectangle {
+            width: 50px;
+            height: 32px;
+            
+            TouchArea {
+                clicked => {
+                    root.help_menu();
+                }
+            }
+            
+            ThemedText { 
+                text: "Help"; 
+                font-size: 14px;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+        }
         
         Rectangle {
             width: 100%;
@@ -29,8 +150,12 @@ component MenuBar inherits Rectangle {
             border-radius: 3px;
             
             TouchArea {
+                width: 100%;
+                height: 100%;
+                mouse-cursor: pointer;
                 clicked => {
                     ThemeProvider.toggle-theme();
+                    toggle_count += 1;
                 }
             }
             
@@ -43,21 +168,26 @@ component MenuBar inherits Rectangle {
             }
         }
         
+        // Settings button
         Rectangle {
             background: ThemeProvider.colors.button;
             width: 40px;
             height: 32px;
             border-radius: 3px;
             
+            TouchArea {
+                width: 100%;
+                height: 100%;
+                clicked => {
+                    root.settings_requested();
+                }
+            }
+            
             ThemedText {
                 text: "⚙";
                 font-size: 16px;
-            }
-            
-            TouchArea {
-                clicked => {
-                    root.settings-requested();
-                }
+                horizontal-alignment: center;
+                vertical-alignment: center;
             }
         }
     }
@@ -113,6 +243,9 @@ component LeftPanel inherits Rectangle {
     width: 250px;
     background: ThemeProvider.colors.background;
     
+    // State for button feedback
+    private property <int> button_press_count: 0;
+    
     VerticalLayout {
         padding: 10px;
         spacing: 10px;
@@ -124,8 +257,6 @@ component LeftPanel inherits Rectangle {
         }
         
         ThemedRectangle {
-            height: 80px;
-            
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
@@ -137,8 +268,6 @@ component LeftPanel inherits Rectangle {
         }
         
         ThemedRectangle {
-            height: 120px;
-            
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
@@ -146,37 +275,121 @@ component LeftPanel inherits Rectangle {
                 ThemedText { text: "Jog Controls"; font-size: 12px; font-weight: 700; }
                 ThemedSecondaryText { text: "Step Size: 1mm"; font-size: 11px; }
                 
+                // First row: Home, Stop, Unlock
                 HorizontalLayout {
                     spacing: 5px;
                     
-                    Rectangle {
-                        background: ThemeProvider.colors.button;
+                    InteractiveButton {
+                        label: "Home";
                         width: 50px;
                         height: 32px;
-                        border-radius: 3px;
-                        ThemedText { text: "X-"; }
+                        clicked => {
+                            button_press_count += 1;
+                        }
                     }
-                    Rectangle {
-                        background: ThemeProvider.colors.button;
+                    InteractiveButton {
+                        label: "Stop";
                         width: 50px;
                         height: 32px;
-                        border-radius: 3px;
-                        ThemedText { text: "Y+"; }
+                        clicked => {
+                            button_press_count += 1;
+                        }
                     }
-                    Rectangle {
-                        background: ThemeProvider.colors.button;
+                    InteractiveButton {
+                        label: "Unlock";
                         width: 50px;
                         height: 32px;
-                        border-radius: 3px;
-                        ThemedText { text: "X+"; }
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                }
+                
+                // Second row: Y+
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle { width: 20px; }
+                    InteractiveButton {
+                        label: "Y+";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    Rectangle { width: 20px; }
+                }
+                
+                // Third row: X-, Z-, X+
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    InteractiveButton {
+                        label: "X-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Z-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "X+";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                }
+                
+                // Fourth row: Y-
+                HorizontalLayout {
+                    spacing: 5px;
+                    Rectangle { width: 20px; }
+                    InteractiveButton {
+                        label: "Y-";
+                        width: 50px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    Rectangle { width: 20px; }
+                }
+                
+                // Fifth row: Pause, Continue
+                HorizontalLayout {
+                    spacing: 5px;
+                    
+                    InteractiveButton {
+                        label: "Pause";
+                        width: 60px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
+                    }
+                    InteractiveButton {
+                        label: "Continue";
+                        width: 60px;
+                        height: 32px;
+                        clicked => {
+                            button_press_count += 1;
+                        }
                     }
                 }
             }
         }
         
         ThemedRectangle {
-            height: 100px;
-            
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
@@ -184,7 +397,17 @@ component LeftPanel inherits Rectangle {
                 ThemedText { text: "Overrides"; font-size: 12px; font-weight: 700; }
                 ThemedSecondaryText { text: "Feed: 100%"; font-size: 11px; }
                 ThemedSecondaryText { text: "Power: 100%"; font-size: 11px; }
+                ThemedSecondaryText { 
+                    text: "Clicks: " + button_press_count; 
+                    font-size: 10px;
+                    color: ThemeProvider.colors.status-blue;
+                }
             }
+        }
+        
+        // Spacer to push widgets to top
+        Rectangle {
+            height: 100%;
         }
     }
 }
@@ -223,7 +446,10 @@ component RightPanel inherits Rectangle {
     background: ThemeProvider.colors.background;
     
     VerticalLayout {
-        padding: 10px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 12.5px;  // 5% of 250px = 12.5px
         spacing: 10px;
         
         ThemedText {
@@ -233,8 +459,6 @@ component RightPanel inherits Rectangle {
         }
         
         ThemedRectangle {
-            height: 100px;
-            
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
@@ -247,22 +471,44 @@ component RightPanel inherits Rectangle {
                         width: 80px;
                         height: 32px;
                         border-radius: 3px;
-                        ThemedText { text: "Rectangle"; }
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Rectangle";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
                     }
                     Rectangle {
                         background: ThemeProvider.colors.button;
                         width: 80px;
                         height: 32px;
                         border-radius: 3px;
-                        ThemedText { text: "Circle"; }
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Circle";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
                     }
                 }
             }
         }
         
         ThemedRectangle {
-            height: 100px;
-            
             VerticalLayout {
                 padding: 10px;
                 spacing: 5px;
@@ -275,14 +521,38 @@ component RightPanel inherits Rectangle {
                         width: 80px;
                         height: 32px;
                         border-radius: 3px;
-                        ThemedText { text: "SVG/DXF"; }
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "SVG/DXF";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
                     }
                     Rectangle {
                         background: ThemeProvider.colors.button;
                         width: 80px;
                         height: 32px;
                         border-radius: 3px;
-                        ThemedText { text: "Image"; }
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            clicked => {
+                            }
+                        }
+                        
+                        ThemedText { 
+                            text: "Image";
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
                     }
                 }
             }
@@ -299,6 +569,11 @@ component RightPanel inherits Rectangle {
                 ThemedSecondaryText { text: "Database loaded"; font-size: 11px; }
             }
         }
+        
+        // Spacer to push widgets to top
+        Rectangle {
+            height: 100%;
+        }
     }
 }
 
@@ -312,7 +587,7 @@ export component AppWindow inherits Window {
         padding: 0px;
         
         MenuBar {
-            settings-requested => {
+            settings_requested => {
                 // TODO: Show settings panel
             }
         }
