@@ -80,6 +80,7 @@ Additional Requirements:
 13. 3-Axis Support: Optimized for GRBL machines with dedicated X/Y/Z axis control
 14. Job Management: Advanced job queuing with priority scheduling, progress tracking, and automatic resumption after errors
 15. System Theme Support: Support Light and Dark themes with automatic detection of OS theme preference, dynamic theme switching without application restart, and WCAG AA accessibility compliance for all UI components
+16. UI Theme Appearance: All UI components including buttons, panels, text fields, status indicators, and menus must adapt their appearance based on the currently selected theme to reflect the system theming preference
 
  Current Features:
   12. **Advanced Visualizer**: Right-click jog to location ✓, color-coded paths for G0/G1/G2/G3 moves ✓, 3-axis support (XYZ) ✓, real-time machine position overlay ✓, outline gcode functionality (planned)

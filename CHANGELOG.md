@@ -7,13 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0-alpha] - 2025-10-19
 
-### Added (Session: MVP Documentation & Planning)
+### Added (Session: MVP Documentation & Phase 2 Planning)
 - Comprehensive implementation plan with phase breakdown (`docs/IMPLEMENTATION_PLAN.md`)
 - Phase structure documentation for all 16+ planned phases
 - Clear deliverables and success criteria for each phase
 - Dependency tracking and risk mitigation strategies
 - Program name confirmed as `gcodekit2` in Cargo.toml
 - Both debug (224MB) and release (13MB) binaries verified and working
+- UI theme appearance requirement added to SPEC.md (requirement #16)
 
 ### Changed
 - SPEC.md updated with current phase status (Phase 15: MVP Implementation & Phase 2 Release)
