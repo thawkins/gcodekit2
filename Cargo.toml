@@ -21,6 +21,16 @@ lyon = "1.0"
 image = "0.24"
 thiserror = "1.0"
 crossterm = "0.27"
+dirs = "5.0"
+tempfile = "3.8"
+
+# Platform-specific theme detection
+[target.'cfg(windows)'.dependencies]
+winreg = "0.50"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2"
+objc-foundation = "0.1"
 
 [build-dependencies]
 slint-build = "1.13.1"

@@ -8,8 +8,10 @@ pub mod designer;
 pub mod jobs;
 pub mod materials;
 pub mod widgets;
+pub mod theme;
 
 pub use communication::GrblController;
 pub use designer::Designer;
 pub use jobs::JobManager;
 pub use materials::MaterialDatabase;
+pub use theme::ThemeManager;
