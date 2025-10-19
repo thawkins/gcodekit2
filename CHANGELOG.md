@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1-alpha] - 2025-10-19 (Material Database Integration & Speeds/Feeds Calculator)
+
+### Added
+- **Task 11: Material Database Integration** ✅:
+  - Speeds & Feeds Calculator with material and tool specifications
+  - Tool material support (HSS, Carbide, Diamond) with speed factors (1x, 3x, 5x)
+  - Intelligent RPM limiting based on tool maximum capabilities
+  - Chip load calculation per tooth for precise feed rate determination
+  - Surface speed computation in SFM (Surface Feet per Minute) and m/min
+  - Quick lookup functionality for pre-configured material parameters
+  - Material type filtering and suggestion system
+  - Support for 10+ material types (Wood, Plastic, Metal, Acrylic, Fabric, Paper, Rubber, Stone, Glass, Leather)
+  - 18 comprehensive integration tests covering calculator functionality, tool materials, and material-specific calculations
+- **Build Infrastructure**: Debug (225MB) and Release (13MB) builds verified with 276 total passing tests
+
+### Tests Added
+- test_speeds_feeds_calculator_creation
+- test_calculate_speeds_feeds_wood
+- test_calculate_speeds_feeds_metal
+- test_carbide_tool_speed_factor
+- test_carbide_tool_higher_speed_than_hss
+- test_quick_lookup
+- test_invalid_material_error
+- test_suggest_materials_by_type
+- test_different_materials_different_speeds
+- test_rpm_respects_tool_max
+- test_large_tool_lower_rpm
+- Plus existing material database tests (80+ total)
+
 ## [0.2.0-alpha] - 2025-10-19 (Phase 2 MVP - Complete Theme Integration & Web Pendant)
 
 ### Added

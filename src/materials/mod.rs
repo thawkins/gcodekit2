@@ -1,10 +1,17 @@
 //! Materials Database Module
 //!
 //! Provides material properties and cutting parameters for different materials
-//! and tools used in laser engraving and CNC machining.
+//! and tools used in laser engraving and CNC machining. Includes speeds and feeds
+//! calculator for optimal cutting parameters based on tool and material combinations.
+
+pub mod speeds_feeds;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+
+pub use speeds_feeds::{
+    SpeedsFeedsCalculator, SpeedsFeedsResult, ToolMaterial, ToolSpec,
+};
 
 /// Material properties for cutting/engraving operations
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -96,6 +103,7 @@ impl Material {
 }
 
 /// Materials database
+#[derive(Clone)]
 pub struct MaterialDatabase {
     materials: HashMap<String, Material>,
 }
