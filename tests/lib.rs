@@ -6,9 +6,11 @@
 //! - tests/jobs/ - Job scheduling and queue management
 //! - tests/materials/ - Material database operations
 //! - tests/widgets/ - UI widget tests
+//! - tests/theme/ - Theme system, color palettes, and persistence
 
 mod communication;
 mod designer;
 mod jobs;
 mod materials;
+mod theme;
 mod widgets;

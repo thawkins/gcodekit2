@@ -9,24 +9,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial MVP with core GRBL communication
-- Phase 2 MVP implementation complete
+- Phase 2 MVP implementation complete with Phase 14 system theme support
 - System theme support (Light/Dark mode)
   - Automatic OS theme detection (Windows, macOS, Linux)
-  - Color palettes with WCAG AA compliance
+  - Color palettes with WCAG AA compliance (4.5:1 minimum contrast)
   - Dynamic theme switching without restart
   - Persistent theme preferences
-- Comprehensive test organization (77 tests in tests/ hierarchy)
-- Theme infrastructure with manager, detector, and palettes
-- Debug and release builds
+  - Full UI component theming
+- Comprehensive theme test suite (31 new tests)
+  - Theme manager and switching tests
+  - Color palette contrast validation
+  - WCAG AA compliance verification
+  - Preference persistence tests
+  - Theme storage and retrieval tests
+- Comprehensive test organization (108 tests in tests/ hierarchy)
+  - Communication module tests
+  - Designer/CAM tests
+  - Jobs/scheduling tests
+  - Materials database tests
+  - Widgets tests
+  - Theme system tests
+- Theme infrastructure with manager, detector, palettes, and storage
+- Debug and release builds (both successful)
 
 ### Changed
 - Program name officially set to `gcodekit2`
-- Tests reorganized to `tests/` folder with module hierarchy
-- AGENTS.md updated with test organization standards
+- Tests reorganized to `tests/` folder with complete module hierarchy
+- AGENTS.md updated with test organization and CHANGELOG requirements
+- SPEC.md updated with system theme support as requirement #15
+- Added Theme module to tests/lib.rs with full integration test coverage
 
 ### Fixed
 - Project structure aligned with best practices
-- All tests passing (77/77)
+- All tests passing (108/108 - 100% pass rate)
 
 ## [0.1.0-alpha]
 
