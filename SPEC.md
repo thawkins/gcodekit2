@@ -103,6 +103,7 @@ Additional Requirements:
 31. **Port Filtering**: Serial ports filtered to show only GRBL-compatible devices (/dev/ttyACM*, /dev/ttyUSB*, COM*, /dev/tty.usbserial*) ✓
 32. **Issue Templates**: GitHub issue templates added for BUG, FEATURE, and CHANGE requests ✓
 33. **Code Quality**: Clippy warnings fixed for improved code maintainability ✓
+34. **System Theme Support**: Dynamic UI adaptation to system theme preference (Light/Dark mode) (planned)
 
 ## Phase 9: Advanced Error Recovery System (99.9% Uptime Guarantee)
 
@@ -204,6 +205,67 @@ The real-time machine status monitoring and device console integration phases ad
 - **Color-Coded Messages**: Type and severity-based message coloring for easy scanning
 - **Automatic Filtering**: Status queries and simple "ok" responses automatically excluded from display
 - **Message Counts**: Real-time message count display with copy/clear controls
+
+## Phase 14: System Theme Support (Light/Dark Mode)
+
+The UI must dynamically adapt to the system theme preference, providing a seamless user experience across different environments:
+
+### Theme Support Requirements:
+- **Light Theme**: Professional light color scheme with dark text, light backgrounds, appropriate contrast
+- **Dark Theme**: Professional dark color scheme with light text, dark backgrounds, reduced eye strain
+- **System Theme Detection**: Automatic detection of OS-level theme preference (Windows, macOS, Linux)
+- **Theme Switching**: Real-time theme switching without application restart
+- **Preferences Storage**: Remember user theme preference across sessions
+- **Accessibility**: Ensure sufficient contrast ratios (WCAG AA minimum 4.5:1) in both themes
+
+### Theme Implementation:
+- **Theme Engine**: Central theme management system with theme definitions
+- **Dynamic Colors**: All UI colors must be derived from theme palette for consistency
+- **Component Styling**: Buttons, text fields, panels, and other widgets adapt to current theme
+- **Icon/Imagery**: Adjust image rendering for visibility in both light and dark modes
+- **Status Indicators**: Ensure status colors (green/red/yellow/blue) are visible and distinct in both themes
+- **Custom Theme Support**: Allow users to define custom color schemes (future phase)
+
+### Color Palette Guidelines:
+
+**Light Theme**:
+- Background: #FFFFFF (white)
+- Primary Text: #1A1A1A (near black)
+- Secondary Text: #666666 (medium gray)
+- Panel Background: #F5F5F5 (light gray)
+- Button/Active: #0066CC (blue)
+- Accent: #FF6B35 (orange)
+- Status Green: #00AA00 (green for idle)
+- Status Blue: #0000FF (blue for run)
+- Status Red: #FF0000 (red for alarm)
+- Status Yellow: #FFAA00 (yellow for hold)
+
+**Dark Theme**:
+- Background: #1E1E1E (dark gray)
+- Primary Text: #FFFFFF (white)
+- Secondary Text: #CCCCCC (light gray)
+- Panel Background: #2D2D2D (medium dark gray)
+- Button/Active: #4DA6FF (light blue)
+- Accent: #FF8C42 (light orange)
+- Status Green: #00FF00 (bright green)
+- Status Blue: #4DA6FF (bright blue)
+- Status Red: #FF3333 (bright red)
+- Status Yellow: #FFDD00 (bright yellow)
+
+### User Preferences:
+- **Theme Selection**: Settings panel option to select between Light, Dark, and System Default
+- **Auto Follow System**: When set to "System Default", automatically follow OS theme changes
+- **Transition**: Smooth color transitions when theme changes (200-300ms fade)
+- **Per-Component Override**: Advanced users can override specific component colors
+
+### Testing & Validation:
+- Visual testing in both light and dark modes
+- Contrast ratio validation tools to ensure WCAG compliance
+- Cross-platform theme detection (Windows, macOS, Linux)
+- Performance testing for theme switches
+- User preference persistence testing
+
+---
 
 ## Development Status
 
@@ -334,14 +396,14 @@ Comprehensive machine profile and settings management enabling users to:
 
 1. **Task 6: Advanced G-code Optimizer** ✅ COMPLETED - Decimal precision truncation, arc-to-line segment conversion, advanced whitespace optimization
 2. **Task 7: Advanced CAM Features** ✅ COMPLETED - Intersection/subtraction boolean operations, region fill algorithm, automatic holding tabs generation
-3. **Task 10: Web Pendant Interface Enhancements** - Extended feature set, mobile responsiveness improvements, real-time streaming
-4. **Task 11: Material Database Integration** - Link materials to speeds/feeds calculator, custom material profiles, database persistence
-5. **Task 12: Image Processing Enhancements** - Dithering algorithms (ordered, error diffusion), edge detection, vectorization
-6. **Task 13: Lathe Operations** - Turning operations, facing, grooving, threading path generation for rotary axes
-7. **Task 14: Lead-In/Lead-Out Moves** - Configurable approach/departure paths, tangent transitions, feed rate ramping
-8. **Task 15: Scripting/Automation Framework** - Batch processing, workflow automation, macro recording/playback
-9. **Task 16: Advanced 3D CAM** - Waterline machining optimization, scanline improvements, 5-axis support planning
-10. **Task 17: UI/UX Polish & Performance** - Theme refinement, performance profiling/optimization, accessibility improvements
+3. **Task 14: System Theme Support (Light/Dark Mode)** - Dynamic UI adaptation to system theme, real-time switching, accessibility compliance
+4. **Task 10: Web Pendant Interface Enhancements** - Extended feature set, mobile responsiveness improvements, real-time streaming
+5. **Task 11: Material Database Integration** - Link materials to speeds/feeds calculator, custom material profiles, database persistence
+6. **Task 12: Image Processing Enhancements** - Dithering algorithms (ordered, error diffusion), edge detection, vectorization
+7. **Task 13: Lathe Operations** - Turning operations, facing, grooving, threading path generation for rotary axes
+8. **Task 15: Lead-In/Lead-Out Moves** - Configurable approach/departure paths, tangent transitions, feed rate ramping
+9. **Task 16: Scripting/Automation Framework** - Batch processing, workflow automation, macro recording/playback
+10. **Task 17: Advanced 3D CAM** - Waterline machining optimization, scanline improvements, 5-axis support planning
 
 **Session Status (Oct 19, 2025 - Final Assessment)**:
 - ✅ Verified all anomaly detection references removed from specs/plans
