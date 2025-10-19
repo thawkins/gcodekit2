@@ -152,69 +152,114 @@ GCodeKit2 is a production-quality desktop application for controlling GRBL-compa
 
 **Testing**: 57 tests covering detection, management, storage, and WCAG compliance
 
-#### Phase 14.2: Theme UI Integration 🔄 IN PROGRESS
+#### Phase 14.2: Theme UI Integration ✅ COMPLETED (v0.2.0-alpha)
 
-**Objective**: Integrate theme switching UI into application menus and panels
+**Completed**:
+- Theme toggle button in menu bar with moon/sun icons
+- Settings panel with Light/Dark/System theme selection buttons
+- Theme mode indicator in settings
+- Color palette preview in settings
+- Appearance settings display
+- Device connection status display
+- Working theme toggle functionality
+
+**Implementation Details**:
+- `ui/app.slint`: AppWindow with MenuBar and theme toggle button
+- `ui/settings-panel.slint`: Theme selection UI with button controls
+- `ui/theme-provider.slint`: ThemeProvider global with toggle-theme() method
+- All UI components using ThemedText, ThemedRectangle for dynamic colors
+- Theme toggle button shows moon icon in light mode, sun icon in dark mode
+
+**Testing**: All 57 theme tests passing
+
+#### Phase 14.3: Component Styling Adaptation 🔄 IN PROGRESS
+
+**Objective**: Ensure all UI components properly reflect theme colors with smooth transitions
 
 **Tasks**:
-1. Theme toggle button in menu bar
-2. Settings panel theme selection dropdown
-3. Real-time theme switching callbacks
-4. Visual feedback for theme changes
-5. Preview of light/dark colors in settings
+1. ✅ Button styling with theme-aware colors
+   - Primary button color follows theme button color
+   - Hover states adapt to theme
+   - Active/selected states visible in both themes
 
-**Estimated Effort**: 2-3 hours
+2. ✅ Text field styling
+   - Border colors adapt to theme
+   - Focus states use theme accent color
+   - Placeholder text uses secondary text color
+
+3. ✅ Panel and container backgrounds
+   - All panels use theme panel background
+   - Nested panels have appropriate contrast
+   - Clear visual hierarchy maintained
+
+4. ✅ Menu styling
+   - Menu bar uses theme panel background
+   - Menu items use theme text colors
+   - Hover states visible in both themes
+
+5. ✅ Status indicators
+   - Status colors (green/blue/red/yellow) visible in both themes
+   - Proper contrast ratios maintained (WCAG AA minimum 4.5:1)
+   - LED indicators and status badges use theme colors
+
+6. ✅ Icon and imagery adjustments
+   - Icons remain visible in light and dark modes
+   - Icon colors coordinated with text colors
+   - Imagery has appropriate contrast
+
+7. ✅ Scrollbar styling
+   - Scrollbars use theme colors
+   - Track and thumb properly colored
+   - Hover states indicated
+
+**Estimated Effort**: 2-3 hours (in progress)
 **Priority**: High
 
 **Deliverables**:
-- Theme toggle in menu bar with icon
-- Settings panel with theme selection (Light/Dark/System)
-- Real-time color updates on theme change
-- User preference persistence
-
-#### Phase 14.3: Component Styling Adaptation 🔄 PLANNED
-
-**Objective**: Adapt all UI components to dynamically reflect active theme
-
-**Tasks**:
-1. Button styling (colors, borders, hover states)
-2. Text field styling (borders, focus states)
-3. Panel and container background colors
-4. Menu styling and colors
-5. Status indicator colors
-6. Icon and imagery adjustments
-7. Scrollbar styling
-
-**Estimated Effort**: 3-4 hours
-**Priority**: High
-
-**Deliverables**:
-- All buttons themed consistently
-- Text fields with theme-aware colors
-- Panels with appropriate contrast
-- Menus with theme colors
-- Status indicators visible in both themes
+- All UI components follow theme palette
+- Consistent visual appearance in both light and dark modes
+- Accessibility maintained throughout
+- No broken visual hierarchy
 
 #### Phase 14.4: Accessibility & Polish 🔄 PLANNED
 
-**Objective**: Ensure accessibility compliance and smooth user experience
+**Objective**: Ensure accessibility compliance and polish user experience
 
 **Tasks**:
-1. WCAG AA compliance verification (4.5:1 contrast ratios)
-2. Theme transition animations (200-300ms fade)
-3. Per-component color override capability
-4. Custom theme support framework
-5. Comprehensive visual testing
-6. Performance optimization for theme switches
+1. WCAG AA Compliance Verification
+   - Verify 4.5:1 contrast ratios for all text
+   - Test color combination accessibility
+   - Document compliance verification
+
+2. Theme Transition Animations
+   - Implement smooth 200-300ms fade transitions
+   - Animate color changes between themes
+   - Provide visual continuity during switch
+
+3. Per-Component Color Overrides (Future)
+   - Framework for custom component colors
+   - Advanced settings for theme customization
+   - Import/export custom themes
+
+4. Comprehensive Visual Testing
+   - Light theme screenshots and validation
+   - Dark theme screenshots and validation
+   - High contrast mode testing
+   - Color blindness simulator testing
+
+5. Performance Optimization
+   - Minimize redraws during theme switch
+   - Optimize color lookup performance
+   - Cache theme palette data
 
 **Estimated Effort**: 2-3 hours
 **Priority**: Medium
 
 **Deliverables**:
-- Verified WCAG AA compliance in both themes
+- Verified WCAG AA compliance documentation
 - Smooth theme transition animations
-- Advanced customization framework
 - Complete test coverage for all themed components
+- Performance benchmarks meeting < 100ms theme switch target
 
 ---
 
