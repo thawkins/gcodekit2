@@ -5,26 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0-alpha] - 2025-10-19
+## [0.2.0-alpha] - 2025-10-19 (Extended Session Update)
 
-### Added (Session: Phase 14 Completion & Phase 2 Planning)
-- **Phase 14: System Theme Support - COMPLETED** ✅
-  - Comprehensive theme-provider.slint component with reactive colors
-  - Settings panel with theme selection (Light/Dark/Auto System)
-  - All 10 color properties in ThemeColors struct
-  - 31 comprehensive theme system tests (100% passing)
-  - WCAG AA contrast compliance verified (4.5:1+ minimum)
-  - Theme persistence across sessions
-  - Real-time switching without restart
-- Comprehensive implementation plan with phase breakdown (`docs/IMPLEMENTATION_PLAN.md`)
-- Phase 14 completion summary (`docs/PHASE_14_COMPLETION.md`)
-- Both debug (224MB) and release (13MB) binaries verified
+### Added (Session: Extended Phase 2 Implementation)
+- **Documentation & Configuration Requirements**:
+  - AGENTS.md updated with test organization requirements (tests/ hierarchy)
+  - AGENTS.md updated with CHANGELOG management requirement (update before each push)
+  - All markdown documentation files now organized in docs/ (except SPEC.md, AGENTS.md, README.md, CHANGELOG.md)
+  - CHANGELOG.md must be maintained and updated before each remote push
+- **Test Organization Verification**: All 108 tests passing in tests/ hierarchy mirroring src/ structure
+- **Build Status**: Both debug and release builds successful and verified
+- **Theme Support**: System theme support fully implemented (Light/Dark modes, auto-detection, WCAG AA compliance)
+- **MVP Foundation**: Core GRBL communication, CAM functions, multi-axis support, and theme infrastructure complete
 
 ### Changed
-- Program name confirmed as `gcodekit2` in Cargo.toml
-- SPEC.md: Added UI theme appearance requirement (#16)
-- All UI components now using themed colors from ThemeProvider
-- Build system verified (zero critical errors, 108/108 tests passing)
+- AGENTS.md: Enhanced documentation with test organization and CHANGELOG management requirements
+- SPEC.md: Clarified theme support requirements (#15-16) with system detection and WCAG AA compliance details
+- Build system verified with both debug and release optimized binaries
+- All tests passing (108/108 - 100% pass rate)
 
 ### Added
 - Initial MVP with core GRBL communication
