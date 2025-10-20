@@ -38,24 +38,24 @@ export component StatusBar inherits Rectangle {
             
             ThemedText {
                 text: "Device: " + root.connection-status;
-                font-size: 13px;
+                font-size: 17px;
                 font-weight: 700;
             }
         }
         
         ThemedText {
             text: "Status: " + root.status;
-            font-size: 13px;
+            font-size: 17px;
         }
         
         ThemedText {
             text: "Position: " + root.position;
-            font-size: 13px;
+            font-size: 17px;
         }
         
         ThemedText {
             text: "Version: " + root.version;
-            font-size: 13px;
+            font-size: 17px;
         }
         
         Rectangle {
@@ -68,13 +68,13 @@ export component StatusBar inherits Rectangle {
             
             ThemedText {
                 text: "Theme:";
-                font-size: 12px;
+                font-size: 16px;
             }
             
             ThemedText {
                 text: ThemeProvider.mode == "light" ? "☀ Light" : "🌙 Dark";
                 color: ThemeProvider.mode == "light" ? ThemeProvider.colors.status-yellow : #7B68EE;
-                font-size: 12px;
+                font-size: 16px;
                 font-weight: 700;
             }
         }
