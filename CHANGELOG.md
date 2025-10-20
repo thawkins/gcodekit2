@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.16-alpha] - 2025-10-20 (Hide Status Info When Disconnected)
+
+### Changed
+- **Status Bar Information Display**: Hide status, position, and version when disconnected ✅
+  - Added `visible: root.is-connected` condition to Status text
+  - Added `visible: root.is-connected` condition to Position text
+  - Added `visible: root.is-connected` condition to Version text
+  - Connection indicator and theme always remain visible
+  - Cleaner interface when device is not connected
+
+### Updated Components
+- `status-bar.slint`: Added visibility conditions to status info elements
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.15-alpha] - 2025-10-20 (Lower Connection Indicator Dot)
 
 ### Changed
