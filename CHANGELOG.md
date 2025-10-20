@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.13-alpha] - 2025-10-20 (Remove ANSI Terminal Codes from Console)
+
+### Fixed
+- **ANSI Escape Codes in Device Console**: Removed all ASCII terminal formatting codes ✅
+  - Disabled ANSI color codes in tracing formatter with `.with_ansi(false)`
+  - Added `strip_ansi_codes()` function to remove any ANSI escape sequences from log lines
+  - Cleans output during filtering and export operations
+  - Ensures clean, readable plain text in device console
+  - Prevents garbled display of terminal formatting characters
+
+### Updated Components
+- `console_logger.rs`: 
+  - Added `.with_ansi(false)` to tracing layer initialization
+  - Added `strip_ansi_codes()` helper function
+  - Updated `filter_console_logs()` to strip codes during filtering
+  - Updated `get_console_as_string()` to strip codes on export
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.12-alpha] - 2025-10-20 (Additional 30% Font Size Increase)
 
 ### Changed

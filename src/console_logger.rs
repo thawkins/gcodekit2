@@ -27,6 +27,7 @@ pub fn init_console_logging() -> ConsoleBuffer {
         })
         .with_target(true)
         .with_level(true)
+        .with_ansi(false)
         .compact();
     
     let env_filter = EnvFilter::new("gcodekit2=trace");
@@ -109,6 +110,7 @@ pub fn filter_console_logs(
 ) -> Vec<String> {
     get_console_logs(buffer)
         .into_iter()
+        .map(|line| strip_ansi_codes(&line))
         .filter(|line| {
             if line.contains(" INFO ") || line.contains("[INFO]") {
                 show_info
@@ -128,9 +130,33 @@ pub fn filter_console_logs(
         .collect()
 }
 
+/// Strip ANSI escape codes from a string
+fn strip_ansi_codes(s: &str) -> String {
+    let mut result = String::new();
+    let mut in_escape = false;
+    
+    for ch in s.chars() {
+        if ch == '\x1b' {
+            in_escape = true;
+        } else if in_escape {
+            if ch == 'm' {
+                in_escape = false;
+            }
+        } else {
+            result.push(ch);
+        }
+    }
+    
+    result
+}
+
 /// Get console logs as a single string for export
 pub fn get_console_as_string(buffer: &ConsoleBuffer) -> String {
-    get_console_logs(buffer).join("\n")
+    get_console_logs(buffer)
+        .into_iter()
+        .map(|line| strip_ansi_codes(&line))
+        .collect::<Vec<_>>()
+        .join("\n")
 }
 
 /// Extract tracing level from log line
