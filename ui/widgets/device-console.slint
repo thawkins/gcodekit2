@@ -14,9 +14,6 @@ export component DeviceConsole inherits Rectangle {
     in property <string> status-text: "Disconnected";
     in property <string> console-content: "[System] Console Ready\nWaiting for device connection...";
     
-    // Command input
-    private property <string> input-command-text: "";
-    
     // Filter toggles
     in property <bool> show-info: true;
     in property <bool> show-debug: true;
@@ -24,6 +21,9 @@ export component DeviceConsole inherits Rectangle {
     in property <bool> show-error: true;
     in property <bool> show-trace: false;
     in property <bool> show-other: true;
+    
+    // Command input
+    private property <string> input-command-text: "";
     
     // Callbacks
     callback send-command(string);
@@ -69,7 +69,7 @@ export component DeviceConsole inherits Rectangle {
                 
                 ThemedText {
                     text: "Clear";
-                    font-size: 16px;
+                    font-size: 9px;
                     color: white;
                 }
                 
@@ -92,7 +92,7 @@ export component DeviceConsole inherits Rectangle {
                 
                 ThemedText {
                     text: "Copy All";
-                    font-size: 16px;
+                    font-size: 9px;
                     color: white;
                 }
                 
@@ -115,7 +115,7 @@ export component DeviceConsole inherits Rectangle {
                 
                 ThemedText {
                     text: "Save All";
-                    font-size: 16px;
+                    font-size: 9px;
                     color: white;
                 }
                 
@@ -127,11 +127,6 @@ export component DeviceConsole inherits Rectangle {
                         root.save-console();
                     }
                 }
-            }
-            
-            // Spacer to push checkboxes to the right
-            Rectangle {
-                width: 100%;
             }
             
             // Filter checkboxes
@@ -161,7 +156,7 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Info";
-                        font-size: 17px;
+                        font-size: 8px;
                     }
                 }
                 
@@ -188,7 +183,7 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Debug";
-                        font-size: 17px;
+                        font-size: 8px;
                     }
                 }
                 
@@ -215,7 +210,7 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Warn";
-                        font-size: 17px;
+                        font-size: 8px;
                     }
                 }
                 
@@ -242,7 +237,7 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Error";
-                        font-size: 17px;
+                        font-size: 8px;
                     }
                 }
                 
@@ -269,34 +264,7 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Trace";
-                        font-size: 17px;
-                    }
-                }
-                
-                // Other checkbox
-                HorizontalLayout {
-                    spacing: 3px;
-                    
-                    Rectangle {
-                        width: 14px;
-                        height: 14px;
-                        border-radius: 2px;
-                        background: root.show-other ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
-                        border-width: 1px;
-                        
-                        TouchArea {
-                            width: 100%;
-                            height: 100%;
-                            mouse-cursor: pointer;
-                            clicked => {
-                                root.toggle-other(!root.show-other);
-                            }
-                        }
-                    }
-                    
-                    ThemedSecondaryText {
-                        text: "Other";
-                        font-size: 17px;
+                        font-size: 8px;
                     }
                 }
             }
@@ -319,12 +287,14 @@ export component DeviceConsole inherits Rectangle {
                         
                         ThemedText {
                             text: root.console-content;
-                            font-size: 17px;
+                            font-size: 8px;
                             font-family: "monospace";
                             wrap: word-wrap;
                         }
                     }
                 }
+                
+                Rectangle { height: 100%; }
             }
         }
         
@@ -336,56 +306,47 @@ export component DeviceConsole inherits Rectangle {
                 
                 ThemedText {
                     text: "Send Command";
-                    font-size: 17px;
+                    font-size: 10px;
                     font-weight: 700;
                 }
                 
                 HorizontalLayout {
                     spacing: 5px;
                     
-                    // Input field with TextInput
+                    // Input field placeholder
                     Rectangle {
                         background: ThemeProvider.colors.panel;
                         border-radius: 3px;
                         height: 24px;
-                        border-width: 1px;
-                        border-color: #CCCCCC;
                         
-                        TextInput {
-                            width: 100%;
-                            height: 100%;
-                            text: input-command-text;
-                            input-type: text;
+                        ThemedSecondaryText {
+                            text: "Enter G-code or $ command...";
+                            font-size: 8px;
+                            padding: 3px;
                         }
                     }
                     
-                    // Send button - custom implementation
+                    // Send button
                     Rectangle {
-                        width: 65px;
-                        height: 24px;
                         background: ThemeProvider.colors.status-green;
+                        width: 60px;
+                        height: 24px;
                         border-radius: 3px;
+                        
+                        ThemedText {
+                            text: "Send";
+                            font-size: 9px;
+                            font-weight: 700;
+                            color: #FFFFFF;
+                        }
                         
                         TouchArea {
                             width: 100%;
                             height: 100%;
                             mouse-cursor: pointer;
-                            
                             clicked => {
-                                if (input-command-text != "") {
-                                    root.send-command(input-command-text);
-                                    input-command-text = "";
-                                }
+                                root.send-command("$H");
                             }
-                        }
-                        
-                        ThemedText {
-                            text: "Send";
-                            font-size: 16px;
-                            font-weight: 700;
-                            color: #FFFFFF;
-                            horizontal-alignment: center;
-                            vertical-alignment: center;
                         }
                     }
                 }

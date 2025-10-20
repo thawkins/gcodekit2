@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.23-alpha] - 2025-10-20 (Restore Device Console Layout)
+
+### Fixed
+- **Device Console Layout Broken**: Restored proper layout structure ✅
+  - Reverted to working layout from v0.2.7 (before send command implementation broke it)
+  - Console now fills top portion, buttons/filters visible, send section at bottom
+  - Filter checkboxes (Info, Debug, Warn, Error, Trace, Other) now visible
+  - Proper spacing and proportions restored
+
+- **Send Command Implementation Restored**: ✅
+  - Added back show-other property and toggle-other callback to working layout
+  - input-command-text private property for TextInput state
+  - Layout now properly proportioned without breaking existing UI
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.22-alpha] - 2025-10-20 (Make Send Command Input Visible)
 
 ### Fixed
