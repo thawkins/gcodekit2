@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.14-alpha] - 2025-10-20 (Position Checkboxes Flush Right)
+
+### Changed
+- **Device Console Filter Checkboxes**: Positioned flush right in button bar ✅
+  - Added spacer (width: 100%) before checkboxes to push them to the right edge
+  - Buttons (Clear, Copy All, Save All) remain on the left
+  - Filter checkboxes (Info, Debug, Warn, Error, Trace, Other) now on the right
+  - Improved visual organization of button bar
+
+### Updated Components
+- `device-console.slint`: Added spacer Rectangle before filter checkboxes layout
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.13-alpha] - 2025-10-20 (Remove ANSI Terminal Codes from Console)
 
 ### Fixed
