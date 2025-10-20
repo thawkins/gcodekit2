@@ -99,16 +99,27 @@ Additional Requirements:
   25. **Device Console**: Real-time log viewer with 1000-line buffer, multi-level filtering, log level prefixes, and export controls ✓
   26. **Custom Tab Widget**: Visual tab highlighting with green active state, white text, and responsive tab switching ✓
   27. **Improved Tab UI**: All tabs display white text for better contrast and readability ✓
-
-  26. **Configurable UI System**: Dockable window functionality with toggleable left/right panels via View menu ✓
-  27. **Advanced CAM Operations**: Part nesting algorithm using bottom-left fill strategy with rotation support ✓
-28. **Test Reorganization**: Tests moved to tests/ folder with hierarchy mirroring src/ ✓
-29. **Build Fixes**: Compilation errors resolved and debug binary built ✓
-30. **Repository Updates**: Changes committed ✓
-31. **Port Filtering**: Serial ports filtered to show only GRBL-compatible devices (/dev/ttyACM*, /dev/ttyUSB*, COM*, /dev/tty.usbserial*) ✓
-32. **Issue Templates**: GitHub issue templates added for BUG, FEATURE, and CHANGE requests ✓
-33. **Code Quality**: Clippy warnings fixed for improved code maintainability ✓
-34. **System Theme Support**: Dynamic UI adaptation to system theme preference (Light/Dark mode) (planned)
+  28. **Device Console Enhancements**: 
+      - Filter checkboxes with 25% reduced spacing for compact layout ✓
+      - "Other" checkbox to control non-tracing log lines visibility ✓
+      - Flush-right positioning of checkboxes in button bar ✓
+      - Clean ANSI-free console output (terminal codes stripped) ✓
+      - 60% larger log line text (8px → 13px) for better readability ✓
+  29. **Application Window Resizing**: Fully resizable application window with mouse-draggable edges and corners ✓
+  30. **Status Bar Enhancements**: 
+      - 50% height reduction (75px → 37.5px) for more screen space ✓
+      - 60-70% larger text (10px → 17px main, 9px → 16px theme) for improved legibility ✓
+      - Improved connection indicator alignment (4px vertical adjustment) ✓
+      - Smart conditional display: hides status/position/version when disconnected ✓
+  31. **Configurable UI System**: Dockable window functionality with toggleable left/right panels via View menu ✓
+  32. **Advanced CAM Operations**: Part nesting algorithm using bottom-left fill strategy with rotation support ✓
+  33. **Test Reorganization**: Tests moved to tests/ folder with hierarchy mirroring src/ ✓
+  34. **Build Fixes**: Compilation errors resolved and debug binary built ✓
+  35. **Repository Updates**: Changes committed ✓
+  36. **Port Filtering**: Serial ports filtered to show only GRBL-compatible devices (/dev/ttyACM*, /dev/ttyUSB*, COM*, /dev/tty.usbserial*) ✓
+  37. **Issue Templates**: GitHub issue templates added for BUG, FEATURE, and CHANGE requests ✓
+  38. **Code Quality**: Clippy warnings fixed for improved code maintainability ✓
+  39. **System Theme Support**: Dynamic UI adaptation to system theme preference (Light/Dark mode) ✓
 
 ## Phase 9: Advanced Error Recovery System (99.9% Uptime Guarantee)
 
@@ -316,18 +327,23 @@ The UI dynamically adapts to the system theme preference, providing a seamless u
 ## Development Status
 
 **Current Phase**: Phase 15 - MVP Implementation & Continuous Enhancement (IN PROGRESS)
-**Implementation Status**: MVP v0.2.6-alpha - Device Communications & UI Polish Complete
-**Version**: 0.2.6-alpha
-**Test Coverage**: 463 passing tests (100%) including device communication and integration tests
+**Implementation Status**: MVP v0.2.16-alpha - UI Polish & Device Console Enhancements Complete
+**Version**: 0.2.16-alpha
+**Test Coverage**: 210 passing tests (100%)
 **Architecture**: Modular, extensible design with stable UI framework, advanced CAM capabilities, real-time status monitoring, complete theme support, WCAG AA accessibility compliance, remote control capabilities, visual G-code simulation, G-code validation, file optimization, and device communications
-**UI Theme Support**:  System detection, dynamic switching, WCAG AA compliance, all components themed, settings panel with theme selection
-**Device Communications**: Real serial port integration, GRBL protocol support, async command handling, automatic reconnection, recovery configuration
-**Web Pendant Interface**:  RESTful API, WebSocket streaming, mobile-responsive HTML5, theme support, comprehensive tests
-**UI Polish**: Auto-sizing widgets, all SPEC-required jog buttons, white text on buttons, responsive layout
-**Documentation**: All markdown files organized in docs/ (except SPEC.md, AGENTS.md, README.md, CHANGELOG.md), complete implementation plan with phase breakdown
-**Test Organization**: All tests in tests/ folder with hierarchy mirroring src/ directory
-**Recent Session Focus**: Device communications implementation, UI button updates, auto-sizing widgets
-**Completed Tasks**: Tasks 1, 2, 3 (Validator, Back Plotter, Optimizer)
+
+### Recent Session Enhancements (v0.2.8-v0.2.16-alpha):
+
+27. **Device Console Checkbox Spacing**: Reduced horizontal spacing between filter checkboxes by 25% ✓
+28. **Application Window Resizing**: Enabled full mouse-draggable window resizing with preferred dimensions ✓
+29. **Device Console Filtering Enhancement**: Added "Other" checkbox to control visibility of non-tracing log lines ✓
+30. **Status Bar Height Reduction**: Reduced status bar from 75px to 37.5px with proportional adjustments ✓
+31. **30% Font Size Increase**: Increased text sizes by 30% in status bar and device console for better readability ✓
+32. **Additional 30% Font Size Increase**: Second round of font increases (60-100% cumulative) for maximum legibility ✓
+33. **Remove ANSI Terminal Codes**: Disabled ANSI escape codes and added stripping function for clean console output ✓
+34. **Checkbox Positioning**: Positioned filter checkboxes flush right with spacer in device console button bar ✓
+35. **Connection Indicator Adjustment**: Lowered connection status indicator dot by 4px for better vertical alignment ✓
+36. **Conditional Status Display**: Hide status, position, and version information when device is disconnected ✓
 
 ⚠️ **Alpha Notice**: This software is under active development. While functional and tested, it may contain bugs and the API may change in future releases. Use with appropriate caution.
 
