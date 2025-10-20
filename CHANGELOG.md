@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.15-alpha] - 2025-10-20 (Lower Connection Indicator Dot)
+
+### Changed
+- **Status Bar Connection Indicator**: Lowered by 4px for better vertical alignment ✅
+  - Wrapped indicator dot in transparent container Rectangle
+  - Applied y: 4px offset to drop the dot down
+  - Applied x: 2px centering within container
+  - Improves visual alignment with "Device" text
+
+### Updated Components
+- `status-bar.slint`: Added positioning wrapper for connection indicator dot
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.14-alpha] - 2025-10-20 (Position Checkboxes Flush Right)
 
 ### Changed

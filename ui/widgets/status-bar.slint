@@ -30,10 +30,18 @@ export component StatusBar inherits Rectangle {
             spacing: 5px;
             
             Rectangle {
-                width: 10px;
-                height: 10px;
-                border-radius: 5px;
-                background: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
+                width: 14px;
+                height: 14px;
+                background: transparent;
+                
+                Rectangle {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
+                    y: 4px;
+                    x: 2px;
+                }
             }
             
             ThemedText {
