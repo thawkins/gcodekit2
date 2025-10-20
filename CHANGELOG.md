@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.19-alpha] - 2025-10-20 (Enhanced Send Command Logging)
+
+### Changed
+- **Send Command Logging**: Improved tracing output for better debugging ✅
+  - Added explicit "Send command clicked with:" log message
+  - Send success logs as "Command sent successfully: {cmd}"
+  - Send failures include both command and error in trace log
+  - Console now shows "RX: ok" on successful send
+  - GRBL controller's `log_response()` now logs with `tracing::info!` macro
+
+- **Device Response Logging**: Responses now appear in tracing logs ✅
+  - Every device response logged with `tracing::info!("Device response: {}")`
+  - Allows responses to be captured in console buffer and displayed in device console
+  - Enables full TX/RX visibility in device console tab
+
+### Updated Components
+- `main.rs`: Enhanced send command handler with explicit logging
+- `communication/mod.rs`: Updated `log_response()` to use tracing
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.18-alpha] - 2025-10-20 (Fix Send Button Layout)
 
 ### Changed

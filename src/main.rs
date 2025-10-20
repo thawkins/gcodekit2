@@ -202,13 +202,19 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
                 let cmd_str = cmd.to_string();
                 
                 let _ = slint::spawn_local(async move {
-                    tracing::info!("User command sent: {}", cmd_str);
+                    tracing::info!("Send command clicked with: {}", cmd_str);
                     add_console_message(&console_buffer, format!("TX: {}", cmd_str));
                     
                     // Send command to device
-                    if let Err(e) = grbl_controller.send_command(&cmd_str).await {
-                        tracing::error!("Failed to send command: {}", e);
-                        add_console_message(&console_buffer, format!("ERROR: {}", e));
+                    match grbl_controller.send_command(&cmd_str).await {
+                        Ok(_) => {
+                            tracing::info!("Command sent successfully: {}", cmd_str);
+                            add_console_message(&console_buffer, format!("RX: ok"));
+                        }
+                        Err(e) => {
+                            tracing::error!("Failed to send command '{}': {}", cmd_str, e);
+                            add_console_message(&console_buffer, format!("ERROR: {}", e));
+                        }
                     }
                     
                     // Update UI

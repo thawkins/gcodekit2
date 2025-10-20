@@ -282,6 +282,7 @@ impl GrblController {
 
     /// Add response to log
     pub async fn log_response(&self, response: String) {
+        tracing::info!("Device response: {}", response);
         let mut log = self.response_log.lock().await;
         log.push_back(response);
         if log.len() > 1000 {
