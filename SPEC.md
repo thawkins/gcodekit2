@@ -327,12 +327,12 @@ The UI dynamically adapts to the system theme preference, providing a seamless u
 ## Development Status
 
 **Current Phase**: Phase 15 - MVP Implementation & Continuous Enhancement (IN PROGRESS)
-**Implementation Status**: MVP v0.2.16-alpha - UI Polish & Device Console Enhancements Complete
-**Version**: 0.2.16-alpha
+**Implementation Status**: MVP v0.2.25-alpha - Device Console Enhancements Complete
+**Version**: 0.2.25-alpha
 **Test Coverage**: 210 passing tests (100%)
 **Architecture**: Modular, extensible design with stable UI framework, advanced CAM capabilities, real-time status monitoring, complete theme support, WCAG AA accessibility compliance, remote control capabilities, visual G-code simulation, G-code validation, file optimization, and device communications
 
-### Recent Session Enhancements (v0.2.8-v0.2.16-alpha):
+### Recent Session Enhancements (v0.2.8-v0.2.25-alpha):
 
 27. **Device Console Checkbox Spacing**: Reduced horizontal spacing between filter checkboxes by 25% ✓
 28. **Application Window Resizing**: Enabled full mouse-draggable window resizing with preferred dimensions ✓
@@ -344,6 +344,10 @@ The UI dynamically adapts to the system theme preference, providing a seamless u
 34. **Checkbox Positioning**: Positioned filter checkboxes flush right with spacer in device console button bar ✓
 35. **Connection Indicator Adjustment**: Lowered connection status indicator dot by 4px for better vertical alignment ✓
 36. **Conditional Status Display**: Hide status, position, and version information when device is disconnected ✓
+37. **Send Command Implementation**: Added editable TextInput for G-code/$ command entry with Send button ✓
+38. **Device Console Layout Restoration**: Fixed broken layout with proper proportions and visibility ✓
+39. **Light Gray Unchecked Checkboxes**: Unchecked filters show light gray (#D3D3D3) for visual clarity ✓
+40. **Device Console Text Size Increase**: Increased all text labels by 20% for improved readability ✓
 
 ⚠️ **Alpha Notice**: This software is under active development. While functional and tested, it may contain bugs and the API may change in future releases. Use with appropriate caution.
 
