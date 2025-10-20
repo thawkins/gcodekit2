@@ -201,6 +201,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
                 let grbl_controller = grbl_controller.clone();
                 let cmd_str = cmd.to_string();
                 
+                eprintln!("DEBUG: on_send_command called with: {}", cmd_str);
+                tracing::warn!("SEND COMMAND CALLBACK: {}", cmd_str);
+                
                 let _ = slint::spawn_local(async move {
                     tracing::info!("Send command clicked with: {}", cmd_str);
                     add_console_message(&console_buffer, format!("TX: {}", cmd_str));

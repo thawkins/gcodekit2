@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.22-alpha] - 2025-10-20 (Make Send Command Input Visible)
+
+### Fixed
+- **Send Command Input Section Hidden**: Command input area now visible ✅
+  - Removed spacer Rectangle with `height: 100%` that was pushing input off-screen
+  - Command input section now properly displayed at bottom of console
+  - Send button and text input are now visible and clickable
+
+### Added
+- **Debug Logging**: Added stderr debug output to send command handler ✅
+  - `eprintln!` for immediate visibility when button is clicked
+  - `tracing::warn!` to mark send command callback invocation
+
+### Updated Components
+- `device-console.slint`: Removed spacer that was hiding the input section
+- `main.rs`: Added debug logging to send command handler
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.21-alpha] - 2025-10-20 (Fix Send Button Element Ordering)
 
 ### Fixed
