@@ -1,6 +1,7 @@
 //! Status Bar Widget - Application status display bar
 //!
-//! Displays machine status, position, version, and current theme indicator.
+//! Displays machine status, position, version, device connection status,
+//! and current theme indicator.
 
 import { ThemedText } from "../theme/mod.slint";
 import { ThemeProvider } from "../theme/mod.slint";
@@ -8,29 +9,53 @@ import { ThemeProvider } from "../theme/mod.slint";
 /// Application status bar showing system information
 export component StatusBar inherits Rectangle {
     background: ThemeProvider.colors.panel;
-    height: 30px;
+    height: 75px;
     
     in property <string> status: "Idle";
     in property <string> position: "X: 0.00 Y: 0.00 Z: 0.00";
     in property <string> version: "GRBL v1.1h";
+    in property <bool> is-connected: false;
+    in property <string> connection-status: "Disconnected";
     
     HorizontalLayout {
-        padding: 5px;
-        spacing: 20px;
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        spacing: 28px;
+        alignment: center;
+        
+        // Connection status indicator
+        HorizontalLayout {
+            spacing: 10px;
+            
+            Rectangle {
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+                background: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
+            }
+            
+            ThemedText {
+                text: "Device: " + root.connection-status;
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
         
         ThemedText {
             text: "Status: " + root.status;
-            font-size: 11px;
+            font-size: 14px;
         }
         
         ThemedText {
             text: "Position: " + root.position;
-            font-size: 11px;
+            font-size: 14px;
         }
         
         ThemedText {
             text: "Version: " + root.version;
-            font-size: 11px;
+            font-size: 14px;
         }
         
         Rectangle {
@@ -39,17 +64,17 @@ export component StatusBar inherits Rectangle {
         
         // Theme indicator
         HorizontalLayout {
-            spacing: 5px;
+            spacing: 8px;
             
             ThemedText {
                 text: "Theme:";
-                font-size: 10px;
+                font-size: 13px;
             }
             
             ThemedText {
                 text: ThemeProvider.mode == "light" ? "☀ Light" : "🌙 Dark";
                 color: ThemeProvider.mode == "light" ? ThemeProvider.colors.status-yellow : #7B68EE;
-                font-size: 10px;
+                font-size: 13px;
                 font-weight: 700;
             }
         }

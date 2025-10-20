@@ -2,7 +2,6 @@
 
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
-use tracing::info;
 
 /// G-code file info
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -87,7 +86,6 @@ impl GcodeLoading {
     /// Load a G-code file
     pub fn load_file(&mut self, file: GcodeFile) -> Result<(), String> {
         file.validate()?;
-        info!("Loaded G-code file: {} ({} lines)", file.name, file.lines);
         self.loaded_file = Some(file);
         self.sent_lines = 0;
         self.file_loaded_at = Some(chrono::Utc::now().to_rfc3339());
@@ -97,7 +95,6 @@ impl GcodeLoading {
     /// Queue a file for loading
     pub fn queue_file(&mut self, file: GcodeFile) {
         self.queue.push_back(file);
-        info!("File queued. Queue length: {}", self.queue.len());
     }
 
     /// Get next file from queue

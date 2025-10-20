@@ -10,7 +10,6 @@ use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::Mutex;
 use tokio::time::sleep;
-use tracing::{debug, info, warn};
 
 /// Serial port configuration
 #[derive(Debug, Clone)]
@@ -60,7 +59,6 @@ impl SerialConnection {
 
     /// Connect to a serial port
     pub async fn connect(&self, port_name: &str) -> Result<()> {
-        info!("Attempting to connect to serial port: {}", port_name);
 
         // Try to open the serial port
         let serial_port = serialport::new(port_name, self.config.baud_rate)
@@ -81,13 +79,11 @@ impl SerialConnection {
         let mut stored_port_name = self.port_name.lock().await;
         *stored_port_name = port_name.to_string();
 
-        info!("Successfully connected to: {}", port_name);
         Ok(())
     }
 
     /// Disconnect from the serial port
     pub async fn disconnect(&self) -> Result<()> {
-        info!("Disconnecting from serial port");
         let mut port = self.port.lock().await;
         *port = None;
         Ok(())
@@ -104,11 +100,6 @@ impl SerialConnection {
             .write(data)
             .context("Failed to write to serial port")?;
 
-        debug!(
-            "Sent {} bytes: {:?}",
-            bytes_written,
-            String::from_utf8_lossy(data)
-        );
         Ok(bytes_written)
     }
 
@@ -116,7 +107,6 @@ impl SerialConnection {
     pub async fn send_command(&self, command: &str) -> Result<()> {
         let command_with_newline = format!("{}\n", command);
         self.send_bytes(command_with_newline.as_bytes()).await?;
-        info!("Sent command: {}", command);
         Ok(())
     }
 
@@ -133,7 +123,6 @@ impl SerialConnection {
             Ok(n) if n > 0 => {
                 buffer.truncate(n);
                 let response = String::from_utf8_lossy(&buffer).to_string();
-                debug!("Received {} bytes: {}", n, response.trim());
                 Ok(response)
             }
             Ok(_) => Err(anyhow!("No data received from serial port")),
@@ -185,7 +174,6 @@ impl SerialConnection {
             })
             .collect();
 
-        info!("Available serial ports: {:?}", port_names);
         Ok(port_names)
     }
 }

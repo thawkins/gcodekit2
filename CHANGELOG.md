@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.8-alpha] - 2025-10-20 (UI Window Resizing & Device Console Spacing)
+
+### Changed
+- **Device Console Checkbox Spacing**: Reduced horizontal spacing between filter checkboxes by 25% ✅
+  - Changed from 7.5px to 5.625px spacing
+  - More compact device console filter bar layout
+  - Improved visual spacing consistency
+
+- **Application Window Resizing**: Enabled full window resizing capability ✅
+  - Changed from fixed `width`/`height` to `preferred-width`/`preferred-height`
+  - Window now fully resizable with mouse dragging on edges/corners
+  - Default size maintained at 1200x800px
+  - Respects window manager resize hints
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.7-alpha] - 2025-10-19 (UI Polish & Device Console)
 
 ### Added

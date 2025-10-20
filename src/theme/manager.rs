@@ -7,7 +7,6 @@ use super::detector::SystemThemeDetector;
 use super::palette::{Palette, ThemeType};
 use super::storage::ThemeStorage;
 use std::sync::{Arc, RwLock};
-use tracing::info;
 
 /// Manages all theme operations
 #[derive(Clone)]
@@ -35,10 +34,6 @@ impl ThemeManager {
             ThemeType::Light
         };
 
-        info!(
-            "ThemeManager initialized: preference={}, detected_theme={:?}",
-            preference, initial_theme
-        );
 
         Ok(ThemeManager {
             current_theme: Arc::new(RwLock::new(initial_theme)),
@@ -64,7 +59,6 @@ impl ThemeManager {
         *self.current_theme.write().unwrap() = theme;
         *self.user_preference.write().unwrap() = preference.clone();
 
-        info!("Theme changed to: {:?}", theme);
         Ok(())
     }
 
@@ -87,7 +81,6 @@ impl ThemeManager {
         *self.current_theme.write().unwrap() = theme;
         *self.user_preference.write().unwrap() = preference.to_string();
 
-        info!("Theme preference changed to: {}", preference);
         Ok(())
     }
 
@@ -120,7 +113,6 @@ impl ThemeManager {
         if preference == "system" {
             let system_theme = SystemThemeDetector::detect_system_theme();
             *self.current_theme.write().unwrap() = system_theme;
-            info!("Applied system theme: {:?}", system_theme);
         }
         Ok(())
     }

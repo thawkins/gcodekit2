@@ -20,33 +20,18 @@ use console_logger::{init_console_logging, get_console_logs, add_console_message
 use anyhow::Result;
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use tracing::info;
 
 // Include Slint modules
 slint::include_modules!();
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Initialize console logging (captures tracing output)
+    // Initialize console logging (captures tracing output from gcodekit2 only, not dependencies)
     let console_buffer = init_console_logging();
-
-    tracing::info!("Starting GCodeKit2 v0.2.0-alpha");
-
-    // Initialize theme system with system theme detection
-    let theme_manager = Arc::new(ThemeManager::new().await?);
-    let _ui_theme_provider =
-        UIThemeProvider::new(Arc::clone(&theme_manager)).await?;
-
-    let current_theme = theme_manager.get_theme();
-    tracing::info!(
-        "System theme detected: {:?}",
-        current_theme
-    );
 
     // Create UI
     let ui = AppWindow::new()?;
-
-    // Log successful initialization
-    tracing::info!("UI window created successfully");
 
     // Setup event handlers for UI interaction
     setup_ui_handlers(&ui, console_buffer).await?;
@@ -227,7 +212,6 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
             let ui_handle = ui_handle.clone();
             move || {
                 console_logger::clear_console_logs(&console_buffer);
-                tracing::info!("Console cleared");
                 
                 if let Some(ui) = ui_handle.upgrade() {
                     ui.set_console_content("[System] Console cleared".into());
@@ -250,8 +234,26 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
             let console_buffer = console_buffer.clone();
             move || {
                 let content = console_logger::get_console_as_string(&console_buffer);
-                tracing::info!("Console saved ({} chars)", content.len());
-                // TODO: Implement file save dialog using rfd crate
+                
+                // Show file save dialog
+                if let Some(file) = rfd::FileDialog::new()
+                    .set_title("Save Console Output")
+                    .add_filter("Text files", &["txt"])
+                    .add_filter("All files", &["*"])
+                    .save_file() 
+                {
+                    let file_path = file.to_string_lossy().to_string();
+                    
+                    // Write file
+                    match std::fs::write(&file_path, &content) {
+                        Ok(_) => {
+                            info!("Console output saved to: {} ({} chars)", file_path, content.len());
+                        }
+                        Err(e) => {
+                            info!("Failed to save console output to {}: {}", file_path, e);
+                        }
+                    }
+                }
             }
         });
         
@@ -259,8 +261,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_toggle_info({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
-            move |_val: bool| {
+            move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_info(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }
@@ -269,8 +272,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_toggle_debug({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
-            move |_val: bool| {
+            move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_debug(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }
@@ -279,8 +283,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_toggle_warn({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
-            move |_val: bool| {
+            move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_warn(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }
@@ -289,8 +294,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_toggle_error({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
-            move |_val: bool| {
+            move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_error(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }
@@ -299,8 +305,9 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_toggle_trace({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
-            move |_val: bool| {
+            move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_trace(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }

@@ -12,7 +12,6 @@ use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 use tokio::net::TcpStream;
 use tokio::sync::Mutex;
 use tokio::time::sleep;
-use tracing::{error, info, warn};
 
 mod grbl;
 mod serial;
@@ -163,7 +162,6 @@ impl GrblController {
 
     /// Connect to a GRBL device on the specified port
     pub async fn connect(&self, port_name: &str) -> Result<()> {
-        info!("Connecting to GRBL device on port: {}", port_name);
 
         // Attempt to connect with retries
         let config = self.recovery_config.lock().await;
@@ -180,19 +178,13 @@ impl GrblController {
                     status.connected = true;
                     status.state = MachineState::Idle;
 
-                    info!("Connected to GRBL device on {}", port_name);
                     return Ok(());
                 }
                 Err(e) => {
                     attempts += 1;
                     if attempts >= max_attempts {
-                        error!("Failed to connect after {} attempts: {}", attempts, e);
                         return Err(e);
                     }
-                    warn!(
-                        "Connection attempt {} failed: {}. Retrying...",
-                        attempts, e
-                    );
                     sleep(Duration::from_millis(config.retry_delay_ms)).await;
                 }
             }
@@ -201,7 +193,6 @@ impl GrblController {
 
     /// Disconnect from the device
     pub async fn disconnect(&self) -> Result<()> {
-        info!("Disconnecting from GRBL device");
         self.serial.disconnect().await?;
 
         let mut port = self.port.lock().await;
@@ -215,7 +206,6 @@ impl GrblController {
 
     /// Detect GRBL firmware version
     pub async fn detect_version(&self) -> Result<String> {
-        info!("Detecting GRBL version");
 
         // Send version request
         self.serial.send_command("$I").await?;
@@ -230,11 +220,9 @@ impl GrblController {
                 let mut status = self.status.lock().await;
                 status.version = version.clone();
 
-                info!("Detected version: {}", version);
                 Ok(version)
             }
             Err(e) => {
-                warn!("Failed to detect version: {}", e);
                 Err(e)
             }
         }
@@ -253,11 +241,9 @@ impl GrblController {
         match self.serial.read_response_timeout(256, Duration::from_secs(1)).await {
             Ok(response) => {
                 self.log_response(response).await;
-                info!("Command {} sent successfully", command);
                 Ok(())
             }
             Err(e) => {
-                warn!("Command {} sent but no immediate response: {}", command, e);
                 // Command was sent, but we might not get immediate response
                 // This is not necessarily an error
                 Ok(())
@@ -292,10 +278,6 @@ impl GrblController {
         status.wpos = wpos;
         status.feed_rate = feed_rate;
         status.spindle_speed = spindle_speed;
-        info!(
-            "Status: {:?} MPos({:.2}, {:.2}, {:.2})",
-            state, mpos.x, mpos.y, mpos.z
-        );
     }
 
     /// Add response to log
@@ -339,7 +321,6 @@ impl GrblController {
 
     /// Emergency stop
     pub async fn emergency_stop(&self) -> Result<()> {
-        info!("Emergency stop triggered");
         let mut status = self.status.lock().await;
         status.state = MachineState::Alarm;
         Ok(())
@@ -347,14 +328,12 @@ impl GrblController {
 
     /// Reset machine alarm
     pub async fn reset_alarm(&self) -> Result<()> {
-        info!("Resetting machine alarm");
         self.send_command("$X").await?;
         Ok(())
     }
 
     /// Unlock machine
     pub async fn unlock(&self) -> Result<()> {
-        info!("Unlocking machine");
         self.send_command("$X").await?;
         Ok(())
     }

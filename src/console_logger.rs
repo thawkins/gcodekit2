@@ -5,6 +5,7 @@
 use std::sync::{Arc, Mutex};
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
+use tracing_subscriber::EnvFilter;
 
 /// Maximum number of lines to keep in console buffer
 const MAX_CONSOLE_LINES: usize = 1000;
@@ -28,7 +29,10 @@ pub fn init_console_logging() -> ConsoleBuffer {
         .with_level(true)
         .compact();
     
+    let env_filter = EnvFilter::new("gcodekit2=trace");
+    
     tracing_subscriber::registry()
+        .with(env_filter)
         .with(custom_layer)
         .init();
     

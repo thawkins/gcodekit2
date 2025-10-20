@@ -6,7 +6,6 @@
 use crate::communication::{GrblController, SerialConnection};
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use tracing::{error, info, warn};
 
 /// Connection widget state synchronized with GrblController
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -62,17 +61,14 @@ impl ConnectionWidget {
 
     /// Refresh available ports from the system
     pub fn refresh_ports(&mut self) -> Result<()> {
-        info!("Refreshing available COM ports");
         match SerialConnection::list_ports() {
             Ok(ports) => {
                 // Filter to only valid GRBL device ports
                 let filtered_ports = Self::filter_valid_ports(ports);
-                info!("Found {} valid GRBL ports: {:?}", filtered_ports.len(), filtered_ports);
                 self.available_ports = filtered_ports;
                 Ok(())
             }
             Err(e) => {
-                warn!("Failed to refresh ports: {}", e);
                 self.available_ports.clear();
                 Err(e)
             }
@@ -84,18 +80,15 @@ impl ConnectionWidget {
         if port.is_empty() {
             return Err(anyhow::anyhow!("No port selected"));
         }
-        info!("Connecting to port: {}", port);
 
         match controller.connect(&port).await {
             Ok(_) => {
                 self.port = port;
                 self.connected = true;
                 self.status_message = format!("Connected to {}", self.port);
-                info!("Successfully connected to {}", self.port);
                 Ok(())
             }
             Err(e) => {
-                error!("Failed to connect to port: {}", e);
                 self.connected = false;
                 self.status_message = format!("Failed: {}", e);
                 Err(e)
@@ -108,18 +101,15 @@ impl ConnectionWidget {
         if self.port.is_empty() {
             return Err(anyhow::anyhow!("No port connected"));
         }
-        info!("Disconnecting from port: {}", self.port);
 
         match controller.disconnect().await {
             Ok(_) => {
                 self.connected = false;
                 self.status_message = "Disconnected".to_string();
                 self.port.clear();
-                info!("Successfully disconnected");
                 Ok(())
             }
             Err(e) => {
-                error!("Failed to disconnect: {}", e);
                 Err(e)
             }
         }
@@ -128,7 +118,6 @@ impl ConnectionWidget {
     /// Set baud rate (for configuration before connection)
     pub fn set_baud_rate(&mut self, rate: u32) {
         self.baud_rate = rate;
-        info!("Baud rate set to: {}", rate);
     }
 
     /// Get connection status as string

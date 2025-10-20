@@ -1,7 +1,6 @@
 //! GRBL protocol implementation
 
 use serde::{Deserialize, Serialize};
-use tracing::info;
 
 /// GRBL version information
 #[derive(Debug, Clone, Serialize, Deserialize)]

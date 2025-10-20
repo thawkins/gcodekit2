@@ -1,7 +1,6 @@
 //! Jog Widget - Real-time axis control (X/Y/Z)
 
 use serde::{Deserialize, Serialize};
-use tracing::info;
 
 /// Step sizes for jogging (in mm)
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
@@ -62,7 +61,6 @@ impl JogWidget {
         self.last_x_move = step;
         let cmd = format!("$J=G91 G21 X{:.2} F600", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog X+: {}", cmd);
         cmd
     }
 
@@ -72,7 +70,6 @@ impl JogWidget {
         self.last_x_move = step;
         let cmd = format!("$J=G91 G21 X{:.2} F600", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog X-: {}", cmd);
         cmd
     }
 
@@ -82,7 +79,6 @@ impl JogWidget {
         self.last_y_move = step;
         let cmd = format!("$J=G91 G21 Y{:.2} F600", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog Y+: {}", cmd);
         cmd
     }
 
@@ -92,7 +88,6 @@ impl JogWidget {
         self.last_y_move = step;
         let cmd = format!("$J=G91 G21 Y{:.2} F600", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog Y-: {}", cmd);
         cmd
     }
 
@@ -102,7 +97,6 @@ impl JogWidget {
         self.last_z_move = step;
         let cmd = format!("$J=G91 G21 Z{:.2} F300", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog Z+: {}", cmd);
         cmd
     }
 
@@ -112,14 +106,12 @@ impl JogWidget {
         self.last_z_move = step;
         let cmd = format!("$J=G91 G21 Z{:.2} F300", step);
         self.current_command = Some(cmd.clone());
-        info!("Jog Z-: {}", cmd);
         cmd
     }
 
     /// Set step size
     pub fn set_step_size(&mut self, size: JogStepSize) {
         self.step_size = size;
-        info!("Jog step size set to: {}", size.as_str());
     }
 
     /// Get available step sizes

@@ -1,7 +1,6 @@
 //! Overrides Widget - Real-time spindle/laser power and feed rate adjustments
 
 use serde::{Deserialize, Serialize};
-use tracing::info;
 
 /// Overrides widget state
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -24,7 +23,6 @@ impl OverridesWidget {
     /// Adjust feed rate override
     pub fn set_feed_rate(&mut self, percentage: u32) {
         self.feed_rate_override = percentage.clamp(50, 200);
-        info!("Feed rate override set to: {}%", self.feed_rate_override);
     }
 
     /// Increase feed rate by 10%
@@ -40,7 +38,6 @@ impl OverridesWidget {
     /// Set spindle/laser power override
     pub fn set_spindle_power(&mut self, percentage: u32) {
         self.spindle_power_override = percentage.clamp(0, 100);
-        info!("Spindle power override set to: {}%", self.spindle_power_override);
     }
 
     /// Increase spindle power by 5%
@@ -56,7 +53,6 @@ impl OverridesWidget {
     /// Toggle laser mode
     pub fn toggle_laser_mode(&mut self) {
         self.laser_mode = !self.laser_mode;
-        info!("Laser mode: {}", self.laser_mode);
     }
 
     /// Get GRBL override command for feed rate
