@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.18-alpha] - 2025-10-20 (Fix Send Button Layout)
+
+### Changed
+- **Send Command Input Box Layout**: Removed fixed width from input field ✅
+  - Input box now flexes to fill available space
+  - Send button (60px) stays fixed and visible inside the window
+  - HorizontalLayout properly distributes space between input and button
+  - Prevents button from being drawn outside the device console window
+
+### Updated Components
+- `device-console.slint`: Removed `width: 100%;` from input Rectangle
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.17-alpha] - 2025-10-20 (Send Command Implementation)
 
 ### Added
