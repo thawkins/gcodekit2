@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.11-alpha] - 2025-10-20 (Font Size Increase - 30% Larger Text)
+
+### Changed
+- **Status Bar Text Size**: Increased by 30% for better readability ✅
+  - Main status text: 10px → 13px
+  - Theme indicator: 9px → 12px
+  - Improves visibility of connection status, device info, and theme indicator
+
+- **Device Console Text Size**: Increased by 30% across all elements ✅
+  - Log line text: 8px → 10px (main console output)
+  - Button labels: 9px → 12px (Clear, Copy All, Save All, Send)
+  - Checkbox labels: 8px → 10px (Info, Debug, Warn, Error, Trace, Other)
+  - Input placeholder: 8px → 10px
+  - "Send Command" label: 10px → 13px
+  - Better readability and easier on the eyes
+
+### Updated Components
+- `status-bar.slint`: Increased main text to 13px, theme text to 12px
+- `device-console.slint`: Increased all text sizes by 30% (8px→10px, 9px→12px, 10px→13px)
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.10-alpha] - 2025-10-20 (Status Bar Height Reduction)
 
 ### Changed
