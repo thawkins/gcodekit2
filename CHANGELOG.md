@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.25-alpha] - 2025-10-20 (Increase Device Console Text Size by 20%)
+
+### Changed
+- **Device Console Text Labels**: Increased all text sizes by 20% ✅
+  - Header title: 14px → 17px
+  - Button labels: 9px → 11px (Clear, Copy All, Save All)
+  - Checkbox labels: 8px → 10px (Info, Debug, Warn, Error, Trace, Other)
+  - Console content: 8px → 10px (monospace log display)
+  - Console placeholder text: 9px → 11px
+  - "Send Command" label: 10px → 12px
+  - Improved readability across entire device console
+
+### Updated Components
+- `device-console.slint`: Updated all font-size properties for 20% increase
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.24-alpha] - 2025-10-20 (Light Gray Unchecked Checkboxes)
 
 ### Changed
