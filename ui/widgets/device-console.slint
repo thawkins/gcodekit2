@@ -141,7 +141,7 @@ export component DeviceConsole inherits Rectangle {
                         width: 14px;
                         height: 14px;
                         border-radius: 2px;
-                        background: root.show-info ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        background: root.show-info ? ThemeProvider.colors.status-green : #D3D3D3;
                         border-width: 1px;
                         
                         TouchArea {
@@ -168,7 +168,7 @@ export component DeviceConsole inherits Rectangle {
                         width: 14px;
                         height: 14px;
                         border-radius: 2px;
-                        background: root.show-debug ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        background: root.show-debug ? ThemeProvider.colors.status-green : #D3D3D3;
                         border-width: 1px;
                         
                         TouchArea {
@@ -195,7 +195,7 @@ export component DeviceConsole inherits Rectangle {
                         width: 14px;
                         height: 14px;
                         border-radius: 2px;
-                        background: root.show-warn ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        background: root.show-warn ? ThemeProvider.colors.status-green : #D3D3D3;
                         border-width: 1px;
                         
                         TouchArea {
@@ -222,7 +222,7 @@ export component DeviceConsole inherits Rectangle {
                         width: 14px;
                         height: 14px;
                         border-radius: 2px;
-                        background: root.show-error ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        background: root.show-error ? ThemeProvider.colors.status-green : #D3D3D3;
                         border-width: 1px;
                         
                         TouchArea {
@@ -249,7 +249,7 @@ export component DeviceConsole inherits Rectangle {
                         width: 14px;
                         height: 14px;
                         border-radius: 2px;
-                        background: root.show-trace ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        background: root.show-trace ? ThemeProvider.colors.status-green : #D3D3D3;
                         border-width: 1px;
                         
                         TouchArea {
@@ -264,6 +264,33 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Trace";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Other checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-other ? ThemeProvider.colors.status-green : #D3D3D3;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-other(!root.show-other);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Other";
                         font-size: 8px;
                     }
                 }

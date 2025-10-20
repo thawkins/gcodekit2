@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.24-alpha] - 2025-10-20 (Light Gray Unchecked Checkboxes)
+
+### Changed
+- **Device Console Filter Checkboxes**: Unchecked checkboxes now show light gray color ✅
+  - Checked state: Green (#00AA00 status-green)
+  - Unchecked state: Light gray (#D3D3D3)
+  - All filter checkboxes updated (Info, Debug, Warn, Error, Trace, Other)
+  - Improved visual clarity showing which filters are active vs inactive
+
+### Added
+- **Other Checkbox**: Re-added to filter bar ✅
+  - Controls visibility of non-tracing log lines
+  - Maintains consistency with other filter checkboxes
+  - Uses same light gray unchecked color scheme
+
+### Updated Components
+- `device-console.slint`: Updated all checkbox unchecked background colors to #D3D3D3
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.23-alpha] - 2025-10-20 (Restore Device Console Layout)
 
 ### Fixed
