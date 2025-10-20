@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.21-alpha] - 2025-10-20 (Fix Send Button Element Ordering)
+
+### Fixed
+- **Send Button Not Responding to Clicks**: Button now properly captures mouse events ✅
+  - Moved TouchArea BEFORE ThemedText in element hierarchy
+  - TouchArea now captures events before text rendering occurs
+  - Increased button width slightly (60px → 65px) for better usability
+
+### Technical Details
+- **Slint Element Ordering**: In Slint, elements render and capture input in declaration order
+  - TouchArea must be declared before/above text elements for proper event capture
+  - This ensures mouse clicks are captured by the interactive layer
+  - Text renders on top without interfering with input handling
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.20-alpha] - 2025-10-20 (Fix Send Button Event Handling)
 
 ### Fixed
