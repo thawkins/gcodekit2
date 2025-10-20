@@ -9,7 +9,7 @@ import { ThemeProvider } from "../theme/mod.slint";
 /// Application status bar showing system information
 export component StatusBar inherits Rectangle {
     background: ThemeProvider.colors.panel;
-    height: 75px;
+    height: 37.5px;
     
     in property <string> status: "Idle";
     in property <string> position: "X: 0.00 Y: 0.00 Z: 0.00";
@@ -18,44 +18,44 @@ export component StatusBar inherits Rectangle {
     in property <string> connection-status: "Disconnected";
     
     HorizontalLayout {
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        spacing: 28px;
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        spacing: 14px;
         alignment: center;
         
         // Connection status indicator
         HorizontalLayout {
-            spacing: 10px;
+            spacing: 5px;
             
             Rectangle {
-                width: 20px;
-                height: 20px;
-                border-radius: 10px;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
                 background: root.is-connected ? ThemeProvider.colors.status-green : ThemeProvider.colors.status-red;
             }
             
             ThemedText {
                 text: "Device: " + root.connection-status;
-                font-size: 14px;
+                font-size: 10px;
                 font-weight: 700;
             }
         }
         
         ThemedText {
             text: "Status: " + root.status;
-            font-size: 14px;
+            font-size: 10px;
         }
         
         ThemedText {
             text: "Position: " + root.position;
-            font-size: 14px;
+            font-size: 10px;
         }
         
         ThemedText {
             text: "Version: " + root.version;
-            font-size: 14px;
+            font-size: 10px;
         }
         
         Rectangle {
@@ -64,17 +64,17 @@ export component StatusBar inherits Rectangle {
         
         // Theme indicator
         HorizontalLayout {
-            spacing: 8px;
+            spacing: 4px;
             
             ThemedText {
                 text: "Theme:";
-                font-size: 13px;
+                font-size: 9px;
             }
             
             ThemedText {
                 text: ThemeProvider.mode == "light" ? "☀ Light" : "🌙 Dark";
                 color: ThemeProvider.mode == "light" ? ThemeProvider.colors.status-yellow : #7B68EE;
-                font-size: 13px;
+                font-size: 9px;
                 font-weight: 700;
             }
         }

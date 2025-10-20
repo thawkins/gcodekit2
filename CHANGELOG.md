@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.10-alpha] - 2025-10-20 (Status Bar Height Reduction)
+
+### Changed
+- **Status Bar Height**: Reduced to half its original height ✅
+  - Changed from 75px to 37.5px
+  - Adjusted all internal spacing: padding halved, spacing halved (28px → 14px)
+  - Reduced indicator circle from 20px to 10px
+  - Reduced font sizes: 14px → 10px for main text, 13px → 9px for theme indicator
+  - Updated panel heights accordingly (125px layout → 87.5px)
+  - More compact status display without losing information
+
+### Updated Components
+- `status-bar.slint`: Reduced height, spacing, padding, and font sizes
+- `app.slint`: Updated panel height calculations (125px → 87.5px) and status bar positioning
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.9-alpha] - 2025-10-20 (Device Console Filtering Enhancement)
 
 ### Added

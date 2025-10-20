@@ -61,7 +61,7 @@ export component AppWindow inherits Window {
         x: 0px;
         y: 50px;
         width: 250px;
-        height: root.height - 125px;
+        height: root.height - 87.5px;
         available-ports: root.available-ports;
         selected-port: root.selected-port;
         is-connected: root.is-connected;
@@ -76,7 +76,7 @@ export component AppWindow inherits Window {
         x: 250px;
         y: 50px;
         width: root.width - 510px;
-        height: root.height - 125px;
+        height: root.height - 87.5px;
         console-content: root.console-content;
         show-info: root.show-info;
         show-debug: root.show-debug;
@@ -100,21 +100,21 @@ export component AppWindow inherits Window {
         x: root.width - 260px;
         y: 50px;
         width: 250px;
-        height: root.height - 125px;
+        height: root.height - 87.5px;
     }
     
     Rectangle {
         x: root.width - 10px;
         y: 50px;
         width: 10px;
-        height: root.height - 125px;
+        height: root.height - 87.5px;
         background: ThemeProvider.colors.background;
     }
     
     StatusBar {
-        y: root.height - 75px;
+        y: root.height - 37.5px;
         width: 100%;
-        height: 75px;
+        height: 37.5px;
         is-connected: root.is-connected;
         connection-status: root.connection-status;
     }
