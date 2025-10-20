@@ -30,6 +30,7 @@ export component AppWindow inherits Window {
     callback toggle-warn(bool);
     callback toggle-error(bool);
     callback toggle-trace(bool);
+    callback toggle-other(bool);
     
     // Connection state properties
     in property <[string]> available-ports;
@@ -45,6 +46,7 @@ export component AppWindow inherits Window {
     in property <bool> show-warn: true;
     in property <bool> show-error: true;
     in property <bool> show-trace: false;
+    in property <bool> show-other: true;
     
     MenuBar {
         y: 0px;
@@ -81,6 +83,7 @@ export component AppWindow inherits Window {
         show-warn: root.show-warn;
         show-error: root.show-error;
         show-trace: root.show-trace;
+        show-other: root.show-other;
         send-command(cmd) => { root.send-command(cmd); }
         clear-console => { root.clear-console(); }
         copy-console => { root.copy-console(); }
@@ -90,6 +93,7 @@ export component AppWindow inherits Window {
         toggle-warn(val) => { root.toggle-warn(val); }
         toggle-error(val) => { root.toggle-error(val); }
         toggle-trace(val) => { root.toggle-trace(val); }
+        toggle-other(val) => { root.toggle-other(val); }
     }
     
     RightPanel {

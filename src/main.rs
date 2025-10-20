@@ -53,6 +53,7 @@ fn update_console_display(
         ui.get_show_warn(),
         ui.get_show_error(),
         ui.get_show_trace(),
+        ui.get_show_other(),
     );
     // Format logs with level at the start
     let formatted: Vec<String> = filtered
@@ -308,6 +309,17 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
             move |val: bool| {
                 if let Some(ui) = ui_handle.upgrade() {
                     ui.set_show_trace(val);
+                    update_console_display(&ui, &console_buffer);
+                }
+            }
+        });
+        
+        ui.on_toggle_other({
+            let console_buffer = console_buffer.clone();
+            let ui_handle = ui_handle.clone();
+            move |val: bool| {
+                if let Some(ui) = ui_handle.upgrade() {
+                    ui.set_show_other(val);
                     update_console_display(&ui, &console_buffer);
                 }
             }

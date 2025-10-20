@@ -20,6 +20,7 @@ export component CenterPanel inherits Rectangle {
     in property <bool> show-warn: true;
     in property <bool> show-error: true;
     in property <bool> show-trace: false;
+    in property <bool> show-other: true;
     
     // Callbacks
     callback send-command(string);
@@ -31,6 +32,7 @@ export component CenterPanel inherits Rectangle {
     callback toggle-warn(bool);
     callback toggle-error(bool);
     callback toggle-trace(bool);
+    callback toggle-other(bool);
     
     VerticalLayout {
         CustomTabWidget {
@@ -61,6 +63,7 @@ export component CenterPanel inherits Rectangle {
                     show-warn: root.show-warn;
                     show-error: root.show-error;
                     show-trace: root.show-trace;
+                    show-other: root.show-other;
                     send-command(cmd) => { root.send-command(cmd); }
                     clear-console => { root.clear-console(); }
                     copy-console => { root.copy-console(); }
@@ -70,6 +73,7 @@ export component CenterPanel inherits Rectangle {
                     toggle-warn(val) => { root.toggle-warn(val); }
                     toggle-error(val) => { root.toggle-error(val); }
                     toggle-trace(val) => { root.toggle-trace(val); }
+                    toggle-other(val) => { root.toggle-other(val); }
                 }
             }
             

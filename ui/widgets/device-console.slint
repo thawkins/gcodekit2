@@ -20,6 +20,7 @@ export component DeviceConsole inherits Rectangle {
     in property <bool> show-warn: true;
     in property <bool> show-error: true;
     in property <bool> show-trace: false;
+    in property <bool> show-other: true;
     
     // Callbacks
     callback send-command(string);
@@ -31,6 +32,7 @@ export component DeviceConsole inherits Rectangle {
     callback toggle-warn(bool);
     callback toggle-error(bool);
     callback toggle-trace(bool);
+    callback toggle-other(bool);
     
     VerticalLayout {
         padding: 10px;
@@ -259,6 +261,33 @@ export component DeviceConsole inherits Rectangle {
                     
                     ThemedSecondaryText {
                         text: "Trace";
+                        font-size: 8px;
+                    }
+                }
+                
+                // Other checkbox
+                HorizontalLayout {
+                    spacing: 3px;
+                    
+                    Rectangle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 2px;
+                        background: root.show-other ? ThemeProvider.colors.status-green : ThemeProvider.colors.button;
+                        border-width: 1px;
+                        
+                        TouchArea {
+                            width: 100%;
+                            height: 100%;
+                            mouse-cursor: pointer;
+                            clicked => {
+                                root.toggle-other(!root.show-other);
+                            }
+                        }
+                    }
+                    
+                    ThemedSecondaryText {
+                        text: "Other";
                         font-size: 8px;
                     }
                 }

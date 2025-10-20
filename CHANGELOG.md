@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.9-alpha] - 2025-10-20 (Device Console Filtering Enhancement)
+
+### Added
+- **"Other" Checkbox for Device Console**: Control visibility of non-tracing log lines ✅
+  - New "Other" checkbox to filter log lines that don't represent a tracing event (INFO, DEBUG, WARN, ERROR, TRACE)
+  - Properly isolates system messages and user commands from tracing output
+  - Checkbox defaults to enabled (show other lines)
+  - Maintains consistent styling with other filter checkboxes
+
+### Changed
+- **Console Filtering Logic**: Refined to properly separate tracing levels from other messages ✅
+  - Updated `filter_console_logs()` to accept `show_other` parameter
+  - Lines without tracing level indicators now controlled by "Other" checkbox
+  - Improved distinction between system messages and traced events
+  - All filter callbacks integrated with new filtering logic
+
+### Updated Components
+- `console_logger.rs`: Enhanced filtering function signature
+- `app.slint`: Added `show-other` property and `toggle-other` callback
+- `center-panel.slint`: Propagated `show-other` property and callback
+- `device-console.slint`: Added "Other" checkbox UI element and callback
+- `main.rs`: Implemented `toggle-other` event handler and updated console display logic
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.8-alpha] - 2025-10-20 (UI Window Resizing & Device Console Spacing)
 
 ### Changed

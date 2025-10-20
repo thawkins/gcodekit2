@@ -105,6 +105,7 @@ pub fn filter_console_logs(
     show_warn: bool,
     show_error: bool,
     show_trace: bool,
+    show_other: bool,
 ) -> Vec<String> {
     get_console_logs(buffer)
         .into_iter()
@@ -120,7 +121,8 @@ pub fn filter_console_logs(
             } else if line.contains(" TRACE ") || line.contains("[TRACE]") {
                 show_trace
             } else {
-                true // Show lines that don't match any filter
+                // Show lines that don't match any tracing level
+                show_other
             }
         })
         .collect()
