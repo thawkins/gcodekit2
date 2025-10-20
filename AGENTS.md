@@ -51,7 +51,7 @@ tests/
 
 ## Github access
 - use "gh" to access all github repositories. 
-- when asked to "push to remote", update the SPEC.md, README.md, and CHANGELOG.md files with all recent activity and spec changes, construct a suitable commit message based on recent activity, commit all changes and push the changes to the remote repository.
+- when asked to "push to remote", update the SPEC.md, README.md, STATS.md and CHANGELOG.md files with all recent activity and spec changes, construct a suitable commit message based on recent activity, commit all changes and push the changes to the remote repository.
 
 ## Changelog Management
 - **CHANGELOG.md**: Maintain a changelog in the root directory documenting all changes before each push to remote.
@@ -62,7 +62,7 @@ tests/
 ## Documentation standards 
 -  For all functions create DOCBLOCK documentation comments above each function that describes the purpose of the function, and documents any arguments and return vaulues
 -  For all modules place a DOCBLOCK at the top of the File that describes the purpose of the module, and any dependancies.
--  **Documentation Files**: All documentation markdown files (*.md) **MUST** be located in the `docs/` folder, except for `SPEC.md`, `AGENTS.md`, `README.md` and `CHANGELOG.md` which remain in the project root. This includes: implementation guides, architecture documentation, feature specifications, task breakdowns, user guides, API references, and any other markdown documentation. Any future documentation should be created in the docs/ folder following this convention.
+-  **Documentation Files**: All documentation markdown files (*.md) **MUST** be located in the `docs/` folder, except for `STATS.md`, `SPEC.md`, `AGENTS.md`, `README.md` and `CHANGELOG.md` which remain in the project root. This includes: implementation guides, architecture documentation, feature specifications, task breakdowns, user guides, API references, and any other markdown documentation. Any future documentation should be created in the docs/ folder following this convention.
 -  Do not create explainer documents or other .md files unless specificaly asked to.
 -  **Test Organization**: All tests **MUST** be located in the `tests/` folder organized by module hierarchy, mirroring the `src/` directory structure, NOT inline in source files.
 
