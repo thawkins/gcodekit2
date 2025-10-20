@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.20-alpha] - 2025-10-20 (Fix Send Button Event Handling)
+
+### Fixed
+- **Send Button Event Responsiveness**: Button now responds to mouse clicks ✅
+  - Replaced manual Rectangle + TouchArea with InteractiveButton component
+  - Uses proper button event handling with visual feedback
+  - Improved event propagation and mouse cursor feedback
+
+### Changed
+- **Send Button Implementation**: Uses InteractiveButton widget ✅
+  - Cleaner implementation with built-in visual state management
+  - Consistent styling with rest of application
+  - Better accessibility and event handling
+  - Maintains green background color from theme
+
+### Updated Components
+- `device-console.slint`: 
+  - Imported InteractiveButton component
+  - Replaced custom button with InteractiveButton widget
+  - Improved event handling for better responsiveness
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.19-alpha] - 2025-10-20 (Enhanced Send Command Logging)
 
 ### Changed

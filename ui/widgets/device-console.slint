@@ -5,6 +5,7 @@
 
 import { ThemedText, ThemedSecondaryText, ThemedRectangle } from "../theme/mod.slint";
 import { ThemeProvider } from "../theme/mod.slint";
+import { InteractiveButton } from "./interactive-button.slint";
 
 /// Device console for displaying serial communication
 export component DeviceConsole inherits Rectangle {
@@ -361,29 +362,16 @@ export component DeviceConsole inherits Rectangle {
                         }
                     }
                     
-                    // Send button
-                    Rectangle {
-                        background: ThemeProvider.colors.status-green;
+                    // Send button using InteractiveButton
+                    InteractiveButton {
+                        label: "Send";
                         width: 60px;
                         height: 24px;
-                        border-radius: 3px;
-                        
-                        ThemedText {
-                            text: "Send";
-                            font-size: 16px;
-                            font-weight: 700;
-                            color: #FFFFFF;
-                        }
-                        
-                        TouchArea {
-                            width: 100%;
-                            height: 100%;
-                            mouse-cursor: pointer;
-                            clicked => {
-                                if (input-command-text != "") {
-                                    root.send-command(input-command-text);
-                                    input-command-text = "";
-                                }
+                        background: ThemeProvider.colors.status-green;
+                        clicked => {
+                            if (input-command-text != "") {
+                                root.send-command(input-command-text);
+                                input-command-text = "";
                             }
                         }
                     }
