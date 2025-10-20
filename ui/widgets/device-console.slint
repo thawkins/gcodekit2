@@ -14,6 +14,9 @@ export component DeviceConsole inherits Rectangle {
     in property <string> status-text: "Disconnected";
     in property <string> console-content: "[System] Console Ready\nWaiting for device connection...";
     
+    // Command input
+    private property <string> input-command-text: "";
+    
     // Filter toggles
     in property <bool> show-info: true;
     in property <bool> show-debug: true;
@@ -342,16 +345,20 @@ export component DeviceConsole inherits Rectangle {
                 HorizontalLayout {
                     spacing: 5px;
                     
-                    // Input field placeholder
+                    // Input field with TextInput
                     Rectangle {
                         background: ThemeProvider.colors.panel;
                         border-radius: 3px;
                         height: 24px;
+                        width: 100%;
+                        border-width: 1px;
+                        border-color: #CCCCCC;
                         
-                        ThemedSecondaryText {
-                            text: "Enter G-code or $ command...";
-                            font-size: 17px;
-                            padding: 3px;
+                        TextInput {
+                            width: 100%;
+                            height: 100%;
+                            text: input-command-text;
+                            input-type: text;
                         }
                     }
                     
@@ -374,7 +381,10 @@ export component DeviceConsole inherits Rectangle {
                             height: 100%;
                             mouse-cursor: pointer;
                             clicked => {
-                                root.send-command("$H");
+                                if (input-command-text != "") {
+                                    root.send-command(input-command-text);
+                                    input-command-text = "";
+                                }
                             }
                         }
                     }

@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.17-alpha] - 2025-10-20 (Send Command Implementation)
+
+### Added
+- **Editable Send Command Box**: TextInput field for entering G-code or $ commands ✅
+  - Clears automatically after sending
+  - Support for any GRBL command (G-code or $ settings commands)
+
+### Changed
+- **Send Command Functionality**: Fully implemented command sending with logging ✅
+  - Send button now sends the TextInput content to the device
+  - Commands are logged with `tracing::info!` macro with "User command sent:" prefix
+  - Device responses are logged by GRBL controller
+  - Errors during send are logged with `tracing::error!` macro
+  - Console display updates with TX: and ERROR: prefixes
+  - Async implementation with proper error handling
+
+### Updated Components
+- `device-console.slint`: Added TextInput field, implemented send button logic
+- `main.rs`: Integrated send command with GRBL controller, added logging
+
+### Build Status
+- Debug Build: ✅ Successful
+- All Tests: ✅ Passing (210/210)
+- Code Quality: ✅ No compilation errors
+
 ## [0.2.16-alpha] - 2025-10-20 (Hide Status Info When Disconnected)
 
 ### Changed

@@ -194,16 +194,29 @@ async fn setup_ui_handlers(ui: &AppWindow, console_buffer: console_logger::Conso
         ui.on_send_command({
             let console_buffer = console_buffer.clone();
             let ui_handle = ui_handle.clone();
+            let grbl_controller = Arc::clone(&grbl_controller);
             move |cmd: slint::SharedString| {
+                let console_buffer = console_buffer.clone();
+                let ui_handle = ui_handle.clone();
+                let grbl_controller = grbl_controller.clone();
                 let cmd_str = cmd.to_string();
-                tracing::info!("User command: {}", cmd_str);
-                add_console_message(&console_buffer, format!("TX: {}", cmd_str));
                 
-                // Update UI
-                if let Some(ui) = ui_handle.upgrade() {
-                    let content = console_logger::get_console_as_string(&console_buffer);
-                    ui.set_console_content(content.into());
-                }
+                let _ = slint::spawn_local(async move {
+                    tracing::info!("User command sent: {}", cmd_str);
+                    add_console_message(&console_buffer, format!("TX: {}", cmd_str));
+                    
+                    // Send command to device
+                    if let Err(e) = grbl_controller.send_command(&cmd_str).await {
+                        tracing::error!("Failed to send command: {}", e);
+                        add_console_message(&console_buffer, format!("ERROR: {}", e));
+                    }
+                    
+                    // Update UI
+                    if let Some(ui) = ui_handle.upgrade() {
+                        let content = console_logger::get_console_as_string(&console_buffer);
+                        ui.set_console_content(content.into());
+                    }
+                });
             }
         });
 
